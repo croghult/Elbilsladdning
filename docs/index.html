@@ -156,13 +156,19 @@
                 if (!response.ok) throw new Error('Kunde inte ladda data.json');
                 const json = await response.json();
                 
+                // Spara data globalt
                 allData = json.sessions || [];
                 drivingData = json.driving || {};
                 window.allSessionsData = allData;
                 window.allDrivingData = drivingData;
                 
-                document.getElementById('last-updated').innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
+                // Uppdatera tidsstämpel
+                const lastUpdatedEl = document.getElementById('last-updated');
+                if (lastUpdatedEl) {
+                    lastUpdatedEl.innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
+                }
                 
+                // Bygg bil-mappning för filter/ikoner
                 carsMap = {};
                 allData.forEach(s => {
                     const carName = s.car || "Övriga bilar";
@@ -171,13 +177,18 @@
                     }
                 });
                 
-                populateMonths();
-                populateCarCheckboxes();
-                render();
-                renderMonthlyTable();
+                // Initiera gränssnitt och tabeller
+                if (typeof populateMonths === 'function') populateMonths();
+                if (typeof populateCarCheckboxes === 'function') populateCarCheckboxes();
+                if (typeof render === 'function') render();
+                if (typeof renderMonthlyTable === 'function') renderMonthlyTable();
+                
             } catch (err) {
-                console.error(err);
-                document.getElementById('table-body').innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Kunde inte hitta eller tolka data.json. Kör GitHub Action först!</td></tr>`;
+                console.error("Fel vid inläsning av data:", err);
+                const tableBody = document.getElementById('table-body');
+                if (tableBody) {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Kunde inte hitta eller tolka data.json. Kör GitHub Action först!</td></tr>`;
+                }
             }
         }
 
