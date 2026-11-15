@@ -1,18 +1,18 @@
 {
   "Christoffer Roghult": {
     "car": "Audi Q8 e-tron",
-    "logo": "assets/audi.png"
+    "logo": "audi.png"
   },
   "Karolina Andersson": {
     "car": "Audi Q8 e-tron",
-    "logo": "assets/audi.png"
+    "logo": "audi.png"
   },
   "Okänd": {
     "car": "Audi Q8 e-tron",
-    "logo": "assets/audi.png"
+    "logo": "audi.png"
   },
   "Tommy Roghult": {
     "car": "Polestar 2",
-    "logo": "assets/polestar.png"
+    "logo": "polestar.png"
   },
 }
