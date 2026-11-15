@@ -189,15 +189,17 @@
         function getCarDisplayInfo(carName) {
             if (!carName) return { displayName: "Övriga bilar", logo: null };
             
-            // Rensa bort eventuella extra mellanslag runt namnet
-            const cleanName = String(carName).trim();
+            // Ersätt ALLA typer av mellanslag (även osynliga non-breaking spaces) med ett vanligt mellanslag och trimma
+            const cleanName = String(carName).replace(/\s+/g, ' ').trim();
             
-            // 1. Försök med exakt matchning först
+            // 1. Försök med exakt matchning efter normalisering
             let mapping = carMapping[cleanName];
             
-            // 2. Om ingen träff, leta oberoende av stora/små bokstäver och extra mellanslag
+            // 2. Om ingen träff, leta case-insensitive med normaliserade nycklar
             if (!mapping) {
-                const foundKey = Object.keys(carMapping).find(k => k.trim().toLowerCase() === cleanName.toLowerCase());
+                const foundKey = Object.keys(carMapping).find(k => 
+                    String(k).replace(/\s+/g, ' ').trim().toLowerCase() === cleanName.toLowerCase()
+                );
                 if (foundKey) {
                     mapping = carMapping[foundKey];
                 }
@@ -207,7 +209,6 @@
             const displayName = info.car || cleanName;
             const logo = info.logo || null;
             
-            // Debug-logg så du ser exakt vad som matchas i konsolen
             console.log(`🔍 Mapping: skickade in "${carName}" -> hittade bilmodell "${displayName}" (logga: ${logo})`);
             
             return { displayName, logo };
