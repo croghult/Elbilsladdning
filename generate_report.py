@@ -23,23 +23,16 @@ def fetch_zaptec_sessions(token):
     response.raise_for_status()
     data = response.json()
     
-    # Hantera Zaptecs svarsformat (om det är en lista eller ett paginerat objekt)
-    raw_sessions = []
-    if isinstance(data, list):
-        raw_sessions = data
-    elif isinstance(data, dict):
-        if "Pages" in data and isinstance(data["Pages"], list):
-            # Om Pages innehåller listor av sessioner
-            for page in data["Pages"]:
-                if isinstance(page, list):
-                    raw_sessions.extend(page)
-                elif isinstance(page, dict) and "Data" in page:
-                    raw_sessions.extend(page["Data"])
-        elif "Data" in data and isinstance(data["Data"], list):
-            raw_sessions = data["Data"]
-
+    # Ursprunglig, fungerande strukturhantering
+    sessions_list = data
+    if isinstance(data, dict):
+        if "Data" in data:
+            sessions_list = data["Data"]
+        elif "Pages" in data:
+            sessions_list = data["Pages"]
+            
     formatted_sessions = []
-    for s in raw_sessions:
+    for s in sessions_list:
         start_dt = s.get("startDateTime") or s.get("StartDateTime")
         energy = s.get("energy") or s.get("Energy", 0.0)
         user_name = s.get("userFullName") or s.get("UserFullName") or "Övriga bilar"
@@ -50,7 +43,7 @@ def fetch_zaptec_sessions(token):
                 dt = datetime.fromisoformat(start_dt.replace("Z", "+00:00"))
                 date_str = dt.strftime("%Y-%m-%d %H:%M")
             except Exception:
-                date_str = str(start_dt)[:16].replace("T", " ")
+                date_str = start_dt[:16].replace("T", " ")
 
         formatted_sessions.append({
             "date": date_str,
@@ -58,7 +51,6 @@ def fetch_zaptec_sessions(token):
             "kwh": float(energy),
             "cost": 0.0
         })
-        
     return formatted_sessions
 
 def process_driving_data(excel_path="audi_trips.xlsx"):
@@ -66,6 +58,7 @@ def process_driving_data(excel_path="audi_trips.xlsx"):
         print(f"Varning: {excel_path} hittades inte. Genererar tom kördata.")
         return {}
     
+    # Läs in Excel-filen (dayfirst hanteras i to_datetime nedan)
     df = pd.read_excel(excel_path)
     
     date_col = next((c for c in df.columns if 'dat' in c.lower() or 'date' in c.lower()), df.columns[0])
