@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alla laddningssessioner - Zaptec</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Header med tillbakalänk -->
+        <header class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <a href="index.html" class="text-xs font-semibold text-blue-600 hover:underline mb-1 inline-block">&larr; Tillbaka till översikten</a>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Alla laddningssessioner</h1>
+                <p class="text-sm text-gray-500 mt-1">Kronologisk historik över samtliga laddtillfällen.</p>
+            </div>
+            <div id="session-count" class="text-xs text-gray-500 bg-white px-3 py-2 rounded-lg border shadow-sm">
+                Laddar sessioner...
+            </div>
+        </header>
+
+        <!-- Sök- och filterfält -->
+        <div class="bg-white p-4 rounded-xl border shadow-sm mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
+            <div class="w-full sm:w-72">
+                <input type="text" id="search-input" placeholder="Sök på datum eller bil..." oninput="filterSessions()" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div class="text-xs text-gray-500" id="filter-status">Visar alla sessioner</div>
+        </div>
+
+        <!-- Tabell -->
+        <div class="bg-white rounded-xl border shadow-sm overflow-hidden mb-8">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                            <th class="px-6 py-3 cursor-pointer" onclick="sortBy('date')">Datum & Tid ↕</th>
+                            <th class="px-6 py-3">Bilmodell</th>
+                            <th class="px-6 py-3 text-right cursor-pointer" onclick="sortBy('kwh')">Förbrukning (kWh) ↕</th>
+                            <th class="px-6 py-3 text-right cursor-pointer" onclick="sortBy('cost')">Kostnad (kr) ↕</th>
+                            <th class="px-6 py-3 text-right">Kr / kWh</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sessions-table-body" class="divide-y divide-gray-200 text-sm">
+                        <!-- Fylls i via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allSessions = [];
+        let carMapping = {};
+        let currentSort = { field: 'date', ascending: false };
+
+        async function loadData() {
+            try {
+                const [dataRes, mappingRes] = await Promise.all([
+                    fetch('data.json'),
+                    fetch('car_mapping.json').catch(() => null)
+                ]);
+
+                if (!dataRes.ok) throw new Error('Kunde inte ladda data.json');
+                const json = await dataRes.json();
+                
+                allSessions = json.sessions || [];
+                if (mappingRes && mappingRes.ok) {
+                    carMapping = await mappingRes.json();
+                }
+
+                document.getElementById('session-count').textContent = `${allSessions.length} sessioner totalt`;
+                renderTable(allSessions);
+            } catch (err) {
+                console.error("Fel vid inläsning:", err);
+                document.getElementById('sessions-table-body').innerHTML = `
+                    <tr><td colspan="5" class="px-6 py-8 text-center text-red-500">Kunde inte ladda laddningsdata.</td></tr>
+                `;
+            }
+        }
+
+        function getCarDisplayInfo(carName) {
+            if (!carName || carName === "Övriga bilar" || carName === "Okänd") {
+                return { displayName: "Audi Q8 e-tron", logo: "audi.png" };
+            }
+            
+            const cleanName = String(carName).replace(/\s+/g, ' ').trim();
+            let mapping = carMapping[cleanName];
+            if (!mapping) {
+                const foundKey = Object.keys(carMapping).find(k => 
+                    String(k).replace(/\s+/g, ' ').trim().toLowerCase() === cleanName.toLowerCase()
+                );
+                if (foundKey) {
+                    mapping = carMapping[foundKey];
+                }
+            }
+            
+            const info = mapping || { car: "Audi Q8 e-tron", logo: "audi.png" };
+            return {
+                displayName: info.car || "Audi Q8 e-tron",
+                logo: info.logo || "audi.png"
+            };
+        }
+
+        function renderTable(sessions) {
+            const tbody = document.getElementById('sessions-table-body');
+            tbody.innerHTML = '';
+
+            if (sessions.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-8 text-center text-gray-500">Inga sessioner hittades.</td></tr>`;
+                return;
+            }
+
+            sessions.forEach(s => {
+                const rawCar = s.car || "Övriga bilar";
+                const info = getCarDisplayInfo(rawCar);
+                const logoHtml = info.logo 
+                    ? `<img src="${info.logo}" alt="${info.displayName}" class="w-4 h-4 object-contain inline-block mr-1.5">` 
+                    : '🚗 ';
+
+                const kwh = s.kwh || 0;
+                const cost = s.cost || 0;
+                const pricePerKwh = kwh > 0 ? (cost / kwh).toFixed(2) : '0.00';
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50 border-b border-gray-100 transition";
+                tr.innerHTML = `
+                    <td class="px-6 py-3 font-medium text-gray-900">${s.date || '-'}</td>
+                    <td class="px-6 py-3 inline-flex items-center text-gray-800">${logoHtml}${info.displayName}</td>
+                    <td class="px-6 py-3 text-right font-semibold">${kwh.toFixed(1)} kWh</td>
+                    <td class="px-6 py-3 text-right text-gray-700">${cost.toFixed(2)} kr</td>
+                    <td class="px-6 py-3 text-right text-gray-500 text-xs">${pricePerKwh} kr/kWh</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterSessions() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filtered = allSessions.filter(s => {
+                const rawCar = s.car || "Övriga bilar";
+                const info = getCarDisplayInfo(rawCar);
+                const dateMatch = (s.date || '').toLowerCase().includes(query);
+                const carMatch = info.displayName.toLowerCase().includes(query);
+                return dateMatch || carMatch;
+            });
+
+            document.getElementById('filter-status').textContent = `Visar ${filtered.length} av ${allSessions.length} sessioner`;
+            renderTable(filtered);
+        }
+
+        function sortBy(field) {
+            if (currentSort.field === field) {
+                currentSort.ascending = !currentSort.ascending;
+            } else {
+                currentSort.field = field;
+                currentSort.ascending = (field === 'date' ? false : true); // Standard: datum nyast först, kWh/kostnad lägst först
+            }
+
+            allSessions.sort((a, b) => {
+                let valA = a[field] || 0;
+                let valB = b[field] || 0;
+
+                if (field === 'date') {
+                    valA = new Date(valA);
+                    valB = new Date(valB);
+                }
+
+                if (valA < valB) return currentSort.ascending ? -1 : 1;
+                if (valA > valB) return currentSort.ascending ? 1 : -1;
+                return 0;
+            });
+
+            filterSessions();
+        }
+
+        document.addEventListener("DOMContentLoaded", loadData);
+    </script>
+</body>
+</html>
