@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zaptec Laddningsstatistik</title>
+    <!-- Tailwind CSS för snygg design -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js för grafer -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased">
     <div class="max-w-6xl mx-auto px-4 py-8">
         <header class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">Zaptec Laddningsstatistik</h1>
-                <p class="text-sm text-gray-500 mt-1">Visar förbrukning och faktisk kostnad baserat på elpris.</p>
+                <p class="text-sm text-gray-500 mt-1">Översikt över förbrukning, grafer och faktiska elkostnader.</p>
             </div>
             <div id="last-updated" class="text-xs text-gray-400 bg-white px-3 py-2 rounded-lg border shadow-sm">
                 Laddar data...
@@ -31,6 +34,22 @@
             <div class="bg-white p-6 rounded-xl border shadow-sm">
                 <p class="text-sm font-medium text-gray-500">Antal sessioner</p>
                 <p id="kpi-sessions" class="text-3xl font-bold text-gray-900 mt-2">0 st</p>
+            </div>
+        </div>
+
+        <!-- Grafer-sektion -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl border shadow-sm">
+                <h3 class="text-sm font-semibold text-gray-700 mb-4 uppercase tracking-wider">Förbrukning per månad (kWh)</h3>
+                <div class="relative h-64">
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border shadow-sm">
+                <h3 class="text-sm font-semibold text-gray-700 mb-4 uppercase tracking-wider">Kostnad per användare (kr)</h3>
+                <div class="relative h-64">
+                    <canvas id="userChart"></canvas>
+                </div>
             </div>
         </div>
 
@@ -75,6 +94,8 @@
 
     <script>
         let allData = [];
+        let monthlyChartInstance = null;
+        let userChartInstance = null;
 
         async function loadData() {
             try {
@@ -92,7 +113,6 @@
         }
 
         function populateFilters() {
-            // Fyll månader
             const months = [...new Set(allData.map(s => s.date.substring(0, 7)))].sort().reverse();
             const monthSelect = document.getElementById('filter-month');
             months.forEach(m => {
@@ -102,7 +122,6 @@
                 monthSelect.appendChild(opt);
             });
 
-            // Fyll användare i dropdown
             const users = [...new Set(allData.map(s => s.user))].sort();
             const userSelect = document.getElementById('filter-user');
             users.forEach(u => {
@@ -143,6 +162,74 @@
             document.getElementById('kpi-kwh').innerText = `${totalKwh.toFixed(1)} kWh`;
             document.getElementById('kpi-cost').innerText = `${totalCost.toFixed(0)} kr`;
             document.getElementById('kpi-sessions').innerText = `${data.length} st`;
+
+            updateCharts(data);
+        }
+
+        function updateCharts(data) {
+            // 1. Gruppera för månad (kWh)
+            const monthlyData = {};
+            // 2. Gruppera per användare (Kostnad)
+            const userData = {};
+
+            data.forEach(s => {
+                const month = s.date.substring(0, 7);
+                const cost = s.cost || (s.energy * 1.50);
+
+                monthlyData[month] = (monthlyData[month] || 0) + s.energy;
+                userData[s.user] = (userData[s.user] || 0) + cost;
+            });
+
+            // Sortera månader kronologiskt
+            const sortedMonths = Object.keys(monthlyData).sort();
+            const monthlyKwhValues = sortedMonths.map(m => monthlyData[m]);
+
+            // Sortera användare efter högst kostnad
+            const sortedUsers = Object.keys(userData).sort((a, b) => userData[b] - userData[a]);
+            const userCostValues = sortedUsers.map(u => userData[u]);
+
+            // Skapa/Uppdatera Månadsgraf
+            const ctxMonthly = document.getElementById('monthlyChart').getContext('2d');
+            if (monthlyChartInstance) monthlyChartInstance.destroy();
+            monthlyChartInstance = new Chart(ctxMonthly, {
+                type: 'bar',
+                data: {
+                    labels: sortedMonths,
+                    datasets: [{
+                        label: 'kWh',
+                        data: monthlyKwhValues,
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            // Skapa/Uppdatera Användargraf
+            const ctxUser = document.getElementById('userChart').getContext('2d');
+            if (userChartInstance) userChartInstance.destroy();
+            userChartInstance = new Chart(ctxUser, {
+                type: 'doughnut',
+                data: {
+                    labels: sortedUsers,
+                    datasets: [{
+                        data: userCostValues,
+                        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
+                    }
+                }
+            });
         }
 
         function applyFilters() {
