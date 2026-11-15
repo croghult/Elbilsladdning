@@ -4,7 +4,6 @@ from datetime import datetime, timezone
 import requests
 import pandas as pd
 
-# --- Funktion för att läsa in kördata från Audi Excel-filen ---
 def process_driving_data() -> dict:
     driving_summary = {}
     excel_path = "audi_trips.xlsx"
@@ -45,21 +44,19 @@ def process_driving_data() -> dict:
             
     return driving_summary
 
-# --- Resten av dina Zaptec-funktioner här ---
 def get_access_token():
-    # ... din kod för att hämta Zaptec-token ...
+    # ... din befintliga kod för Zaptec ...
     pass
 
 def fetch_all_charge_history(token):
-    # ... din kod för att hämta laddsessioner ...
+    # ... din befintliga kod för Zaptec ...
     return []
 
 def main():
     # token = get_access_token()
     # sessions = fetch_all_charge_history(token)
-    sessions = [] # Om du testar utan Zaptec-inloggning just nu
+    sessions = [] # Ändra till dina riktiga sessioner om du har kvar dem
     
-    # Hämta kördata från Excel-filen
     driving_data = process_driving_data()
     
     output_data = {
@@ -68,9 +65,7 @@ def main():
         "driving": driving_data
     }
 
-    # Se till att mappen 'docs' finns
     os.makedirs("docs", exist_ok=True)
-
     with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
     
