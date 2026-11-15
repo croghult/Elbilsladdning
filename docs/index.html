@@ -59,30 +59,7 @@
                     </div>
                 </div>
             </div>
-<!-- Månadsöversikt per år -->
-        <div class="bg-white p-6 rounded-xl border shadow-sm mb-8">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-                <h3 class="text-lg font-bold text-gray-900">Månadsöversikt per år</h3>
-                <!-- Toggle-knappar -->
-                <div class="inline-flex rounded-lg border border-gray-200 p-1 bg-gray-50">
-                    <button id="btn-view-kwh" onclick="setMonthlyView('kwh')" class="px-3 py-1 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm transition-all">kWh</button>
-                    <button id="btn-view-kr" onclick="setMonthlyView('kr')" class="px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all">kr</button>
-                </div>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
-                    <thead id="monthly-table-head" class="bg-gray-50 text-gray-700">
-                        <!-- Genereras av JS -->
-                    </thead>
-                    <tbody id="monthly-table-body" class="divide-y divide-gray-200 bg-white text-gray-900">
-                        <!-- Genereras av JS -->
-                    </tbody>
-                    <tfoot id="monthly-table-foot" class="bg-gray-50 font-semibold text-gray-900 border-t-2 border-gray-200">
-                        <!-- Genereras av JS -->
-                    </tfoot>
-                </table>
-            </div>
-        </div>
+
             <!-- Bil-checklista & Månadsfilter (tar 1 kolumn) -->
             <div class="bg-white p-6 rounded-xl border shadow-sm flex flex-col justify-between">
                 <div>
@@ -113,8 +90,33 @@
             </div>
         </div>
 
+        <!-- Månadsöversikt per år -->
+        <div class="bg-white p-6 rounded-xl border shadow-sm mb-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
+                <h3 class="text-lg font-bold text-gray-900">Månadsöversikt per år</h3>
+                <!-- Toggle-knappar -->
+                <div class="inline-flex rounded-lg border border-gray-200 p-1 bg-gray-50">
+                    <button id="btn-view-kwh" onclick="setMonthlyView('kwh')" class="px-3 py-1 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm transition-all">kWh</button>
+                    <button id="btn-view-kr" onclick="setMonthlyView('kr')" class="px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all">kr</button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
+                    <thead id="monthly-table-head" class="bg-gray-50 text-gray-700">
+                        <!-- Genereras av JS -->
+                    </thead>
+                    <tbody id="monthly-table-body" class="divide-y divide-gray-200 bg-white text-gray-900">
+                        <!-- Genereras av JS -->
+                    </tbody>
+                    <tfoot id="monthly-table-foot" class="bg-gray-50 font-semibold text-gray-900 border-t-2 border-gray-200">
+                        <!-- Genereras av JS -->
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
         <!-- Tabell -->
-        <div class="bg-white rounded-xl border shadow-sm overflow-hidden">
+        <div class="bg-white rounded-xl border shadow-sm overflow-hidden mb-8">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
@@ -138,34 +140,136 @@
         let carsMap = {};
         let selectedMetric = 'kwh'; 
         let monthlyChartInstance = null;
+        let currentMonthlyView = 'kwh';
 
         async function loadData() {
-    try {
-        const response = await fetch('data.json');
-        if (!response.ok) throw new Error('Kunde inte ladda data.json');
-        const json = await response.json();
-        
-        allData = json.sessions || [];
-        window.allSessionsData = json.sessions || []; // <-- Spara globalt för tabellen
-        
-        document.getElementById('last-updated').innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
-        
-        carsMap = {};
-        allData.forEach(s => {
-            const carName = s.car || "Övriga bilar";
-            if (!carsMap[carName]) {
-                carsMap[carName] = s.car_logo || "";
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('Kunde inte ladda data.json');
+                const json = await response.json();
+                
+                allData = json.sessions || [];
+                window.allSessionsData = json.sessions || [];
+                
+                document.getElementById('last-updated').innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
+                
+                carsMap = {};
+                allData.forEach(s => {
+                    const carName = s.car || "Övriga bilar";
+                    if (!carsMap[carName]) {
+                        carsMap[carName] = s.car_logo || "";
+                    }
+                });
+                
+                populateMonths();
+                populateCarCheckboxes();
+                render();
+                renderMonthlyTable();
+            } catch (err) {
+                console.error(err);
+                document.getElementById('table-body').innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Kunde inte hitta data.json. Kör GitHub Action först!</td></tr>`;
             }
-        });
-        
-        populateMonths();
-        populateCarCheckboxes();
-        render();
-        renderMonthlyTable(); // <-- Rita ut månadstabellen här
-    } catch (err) {
-        document.getElementById('table-body').innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Kunde inte hitta data.json. Kör GitHub Action först!</td></tr>`;
-    }
-}
+        }
+
+        function setMonthlyView(view) {
+            currentMonthlyView = view;
+            const btnKwh = document.getElementById('btn-view-kwh');
+            const btnKr = document.getElementById('btn-view-kr');
+
+            if (view === 'kwh') {
+                btnKwh.className = "px-3 py-1 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm transition-all";
+                btnKr.className = "px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all";
+            } else {
+                btnKr.className = "px-3 py-1 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm transition-all";
+                btnKwh.className = "px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all";
+            }
+
+            renderMonthlyTable();
+        }
+
+        function renderMonthlyTable() {
+            const allSessions = window.allSessionsData || allData || [];
+            const months = [
+                "Januari", "Februari", "Mars", "April", "Maj", "Juni", 
+                "Juli", "Augusti", "September", "Oktober", "November", "December"
+            ];
+
+            const yearsSet = new Set();
+            const matrix = {};
+
+            months.forEach((_, mIdx) => {
+                matrix[mIdx] = {};
+            });
+
+            allSessions.forEach(s => {
+                const year = s.date.substring(0, 4);
+                const month = parseInt(s.date.substring(5, 7), 10) - 1;
+                
+                yearsSet.add(year);
+
+                if (!matrix[month][year]) {
+                    matrix[month][year] = { energy: 0, cost: 0 };
+                }
+                matrix[month][year].energy += s.energy || 0;
+                matrix[month][year].cost += (s.cost || (s.energy * 1.50));
+            });
+
+            const years = Array.from(yearsSet).sort();
+
+            let headHtml = `<tr><th class="px-4 py-3 font-semibold">Månad</th>`;
+            years.forEach(y => {
+                headHtml += `<th class="px-4 py-3 text-right font-semibold">${y}</th>`;
+            });
+            headHtml += `</tr>`;
+            document.getElementById('monthly-table-head').innerHTML = headHtml;
+
+            if (years.length === 0) {
+                document.getElementById('monthly-table-body').innerHTML = `<tr><td colspan="10" class="px-4 py-4 text-center text-gray-500">Ingen data tillgänglig</td></tr>`;
+                document.getElementById('monthly-table-foot').innerHTML = '';
+                return;
+            }
+
+            let bodyHtml = '';
+            months.forEach((monthName, mIdx) => {
+                bodyHtml += `<tr class="hover:bg-gray-50 border-b border-gray-100">`;
+                bodyHtml += `<td class="px-4 py-3 font-medium text-gray-900">${monthName}</td>`;
+
+                years.forEach(y => {
+                    const cellData = matrix[mIdx][y];
+                    let val = 0;
+                    if (cellData) {
+                        val = currentMonthlyView === 'kwh' ? cellData.energy : cellData.cost;
+                    }
+                    
+                    const formattedVal = currentMonthlyView === 'kwh' 
+                        ? (val > 0 ? `${val.toFixed(1)} kWh` : '-') 
+                        : (val > 0 ? `${Math.round(val)} kr` : '-');
+
+                    bodyHtml += `<td class="px-4 py-3 text-right text-gray-600">${formattedVal}</td>`;
+                });
+                bodyHtml += `</tr>`;
+            });
+            document.getElementById('monthly-table-body').innerHTML = bodyHtml;
+
+            let footHtml = `<tr><td class="px-4 py-3 font-bold text-gray-900">Total</td>`;
+            years.forEach(y => {
+                let yearTotal = 0;
+                months.forEach((_, mIdx) => {
+                    const cellData = matrix[mIdx][y];
+                    if (cellData) {
+                        yearTotal += currentMonthlyView === 'kwh' ? cellData.energy : cellData.cost;
+                    }
+                });
+
+                const formattedTotal = currentMonthlyView === 'kwh'
+                    ? `${yearTotal.toFixed(1)} kWh`
+                    : `${Math.round(yearTotal)} kr`;
+
+                footHtml += `<td class="px-4 py-3 text-right font-bold text-gray-900">${formattedTotal}</td>`;
+            });
+            footHtml += `</tr>`;
+            document.getElementById('monthly-table-foot').innerHTML = footHtml;
+        }
 
         function populateMonths() {
             const months = [...new Set(allData.map(s => s.date.substring(0, 7)))].sort().reverse();
@@ -285,10 +389,9 @@
 
             const avgPrice = totalKwh > 0 ? (totalCost / totalKwh) : 0;
 
-            // Uppdatera KPI-korten på skärmen
             document.getElementById('kpi-kwh').innerText = `${totalKwh.toFixed(1)} kWh`;
             document.getElementById('kpi-cost').innerText = `${totalCost.toFixed(0)} kr`;
-            document.getElementById('kpi-avg-price').innerText = `${avgPrice.toFixed(2)} kr/kWh`; // <-- NYTT KORT
+            document.getElementById('kpi-avg-price').innerText = `${avgPrice.toFixed(2)} kr/kWh`;
             document.getElementById('kpi-sessions').innerText = `${filtered.length} st`;
 
             renderChartOnly();
