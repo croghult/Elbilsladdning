@@ -1,10 +1,11 @@
 import os
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import requests
 
 ZAPTEC_USERNAME = os.environ["ZAPTEC_USERNAME"]
 ZAPTEC_PASSWORD = os.environ["ZAPTEC_PASSWORD"]
+ELAREA = "SE3"  # Ändra till SE1, SE2, SE3 eller SE4 beroende på var du bor
 BASE_URL = "https://api.zaptec.com"
 
 def get_access_token() -> str:
@@ -13,6 +14,38 @@ def get_access_token() -> str:
     resp = requests.post(url, data=payload, timeout=30)
     resp.raise_for_status()
     return resp.json()["access_token"]
+
+def fetch_spot_prices(date_str: str) -> dict:
+    """Hämtar tim-/kvartspriser för ett visst datum från elprisetjustnu.se"""
+    # Exempel: https://www.elprisetjustnu.se/api/v1/prices/2026/11-15_SE3.json
+    url = f"https://www.elprisetjustnu.se/api/v1/prices/{date_str.replace('-', '/')}_{ELAREA}.json"
+    try:
+        resp = requests.get(url, timeout=10)
+        if resp.status_code == 200:
+            return {item["time_start"]: item["SEK_per_kWh"] for item in resp.json()}
+    except Exception:
+        pass
+    return {}
+
+def calculate_session_cost(start_str: str, energy_kwh: float) -> float:
+    """Räknar ut kostnad baserat på spotpris (med standardpåslag på t.ex. 25 öre om man vill, eller enbart spot)"""
+    try:
+        dt = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+        date_str = dt.strftime("%Y-%m-%d")
+        
+        # Cachelagra eller hämta priser för dagen
+        prices = fetch_spot_prices(date_str)
+        
+        # Matcha timme
+        hour_key = dt.strftime("%Y-%m-%dT%H:00:00")
+        price_per_kwh = prices.get(hour_key, 1.50) # Fallback till 1.50 kr om pris saknas
+        
+        # Lägg till elöverföring/skatt om du vill (t.ex. 0.50 kr), annars enbart spot
+        total_price = price_per_kwh + 0.50 
+        
+        return energy_kwh * total_price
+    except Exception:
+        return energy_kwh * 1.50
 
 def fetch_all_charge_history(token: str) -> list[dict]:
     headers = {"Authorization": f"Bearer {token}"}
@@ -32,19 +65,26 @@ def fetch_all_charge_history(token: str) -> list[dict]:
 
         for s in items:
             session_id = s.get("Id")
+            start_time = s.get("StartDateTime", "")
+            energy = float(s.get("Energy", 0.0))
+            user = s.get("UserFullName") or s.get("UserEmail") or s.get("ExternallyEndedBy") or "Okänd"
+            
+            # Beräkna dynamisk kostnad
+            cost = calculate_session_cost(start_time, energy)
+
             sessions_map[session_id] = {
                 "id": session_id,
-                "date": s.get("StartDateTime", "")[:19].replace("T", " "),
-                "user": s.get("UserFullName") or s.get("UserEmail") or s.get("ExternallyEndedBy") or "Okänd",
-                "energy": float(s.get("Energy", 0.0))
+                "date": start_time[:19].replace("T", " "),
+                "user": user,
+                "energy": energy,
+                "cost": round(cost, 2)
             }
 
         if len(items) < 100:
             break
         page_index += 1
 
-    sorted_sessions = sorted(sessions_map.values(), key=lambda x: x["date"], reverse=True)
-    return sorted_sessions
+    return sorted(sessions_map.values(), key=lambda x: x["date"], reverse=True)
 
 def main():
     token = get_access_token()
@@ -59,7 +99,7 @@ def main():
     with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
     
-    print(f"Hämtade totalt {len(sessions)} unika laddsessioner och sparade till docs/data.json")
+    print(f"Hämtade {len(sessions)} sessioner med dynamiska priser.")
 
 if __name__ == "__main__":
     main()
