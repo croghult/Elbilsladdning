@@ -1,75 +1,123 @@
 import os
 import json
-from datetime import datetime, timezone
 import requests
 import pandas as pd
+from datetime import datetime, timezone
 
-def process_driving_data() -> dict:
-    driving_summary = {}
-    excel_path = "audi_trips.xlsx"
+def get_zaptec_token(username, password):
+    url = "https://api.zaptec.com/oauth/token"
+    payload = {
+        "grant_type": "password",
+        "username": username,
+        "password": password
+    }
+    headers = {"Content-Type": "application/x-www-form-urlencoded"}
+    response = requests.post(url, data=payload, headers=headers)
+    response.raise_for_status()
+    return response.json().get("access_token")
+
+def fetch_zaptec_sessions(token):
+    url = "https://api.zaptec.com/api/chargehistory"
+    headers = {"Authorization": f"Bearer {token}", "Accept": "application/json"}
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    data = response.json()
     
-    if os.path.exists(excel_path):
+    # Hantera olika svarsstrukturer från Zaptec API
+    sessions_list = data
+    if isinstance(data, dict):
+        if "Data" in data:
+            sessions_list = data["Data"]
+        elif "Pages" in data:
+            sessions_list = data["Pages"]
+            
+    formatted_sessions = []
+    for s in sessions_list:
+        start_dt = s.get("startDateTime") or s.get("StartDateTime")
+        energy = s.get("energy") or s.get("Energy", 0.0)
+        user_name = s.get("userFullName") or s.get("UserFullName") or "Övriga bilar"
+        
+        date_str = ""
+        if start_dt:
+            try:
+                dt = datetime.fromisoformat(start_dt.replace("Z", "+00:00"))
+                date_str = dt.strftime("%Y-%m-%d %H:%M")
+            except Exception:
+                date_str = start_dt[:16].replace("T", " ")
+
+        formatted_sessions.append({
+            "date": date_str,
+            "car": user_name,
+            "kwh": float(energy),
+            "cost": 0.0  # Kan fyllas på med spotprisberäkning om önskvärt
+        })
+    return formatted_sessions
+
+def process_driving_data(excel_path="audi_trips.xlsx"):
+    if not os.path.exists(excel_path):
+        print(f"Varning: {excel_path} hittades inte. Genererar tom kördata.")
+        return {}
+    
+    # Läs in Excel-filen med dayfirst=True enligt konfiguration
+    df = pd.read_excel(excel_path, dayfirst=True)
+    
+    # Identifiera datum- och distanskolumner dynamiskt
+    date_col = next((c for c in df.columns if 'dat' in c.lower() or 'date' in c.lower()), df.columns[0])
+    dist_col = next((c for c in df.columns if 'dist' in c.lower() or 'km' in c.lower() or 'mil' in c.lower()), df.columns[1])
+    
+    df['parsed_date'] = pd.to_datetime(df[date_col], dayfirst=True, errors='coerce')
+    df = df.dropna(subset=['parsed_date'])
+    df['ym'] = df['parsed_date'].dt.strftime('%Y-%m')
+    
+    def clean_distance(val):
+        if pd.isna(val):
+            return 0.0
+        if isinstance(val, (int, float)):
+            return float(val)
+        cleaned = str(val).lower().replace('km', '').replace(' ', '').replace(',', '.')
         try:
-            df_raw = pd.read_excel(excel_path, sheet_name='Korttidsminne', header=None)
-            header_row_idx = None
-            for idx, row in df_raw.iterrows():
-                row_str = str(row.values).lower()
-                if 'körningens slut' in row_str or 'körd sträcka' in row_str:
-                    header_row_idx = idx
-                    break
-            
-            if header_row_idx is not None:
-                df = pd.read_excel(excel_path, sheet_name='Korttidsminne', header=header_row_idx)
-            else:
-                df = pd.read_excel(excel_path, sheet_name='Korttidsminne', header=1)
-                
-            date_col = next((col for col in df.columns if 'slut' in str(col).lower() or 'datum' in str(col).lower() or 'date' in str(col).lower()), None)
-            dist_col = next((col for col in df.columns if 'sträck' in str(col).lower() or 'distance' in str(col).lower() or 'km' in str(col).lower()), None)
-            
-            if date_col and dist_col:
-                df['ParsedDate'] = pd.to_datetime(df[date_col], errors='coerce', dayfirst=True)
-                df['Month'] = df['ParsedDate'].dt.strftime('%Y-%m')
-                df['DistKm'] = pd.to_numeric(df[dist_col], errors='coerce').fillna(0)
-                
-                grouped = df.groupby('Month')['DistKm'].sum().to_dict()
-                
-                for month, km in grouped.items():
-                    if pd.notna(month):
-                        driving_summary[month] = {"distance_km": round(float(km), 1)}
-                print(f"Läste in körstatistik för {len(driving_summary)} månader från Excel.")
-            else:
-                print("Kunde inte matcha kolumner för datum/sträcka i Excel-filen.")
-        except Exception as e:
-            print(f"Fel vid inläsning av audi_trips.xlsx: {e}")
-            
-    return driving_summary
+            return float(cleaned)
+        except ValueError:
+            return 0.0
 
-def get_access_token():
-    # ... din befintliga kod för Zaptec ...
-    pass
-
-def fetch_all_charge_history(token):
-    # ... din befintliga kod för Zaptec ...
-    return []
+    df['km_num'] = df[dist_col].apply(clean_distance)
+    
+    grouped = df.groupby('ym')['km_num'].sum().to_dict()
+    driving_data = {}
+    for ym, km in grouped.items():
+        driving_data[ym] = {"distance_km": float(km)}
+        
+    return driving_data
 
 def main():
-    # token = get_access_token()
-    # sessions = fetch_all_charge_history(token)
-    sessions = [] # Ändra till dina riktiga sessioner om du har kvar dem
+    username = os.environ.get("ZAPTEC_USERNAME")
+    password = os.environ.get("ZAPTEC_PASSWORD")
     
-    driving_data = process_driving_data()
+    sessions = []
+    if username and password:
+        try:
+            print("Ansluter till Zaptec API...")
+            token = get_zaptec_token(username, password)
+            sessions = fetch_zaptec_sessions(token)
+            print(f"Hämtade {len(sessions)} laddsessioner från Zaptec.")
+        except Exception as e:
+            print(f"Kunde inte hämta Zaptec-data: {e}")
+    else:
+        print("OBS: ZAPTEC_USERNAME eller ZAPTEC_PASSWORD saknas i miljövariablerna.")
+
+    print("Bearbetar kördata från audi_trips.xlsx...")
+    driving = process_driving_data("audi_trips.xlsx")
     
-    output_data = {
+    output = {
         "updated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"),
         "sessions": sessions,
-        "driving": driving_data
+        "driving": driving
     }
-
-    os.makedirs("docs", exist_ok=True)
-    with open("docs/data.json", "w", encoding="utf-8") as f:
-        json.dump(output_data, f, ensure_ascii=False, indent=2)
     
-    print("data.json har sparats med kördata!")
+    with open("data.json", "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+    
+    print("data.json har skapats framgångsrikt!")
 
 if __name__ == "__main__":
     main()
