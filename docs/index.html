@@ -21,15 +21,19 @@
             </div>
         </header>
 
-        <!-- KPI-kort -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+       <!-- KPI-kort -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div class="bg-white p-6 rounded-xl border shadow-sm">
                 <p class="text-sm font-medium text-gray-500">Total förbrukning</p>
                 <p id="kpi-kwh" class="text-3xl font-bold text-gray-900 mt-2">0 kWh</p>
             </div>
             <div class="bg-white p-6 rounded-xl border shadow-sm">
-                <p class="text-sm font-medium text-gray-500">Total kostnad (faktiskt pris)</p>
+                <p class="text-sm font-medium text-gray-500">Total kostnad</p>
                 <p id="kpi-cost" class="text-3xl font-bold text-gray-900 mt-2">0 kr</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border shadow-sm">
+                <p class="text-sm font-medium text-gray-500">Snittkostnad per kWh</p>
+                <p id="kpi-avg-price" class="text-3xl font-bold text-gray-900 mt-2">0.00 kr</p>
             </div>
             <div class="bg-white p-6 rounded-xl border shadow-sm">
                 <p class="text-sm font-medium text-gray-500">Antal sessioner</p>
