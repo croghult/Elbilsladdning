@@ -28,16 +28,19 @@ def fetch_spot_prices(date_str: str) -> list[dict]:
     if date_str in PRICE_CACHE:
         return PRICE_CACHE[date_str]
 
-    url = f"https://www.elprisetjustnu.se/api/v1/prices/{date_str.replace('-', '/')}_{ELAREA}.json"
+    year = date_str[:4]
+    month_day = date_str[5:]
+    url = f"https://www.elprisetjustnu.se/api/v1/prices/{year}/{month_day}_{ELAREA}.json"
+    
     try:
         resp = requests.get(url, timeout=10)
-        print(f"Hämtar pris för {date_str}: Status {resp.status_code}") # <-- LÄGG TILL DENNA
+        print(f"Hämtar pris för {date_str}: Status {resp.status_code}")
         if resp.status_code == 200:
             data = resp.json()
             PRICE_CACHE[date_str] = data
             return data
     except Exception as e:
-        print(f"Fel vid hämtning av elpris: {e}") # <-- OCH DENNA
+        print(f"Fel vid hämtning av elpris för {date_str}: {e}")
 
     PRICE_CACHE[date_str] = []
     return []
