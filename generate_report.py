@@ -1,12 +1,21 @@
 import os
 import json
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 import requests
 
 ZAPTEC_USERNAME = os.environ["ZAPTEC_USERNAME"]
 ZAPTEC_PASSWORD = os.environ["ZAPTEC_PASSWORD"]
 ELAREA = "SE3"
 BASE_URL = "https://api.zaptec.com"
+
+# Prisinställningar
+VAT_MULTIPLIER = 1.25   # 25 % moms på spotpriset
+GRID_AND_TAX_FEE = 0.50 # Påslag i kr/kWh (inkl. moms) för elöverföring, energiskatt och elhandelspåslag
+FALLBACK_SPOT_PRICE = 1.50
+
+# Enkel cache i minnet så varje datum bara hämtas en gång per körning
+PRICE_CACHE = {}
 
 def get_access_token() -> str:
     url = f"{BASE_URL}/oauth/token"
@@ -15,27 +24,47 @@ def get_access_token() -> str:
     resp.raise_for_status()
     return resp.json()["access_token"]
 
-def fetch_spot_prices(date_str: str) -> dict:
+def fetch_spot_prices(date_str: str) -> list[dict]:
+    if date_str in PRICE_CACHE:
+        return PRICE_CACHE[date_str]
+
     url = f"https://www.elprisetjustnu.se/api/v1/prices/{date_str.replace('-', '/')}_{ELAREA}.json"
     try:
         resp = requests.get(url, timeout=10)
         if resp.status_code == 200:
-            return {item["time_start"]: item["SEK_per_kWh"] for item in resp.json()}
+            data = resp.json()
+            PRICE_CACHE[date_str] = data
+            return data
     except Exception:
         pass
-    return {}
+
+    PRICE_CACHE[date_str] = []
+    return []
 
 def calculate_session_cost(start_str: str, energy_kwh: float) -> float:
     try:
-        dt = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
-        date_str = dt.strftime("%Y-%m-%d")
+        # Tolka Zaptecs UTC-tid och konvertera till svensk lokal tid
+        dt_utc = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+        dt_local = dt_utc.astimezone(ZoneInfo("Europe/Stockholm"))
+        
+        date_str = dt_local.strftime("%Y-%m-%d")
         prices = fetch_spot_prices(date_str)
-        hour_key = dt.strftime("%Y-%m-%dT%H:00:00")
-        price_per_kwh = prices.get(hour_key, 1.50)
-        total_price = price_per_kwh + 0.50 # Påslag för elöverföring/skatt
-        return energy_kwh * total_price
+        
+        spot_price = None
+        for item in prices:
+            t_start = datetime.fromisoformat(item["time_start"])
+            t_end = datetime.fromisoformat(item["time_end"])
+            if t_start <= dt_local < t_end:
+                spot_price = float(item["SEK_per_kWh"])
+                break
+        
+        if spot_price is None:
+            spot_price = FALLBACK_SPOT_PRICE
+
+        total_price_per_kwh = (spot_price * VAT_MULTIPLIER) + GRID_AND_TAX_FEE
+        return energy_kwh * total_price_per_kwh
     except Exception:
-        return energy_kwh * 1.50
+        return energy_kwh * ((FALLBACK_SPOT_PRICE * VAT_MULTIPLIER) + GRID_AND_TAX_FEE)
 
 def load_car_mapping() -> dict:
     if os.path.exists("car_mapping.json"):
@@ -67,8 +96,8 @@ def fetch_all_charge_history(token: str) -> list[dict]:
             session_id = s.get("Id")
             start_time = s.get("StartDateTime", "")
             energy = float(s.get("Energy", 0.0))
+            
             raw_user = s.get("UserFullName") or s.get("UserEmail") or s.get("ExternallyEndedBy") or "Okänd"
-            # Städa bort dubbla mellanslag och specialblanksteg
             user = " ".join(raw_user.split())
             
             # Matcha användare mot bilmappning
@@ -107,7 +136,7 @@ def main():
     with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
     
-    print(f"Hämtade {len(sessions)} sessioner med uppdaterad bilmappning.")
+    print(f"Hämtade {len(sessions)} sessioner med exakta spotpriser och bilmappning.")
 
 if __name__ == "__main__":
     main()
