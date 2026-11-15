@@ -69,7 +69,7 @@
                 <div>
                     <div class="mb-4">
                         <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Filtrera månad</label>
-                        <select id="filter-month" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <select id="filter-month" onchange="render()" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                             <option value="all">Alla månader</option>
                         </select>
                     </div>
@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                <button id="reset-filters" class="w-full text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg transition mt-2">Rensa filter</button>
+                <button id="reset-filters" onclick="resetFilters()" class="w-full text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg transition mt-2">Rensa filter</button>
             </div>
         </div>
 
@@ -150,25 +150,22 @@
         let monthlyChartInstance = null;
         let currentMonthlyView = 'kwh';
 
-       async function loadData() {
+        async function loadData() {
             try {
                 const response = await fetch('data.json');
                 if (!response.ok) throw new Error('Kunde inte ladda data.json');
                 const json = await response.json();
                 
-                // Spara data globalt
                 allData = json.sessions || [];
                 drivingData = json.driving || {};
                 window.allSessionsData = allData;
                 window.allDrivingData = drivingData;
                 
-                // Uppdatera tidsstämpel
                 const lastUpdatedEl = document.getElementById('last-updated');
                 if (lastUpdatedEl) {
                     lastUpdatedEl.innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
                 }
                 
-                // Bygg bil-mappning för filter/ikoner
                 carsMap = {};
                 allData.forEach(s => {
                     const carName = s.car || "Övriga bilar";
@@ -177,19 +174,16 @@
                     }
                 });
                 
-                // Initiera gränssnitt och tabeller
-                if (typeof populateMonths === 'function') populateMonths();
-                if (typeof populateCarCheckboxes === 'function') populateCarCheckboxes();
-                if (typeof render === 'function') render();
-                if (typeof renderMonthlyTable === 'function') renderMonthlyTable();
+                populateMonths();
+                populateCarCheckboxes();
+                render();
+                renderMonthlyTable();
                 
-                // Dölj laddningsmeddelandet (stödjer både id="loading" och klasser)
                 hideLoader();
                 
             } catch (err) {
                 console.error("Fel vid inläsning av data:", err);
-                hideLoader(); // Dölj laddaren även vid fel så sidan inte låser sig
-                
+                hideLoader();
                 const tableBody = document.getElementById('table-body');
                 if (tableBody) {
                     tableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Fel: ${err.message}</td></tr>`;
@@ -198,7 +192,7 @@
         }
         
         function hideLoader() {
-            const loadingEl = document.getElementById('loading') || document.querySelector('.loading') || document.querySelector('#loader');
+            const loadingEl = document.getElementById('loading');
             if (loadingEl) {
                 loadingEl.style.display = 'none';
                 loadingEl.classList.add('hidden');
@@ -220,12 +214,73 @@
             renderMonthlyTable();
         }
 
-        function renderMonthlyTable() {
-            const allSessions = window.allSessionsData || [];
-            const drivingObj = window.allDrivingData || {};
-            const months = [
-                "Januari", "Februari", "Mars", "April", "Maj", "Juni", 
-                "Juli", "Augusti", "September", "Oktober", "November", "December"
-            ];
+        function populateMonths() {
+            const select = document.getElementById('filter-month');
+            if (!select) return;
+            
+            const monthsSet = new Set();
+            allData.forEach(s => {
+                if (s.date) {
+                    const ym = s.date.substring(0, 7);
+                    monthsSet.add(ym);
+                }
+            });
+            Object.keys(drivingData).forEach(ym => monthsSet.add(ym));
 
-            const yearsSet = new
+            const sortedMonths = Array.from(monthsSet).sort().reverse();
+            
+            select.innerHTML = '<option value="all">Alla månader</option>';
+            sortedMonths.forEach(ym => {
+                const opt = document.createElement('option');
+                opt.value = ym;
+                opt.textContent = ym;
+                select.appendChild(opt);
+            });
+        }
+
+        function populateCarCheckboxes() {
+            const container = document.getElementById('car-checkboxes');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            Object.keys(carsMap).forEach(car => {
+                const div = document.createElement('label');
+                div.className = "flex items-center space-x-2 cursor-pointer";
+                div.innerHTML = `<input type="checkbox" value="${car}" checked onchange="render()" class="car-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500"><span>${car}</span>`;
+                container.appendChild(div);
+            });
+        }
+
+        function toggleAllCars(state) {
+            document.querySelectorAll('.car-checkbox').forEach(cb => cb.checked = state);
+            render();
+        }
+
+        function resetFilters() {
+            const monthSelect = document.getElementById('filter-month');
+            if (monthSelect) monthSelect.value = 'all';
+            toggleAllCars(true);
+            render();
+        }
+
+        function getSelectedCars() {
+            const checkboxes = document.querySelectorAll('.car-checkbox:checked');
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+        function render() {
+            const selectedMonth = document.getElementById('filter-month').value;
+            const selectedCars = getSelectedCars();
+
+            const filteredSessions = allData.filter(s => {
+                const car = s.car || "Övriga bilar";
+                const matchCar = selectedCars.includes(car);
+                const matchMonth = (selectedMonth === 'all' || (s.date && s.date.startsWith(selectedMonth)));
+                return matchCar && matchMonth;
+            });
+
+            let totalKwh = 0;
+            let totalCost = 0;
+            filteredSessions.forEach(s => {
+                totalKwh += (s.kwh || 0);
+                totalCost += (s.cost ||
