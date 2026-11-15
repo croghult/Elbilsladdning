@@ -23,59 +23,39 @@ def fetch_zaptec_sessions(token):
     response.raise_for_status()
     data = response.json()
     
-    # Robust hantering av Zaptecs svarsstruktur (stödjer direkt lista, Data och Pages)
-    sessions_list = []
+    # Hantera Zaptecs svarsformat (om det är en lista eller ett paginerat objekt)
+    raw_sessions = []
     if isinstance(data, list):
-        sessions_list = data
+        raw_sessions = data
     elif isinstance(data, dict):
-        if isinstance(data.get("Data"), list):
-            sessions_list = data["Data"]
-        elif isinstance(data.get("Pages"), list):
-            # Om Pages är en lista av sidor/objekt
-            for p in data["Pages"]:
-                if isinstance(p, list):
-                    sessions_list.extend(p)
-                elif isinstance(p, dict):
-                    sub = p.get("Data") or p.get("Items") or p.get("Entries")
-                    if isinstance(sub, list):
-                        sessions_list.extend(sub)
-                    else:
-                        sessions_list.append(p)
-        else:
-            # Fallback: leta efter den första listan som finns i diktet
-            for v in data.values():
-                if isinstance(v, list):
-                    sessions_list = v
-                    break
+        if "Pages" in data and isinstance(data["Pages"], list):
+            # Om Pages innehåller listor av sessioner
+            for page in data["Pages"]:
+                if isinstance(page, list):
+                    raw_sessions.extend(page)
+                elif isinstance(page, dict) and "Data" in page:
+                    raw_sessions.extend(page["Data"])
+        elif "Data" in data and isinstance(data["Data"], list):
+            raw_sessions = data["Data"]
 
     formatted_sessions = []
-    for s in sessions_list:
-        if not isinstance(s, dict):
-            continue
-            
-        start_dt = s.get("startDateTime") or s.get("StartDateTime") or s.get("date") or s.get("Date")
-        energy = s.get("energy") or s.get("Energy") or s.get("kWh") or s.get("KWh") or 0.0
-        user_name = s.get("userFullName") or s.get("UserFullName") or s.get("UserName") or "Övriga bilar"
+    for s in raw_sessions:
+        start_dt = s.get("startDateTime") or s.get("StartDateTime")
+        energy = s.get("energy") or s.get("Energy", 0.0)
+        user_name = s.get("userFullName") or s.get("UserFullName") or "Övriga bilar"
         
         date_str = ""
         if start_dt:
             try:
-                dt = datetime.fromisoformat(str(start_dt).replace("Z", "+00:00"))
+                dt = datetime.fromisoformat(start_dt.replace("Z", "+00:00"))
                 date_str = dt.strftime("%Y-%m-%d %H:%M")
             except Exception:
                 date_str = str(start_dt)[:16].replace("T", " ")
 
-        try:
-            energy_val = float(energy)
-            if energy_val > 1000:  # Om värdet är i Wh istället för kWh
-                energy_val = energy_val / 1000.0
-        except (ValueError, TypeError):
-            energy_val = 0.0
-
         formatted_sessions.append({
             "date": date_str,
-            "car": str(user_name),
-            "kwh": energy_val,
+            "car": user_name,
+            "kwh": float(energy),
             "cost": 0.0
         })
         
@@ -86,7 +66,6 @@ def process_driving_data(excel_path="audi_trips.xlsx"):
         print(f"Varning: {excel_path} hittades inte. Genererar tom kördata.")
         return {}
     
-    # Läs in Excel-filen utan dayfirst i read_excel (hanteras i to_datetime)
     df = pd.read_excel(excel_path)
     
     date_col = next((c for c in df.columns if 'dat' in c.lower() or 'date' in c.lower()), df.columns[0])
