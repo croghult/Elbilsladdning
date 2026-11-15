@@ -14,7 +14,7 @@
         <header class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">Zaptec Laddningsstatistik</h1>
-                <p class="text-sm text-gray-500 mt-1">Översikt över förbrukning, dynamiska grafer och faktiska elkostnader.</p>
+                <p class="text-sm text-gray-500 mt-1">Översikt över förbrukning, grafer och kostnader per bil.</p>
             </div>
             <div id="last-updated" class="text-xs text-gray-400 bg-white px-3 py-2 rounded-lg border shadow-sm">
                 Laddar data...
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <!-- Layout med grafer och filter/användarlista -->
+        <!-- Layout med grafer och filter -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <!-- Stapeldiagram med toggle (tar 2 kolumner) -->
             <div class="bg-white p-6 rounded-xl border shadow-sm lg:col-span-2 flex flex-col justify-between">
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <!-- Användarchecklista & Månadsfilter (tar 1 kolumn) -->
+            <!-- Bil-checklista & Månadsfilter (tar 1 kolumn) -->
             <div class="bg-white p-6 rounded-xl border shadow-sm flex flex-col justify-between">
                 <div>
                     <div class="mb-4">
@@ -68,15 +68,15 @@
 
                     <div class="mb-4">
                         <div class="flex items-center justify-between mb-1">
-                            <label class="block text-xs font-semibold text-gray-500 uppercase">Inkludera användare</label>
+                            <label class="block text-xs font-semibold text-gray-500 uppercase">Inkludera bilar</label>
                             <div class="space-x-2">
-                                <button onclick="toggleAllUsers(true)" class="text-[10px] text-blue-600 hover:underline">Alla</button>
+                                <button onclick="toggleAllCars(true)" class="text-[10px] text-blue-600 hover:underline">Alla</button>
                                 <span class="text-gray-300">|</span>
-                                <button onclick="toggleAllUsers(false)" class="text-[10px] text-blue-600 hover:underline">Inga</button>
+                                <button onclick="toggleAllCars(false)" class="text-[10px] text-blue-600 hover:underline">Inga</button>
                             </div>
                         </div>
-                        <!-- Checklista fylls på dynamiskt -->
-                        <div id="user-checkboxes" class="space-y-2 max-h-40 overflow-y-auto pr-1 border bg-gray-50 p-2 rounded-lg text-sm">
+                        <!-- Checklista för bilar fylls på dynamiskt -->
+                        <div id="car-checkboxes" class="space-y-2 max-h-40 overflow-y-auto pr-1 border bg-gray-50 p-2 rounded-lg text-sm">
                             <!-- JS fyller i här -->
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                     <thead>
                         <tr class="bg-gray-50 border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                             <th class="px-6 py-3">Datum / Tid</th>
-                            <th class="px-6 py-3">Användare</th>
+                            <th class="px-6 py-3">Bil & Förare</th>
                             <th class="px-6 py-3 text-right">Förbrukning (kWh)</th>
                             <th class="px-6 py-3 text-right">Kostnad (kr)</th>
                         </tr>
@@ -108,8 +108,8 @@
 
     <script>
         let allData = [];
-        let allUsers = [];
-        let selectedMetric = 'kwh'; // 'kwh' eller 'kr'
+        let carsMap = {};
+        let selectedMetric = 'kwh'; 
         let monthlyChartInstance = null;
 
         async function loadData() {
@@ -121,10 +121,16 @@
                 
                 document.getElementById('last-updated').innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
                 
-                allUsers = [...new Set(allData.map(s => s.user))].sort();
+                carsMap = {};
+                allData.forEach(s => {
+                    const carName = s.car || "Övriga bilar";
+                    if (!carsMap[carName]) {
+                        carsMap[carName] = s.car_logo || "";
+                    }
+                });
                 
                 populateMonths();
-                populateUserCheckboxes();
+                populateCarCheckboxes();
                 render();
             } catch (err) {
                 document.getElementById('table-body').innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Kunde inte hitta data.json. Kör GitHub Action först!</td></tr>`;
@@ -142,22 +148,28 @@
             });
         }
 
-        function populateUserCheckboxes() {
-            const container = document.getElementById('user-checkboxes');
+        function populateCarCheckboxes() {
+            const container = document.getElementById('car-checkboxes');
             container.innerHTML = '';
-            allUsers.forEach(u => {
+            
+            Object.keys(carsMap).sort().forEach(carName => {
+                const logo = carsMap[carName];
                 const label = document.createElement('label');
-                label.className = "flex items-center space-x-2 text-xs text-gray-700 cursor-pointer py-0.5";
+                label.className = "flex items-center space-x-2 text-xs text-gray-700 cursor-pointer py-1";
+                
+                let logoHtml = logo ? `<img src="${logo}" class="w-5 h-5 object-contain rounded" />` : `<div class="w-5 h-5 bg-gray-200 rounded flex items-center justify-center text-[10px] font-bold">🚗</div>`;
+                
                 label.innerHTML = `
-                    <input type="checkbox" value="${u}" checked onchange="render()" class="user-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500 h-4 w-4">
-                    <span class="truncate" title="${u}">${u}</span>
+                    <input type="checkbox" value="${carName}" checked onchange="render()" class="car-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500 h-4 w-4">
+                    ${logoHtml}
+                    <span class="truncate font-medium" title="${carName}">${carName}</span>
                 `;
                 container.appendChild(label);
             });
         }
 
-        function toggleAllUsers(state) {
-            document.querySelectorAll('.user-checkbox').forEach(cb => cb.checked = state);
+        function toggleAllCars(state) {
+            document.querySelectorAll('.car-checkbox').forEach(cb => cb.checked = state);
             render();
         }
 
@@ -166,7 +178,6 @@
             const btnKwh = document.getElementById('btn-kwh');
             const btnKr = document.getElementById('btn-kr');
             const monthVal = document.getElementById('filter-month').value;
-            const unit = selectedMetric === 'kwh' ? 'kWh' : 'kr';
             
             if (metric === 'kwh') {
                 btnKwh.className = "px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-blue-600 shadow-sm transition";
@@ -192,12 +203,13 @@
 
         function getFilteredData() {
             const monthVal = document.getElementById('filter-month').value;
-            const checkedUsers = Array.from(document.querySelectorAll('.user-checkbox:checked')).map(cb => cb.value);
+            const checkedCars = Array.from(document.querySelectorAll('.car-checkbox:checked')).map(cb => cb.value);
 
             return allData.filter(s => {
+                const carName = s.car || "Övriga bilar";
                 const matchMonth = (monthVal === 'all' || s.date.startsWith(monthVal));
-                const matchUser = checkedUsers.includes(s.user);
-                return matchMonth && matchUser;
+                const matchCar = checkedCars.includes(carName);
+                return matchMonth && matchCar;
             });
         }
 
@@ -220,11 +232,21 @@
                     totalKwh += s.energy;
                     totalCost += cost;
 
+                    const carName = s.car || "Övriga bilar";
+                    const logo = s.car_logo;
+                    let logoHtml = logo ? `<img src="${logo}" class="w-6 h-6 object-contain rounded inline-block mr-2" />` : `<span class="mr-2">🚗</span>`;
+
                     const tr = document.createElement('tr');
                     tr.className = "hover:bg-gray-50 transition";
                     tr.innerHTML = `
                         <td class="px-6 py-4 text-gray-600">${s.date}</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">${s.user}</td>
+                        <td class="px-6 py-4 font-medium text-gray-900 flex items-center">
+                            ${logoHtml}
+                            <div>
+                                <div>${carName}</div>
+                                <div class="text-xs text-gray-400 font-normal">Förare: ${s.user}</div>
+                            </div>
+                        </td>
                         <td class="px-6 py-4 text-right text-gray-700">${s.energy.toFixed(2)} kWh</td>
                         <td class="px-6 py-4 text-right font-semibold text-gray-900">${cost.toFixed(2)} kr</td>
                     `;
@@ -241,24 +263,19 @@
 
         function renderChartOnly() {
             const monthVal = document.getElementById('filter-month').value;
-            const checkedUsers = Array.from(document.querySelectorAll('.user-checkbox:checked')).map(cb => cb.value);
+            const checkedCars = Array.from(document.querySelectorAll('.car-checkbox:checked')).map(cb => cb.value);
             
-            // För grafen filtrerar vi på användare (och på månad om vald)
-            const chartData = allData.filter(s => checkedUsers.includes(s.user));
+            const chartData = allData.filter(s => checkedCars.includes(s.car || "Övriga bilar"));
             const aggregated = {};
 
             if (monthVal === 'all') {
-                // Gruppera per månad
                 chartData.forEach(s => {
                     const month = s.date.substring(0, 7);
                     const cost = s.cost || (s.energy * 1.50);
                     aggregated[month] = (aggregated[month] || 0) + (selectedMetric === 'kwh' ? s.energy : cost);
                 });
             } else {
-                // Gruppera dag för dag för den valda månaden
                 const monthFiltered = chartData.filter(s => s.date.startsWith(monthVal));
-                
-                // Skapa upp alla dagar i månaden så staplarna blir snygga och fyller ut
                 const [year, monthNum] = monthVal.split('-').map(Number);
                 const daysInMonth = new Date(year, monthNum, 0).getDate();
                 
@@ -278,14 +295,7 @@
 
             const labels = Object.keys(aggregated).sort();
             const values = labels.map(l => aggregated[l]);
-
-            // Om vi visar dagar, visa bara dag-numret (t.ex. "01", "02") på x-axeln för att spara plats
-            const displayLabels = labels.map(l => {
-                if (monthVal !== 'all') {
-                    return l.substring(8, 10);
-                }
-                return l;
-            });
+            const displayLabels = labels.map(l => (monthVal !== 'all' ? l.substring(8, 10) : l));
 
             const ctx = document.getElementById('monthlyChart').getContext('2d');
             if (monthlyChartInstance) monthlyChartInstance.destroy();
@@ -309,7 +319,6 @@
                         tooltip: {
                             callbacks: {
                                 title: function(context) {
-                                    // Visa fullständigt datum i tooltippet när man hovrar över en dag
                                     if (monthVal !== 'all') {
                                         return labels[context[0].dataIndex];
                                     }
@@ -326,7 +335,7 @@
         document.getElementById('filter-month').addEventListener('change', render);
         document.getElementById('reset-filters').addEventListener('click', () => {
             document.getElementById('filter-month').value = 'all';
-            toggleAllUsers(true);
+            toggleAllCars(true);
         });
 
         loadData();
