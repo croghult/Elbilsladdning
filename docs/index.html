@@ -283,4 +283,163 @@
             let totalCost = 0;
             filteredSessions.forEach(s => {
                 totalKwh += (s.kwh || 0);
-                totalCost += (s.cost ||
+                totalCost += (s.cost || 0);
+            });
+
+            let totalKm = 0;
+            if (selectedMonth === 'all') {
+                Object.entries(drivingData).forEach(([ym, data]) => {
+                    totalKm += (data.distance_km || 0);
+                });
+            } else if (drivingData[selectedMonth]) {
+                totalKm = drivingData[selectedMonth].distance_km || 0;
+            }
+
+            const avgPrice = totalKwh > 0 ? totalCost / totalKwh : 0;
+            const totalMil = totalKm / 10;
+            const costPerMil = totalMil > 0 ? totalCost / totalMil : 0;
+
+            document.getElementById('kpi-kwh').textContent = totalKwh.toFixed(1) + ' kWh';
+            document.getElementById('kpi-cost').textContent = totalCost.toFixed(0) + ' kr';
+            document.getElementById('kpi-avg-price').textContent = avgPrice.toFixed(2) + ' kr';
+            document.getElementById('kpi-cost-per-mil').textContent = costPerMil.toFixed(2) + ' kr/mil';
+            document.getElementById('kpi-sessions').textContent = filteredSessions.length + ' st';
+
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+            filteredSessions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(s => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50 border-b border-gray-100";
+                tr.innerHTML = `
+                    <td class="px-6 py-3">${s.date || '-'}</td>
+                    <td class="px-6 py-3 font-medium">${s.car || 'Övriga bilar'}</td>
+                    <td class="px-6 py-3 text-right">${(s.kwh || 0).toFixed(1)}</td>
+                    <td class="px-6 py-3 text-right">${(s.cost || 0).toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            renderChart(filteredSessions);
+        }
+
+        function setChartMetric(metric) {
+            selectedMetric = metric;
+            document.getElementById('btn-kwh').className = metric === 'kwh' ? "px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-blue-600 shadow-sm transition" : "px-3 py-1.5 text-xs font-semibold rounded-md text-gray-600 hover:text-gray-900 transition";
+            document.getElementById('btn-kr').className = metric === 'kr' ? "px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-blue-600 shadow-sm transition" : "px-3 py-1.5 text-xs font-semibold rounded-md text-gray-600 hover:text-gray-900 transition";
+            document.getElementById('chart-title').textContent = `Månadsvis förbrukning (${metric})`;
+            render();
+        }
+
+        function renderChart(sessions) {
+            const monthlyData = {};
+            sessions.forEach(s => {
+                if (s.date) {
+                    const ym = s.date.substring(0, 7);
+                    if (!monthlyData[ym]) monthlyData[ym] = { kwh: 0, kr: 0 };
+                    monthlyData[ym].kwh += (s.kwh || 0);
+                    monthlyData[ym].kr += (s.cost || 0);
+                }
+            });
+
+            const labels = Object.keys(monthlyData).sort();
+            const dataValues = labels.map(ym => monthlyData[ym][selectedMetric]);
+
+            const ctx = document.getElementById('monthlyChart').getContext('2d');
+            if (monthlyChartInstance) monthlyChartInstance.destroy();
+
+            monthlyChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: selectedMetric.toUpperCase(),
+                        data: dataValues,
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderMonthlyTable() {
+            const allSessions = window.allSessionsData || [];
+            const drivingObj = window.allDrivingData || {};
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
+
+            const yearsSet = new Set();
+            allSessions.forEach(s => { if (s.date) yearsSet.add(s.date.substring(0, 4)); });
+            Object.keys(drivingObj).forEach(ym => yearsSet.add(ym.substring(0, 4)););
+
+            const years = Array.from(yearsSet).sort().reverse();
+            if (years.length === 0) years.push(new Date().getFullYear().toString());
+
+            const head = document.getElementById('monthly-table-head');
+            const body = document.getElementById('monthly-table-body');
+            const foot = document.getElementById('monthly-table-foot');
+
+            let headHtml = `<tr><th class="px-4 py-3">Månad</th>`;
+            years.forEach(y => headHtml += `<th class="px-4 py-3 text-right">${y}</th>`);
+            headHtml += `<th class="px-4 py-3 text-right font-bold">Totalt</th></tr>`;
+            head.innerHTML = headHtml;
+
+            let bodyHtml = '';
+            const yearTotals = {};
+            years.forEach(y => yearTotals[y] = 0);
+
+            for (let m = 0; m < 12; m++) {
+                const mStr = String(m + 1).padStart(2, '0');
+                bodyHtml += `<tr><td class="px-4 py-3 font-medium">${monthNames[m]}</td>`;
+                
+                let rowSum = 0;
+                years.forEach(y => {
+                    const ym = `${y}-${mStr}`;
+                    let val = 0;
+
+                    if (currentMonthlyView === 'kwh') {
+                        allSessions.forEach(s => { if (s.date && s.date.startsWith(ym)) val += (s.kwh || 0); });
+                    } else if (currentMonthlyView === 'kr') {
+                        allSessions.forEach(s => { if (s.date && s.date.startsWith(ym)) val += (s.cost || 0); });
+                    } else if (currentMonthlyView === 'km') {
+                        if (drivingObj[ym]) val = drivingObj[ym].distance_km || 0;
+                    } else if (currentMonthlyView === 'krmil') {
+                        let km = drivingObj[ym] ? (drivingObj[ym].distance_km || 0) : 0;
+                        let cost = 0;
+                        allSessions.forEach(s => { if (s.date && s.date.startsWith(ym)) cost += (s.cost || 0); });
+                        let mil = km / 10;
+                        val = mil > 0 ? cost / mil : 0;
+                    }
+
+                    rowSum += val;
+                    yearTotals[y] += val;
+
+                    const formatted = currentMonthlyView === 'km' ? val.toFixed(0) : val.toFixed(1);
+                    bodyHtml += `<td class="px-4 py-3 text-right">${val > 0 ? formatted : '-'}</td>`;
+                });
+
+                bodyHtml += `<td class="px-4 py-3 text-right font-bold">${rowSum > 0 ? (currentMonthlyView === 'km' ? rowSum.toFixed(0) : rowSum.toFixed(1)) : '-'}</td></tr>`;
+            }
+            body.innerHTML = bodyHtml;
+
+            let footHtml = `<tr><td class="px-4 py-3 font-bold">Totalt</td>`;
+            let grandTotal = 0;
+            years.forEach(y => {
+                footHtml += `<td class="px-4 py-3 text-right font-bold">${yearTotals[y] > 0 ? (currentMonthlyView === 'km' ? yearTotals[y].toFixed(0) : yearTotals[y].toFixed(1)) : '-'}</td>`;
+                grandTotal += yearTotals[y];
+            });
+            footHtml += `<td class="px-4 py-3 text-right font-bold">${grandTotal > 0 ? (currentMonthlyView === 'km' ? grandTotal.toFixed(0) : grandTotal.toFixed(1)) : '-'}</td></tr>`;
+            foot.innerHTML = footHtml;
+        }
+
+        document.addEventListener("DOMContentLoaded", loadData);
+    </script>
+</body>
+</html>
