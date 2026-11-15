@@ -67,7 +67,9 @@ def fetch_all_charge_history(token: str) -> list[dict]:
             session_id = s.get("Id")
             start_time = s.get("StartDateTime", "")
             energy = float(s.get("Energy", 0.0))
-            user = s.get("UserFullName") or s.get("UserEmail") or s.get("ExternallyEndedBy") or "Okänd"
+            raw_user = s.get("UserFullName") or s.get("UserEmail") or s.get("ExternallyEndedBy") or "Okänd"
+            # Städa bort dubbla mellanslag och specialblanksteg
+            user = " ".join(raw_user.split())
             
             # Matcha användare mot bilmappning
             car_info = car_mapping.get(user, {"car": "Övriga bilar", "logo": ""})
