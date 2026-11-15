@@ -31,12 +31,13 @@ def fetch_spot_prices(date_str: str) -> list[dict]:
     url = f"https://www.elprisetjustnu.se/api/v1/prices/{date_str.replace('-', '/')}_{ELAREA}.json"
     try:
         resp = requests.get(url, timeout=10)
+        print(f"Hämtar pris för {date_str}: Status {resp.status_code}") # <-- LÄGG TILL DENNA
         if resp.status_code == 200:
             data = resp.json()
             PRICE_CACHE[date_str] = data
             return data
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"Fel vid hämtning av elpris: {e}") # <-- OCH DENNA
 
     PRICE_CACHE[date_str] = []
     return []
