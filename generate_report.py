@@ -23,7 +23,6 @@ def fetch_zaptec_sessions(token):
     response.raise_for_status()
     data = response.json()
     
-    # Hantera olika svarsstrukturer från Zaptec API
     sessions_list = data
     if isinstance(data, dict):
         if "Data" in data:
@@ -49,7 +48,7 @@ def fetch_zaptec_sessions(token):
             "date": date_str,
             "car": user_name,
             "kwh": float(energy),
-            "cost": 0.0  # Kan fyllas på med spotprisberäkning om önskvärt
+            "cost": 0.0
         })
     return formatted_sessions
 
@@ -58,10 +57,9 @@ def process_driving_data(excel_path="audi_trips.xlsx"):
         print(f"Varning: {excel_path} hittades inte. Genererar tom kördata.")
         return {}
     
-    # Läs in Excel-filen med dayfirst=True enligt konfiguration
-    df = pd.read_excel(excel_path, dayfirst=True)
+    # Läs in Excel-filen utan dayfirst (hanteras i to_datetime nedan)
+    df = pd.read_excel(excel_path)
     
-    # Identifiera datum- och distanskolumner dynamiskt
     date_col = next((c for c in df.columns if 'dat' in c.lower() or 'date' in c.lower()), df.columns[0])
     dist_col = next((c for c in df.columns if 'dist' in c.lower() or 'km' in c.lower() or 'mil' in c.lower()), df.columns[1])
     
