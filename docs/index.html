@@ -257,8 +257,12 @@
                 });
             }
 
+            const avgPrice = totalKwh > 0 ? (totalCost / totalKwh) : 0;
+
+            // Uppdatera KPI-korten på skärmen
             document.getElementById('kpi-kwh').innerText = `${totalKwh.toFixed(1)} kWh`;
             document.getElementById('kpi-cost').innerText = `${totalCost.toFixed(0)} kr`;
+            document.getElementById('kpi-avg-price').innerText = `${avgPrice.toFixed(2)} kr/kWh`; // <-- NYTT KORT
             document.getElementById('kpi-sessions').innerText = `${filtered.length} st`;
 
             renderChartOnly();
