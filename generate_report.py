@@ -19,24 +19,33 @@ def get_zaptec_token(username, password):
 def fetch_zaptec_sessions(token):
     url = "https://api.zaptec.com/api/chargehistory"
     headers = {"Authorization": f"Bearer {token}", "Accept": "application/json"}
-    response = requests.get(url, headers=headers)
     
-    # Skriv ut status och råsvar i GitHub-loggen för att se vad som kommer tillbaka
-    print("ZAPTEC API STATUS:", response.status_code)
-    print("ZAPTEC API RAW RESPONSE:", response.text[:1000])
+    all_raw_sessions = []
+    page = 1
+    total_pages = 1
     
-    response.raise_for_status()
-    data = response.json()
-    
-    sessions_list = data
-    if isinstance(data, dict):
-        if "Data" in data:
-            sessions_list = data["Data"]
-        elif "Pages" in data:
-            sessions_list = data["Pages"]
+    # Loopa igenom alla sidor för att få med samtliga sessioner
+    while page <= total_pages:
+        params = {"PageIndex": page} if page > 1 else {}
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        
+        if isinstance(data, dict):
+            total_pages = data.get("Pages", 1)
+            page_data = data.get("Data", [])
+            if isinstance(page_data, list):
+                all_raw_sessions.extend(page_data)
+        elif isinstance(data, list):
+            all_raw_sessions.extend(data)
+            break
             
+        page += 1
+        if page > total_pages:
+            break
+
     formatted_sessions = []
-    for s in sessions_list:
+    for s in all_raw_sessions:
         if not isinstance(s, dict):
             continue
             
@@ -58,6 +67,7 @@ def fetch_zaptec_sessions(token):
             "kwh": float(energy),
             "cost": 0.0
         })
+        
     return formatted_sessions
 
 def process_driving_data(excel_path="audi_trips.xlsx"):
@@ -104,7 +114,7 @@ def main():
             print("Ansluter till Zaptec API...")
             token = get_zaptec_token(username, password)
             sessions = fetch_zaptec_sessions(token)
-            print(f"Hämtade {len(sessions)} laddsessioner från Zaptec.")
+            print(f"Hämtade totalt {len(sessions)} laddsessioner från alla sidor hos Zaptec.")
         except Exception as e:
             print(f"Kunde inte hämta Zaptec-data: {e}")
     else:
