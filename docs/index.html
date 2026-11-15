@@ -187,15 +187,22 @@
         }
 
         function getCarDisplayInfo(carName) {
-            let mapping = carMapping[carName];
+            if (!carName) return { displayName: "Övriga bilar", logo: null };
+            
+            // Rensa eventuella extra mellanslag för säkerhets skull
+            const cleanCarName = carName.trim();
+            
+            let mapping = carMapping[cleanCarName];
             if (!mapping) {
-                const foundKey = Object.keys(carMapping).find(k => k.toLowerCase() === carName.toLowerCase());
-                if (foundKey) mapping = carMapping[foundKey];
+                // Leta oberoende av stora/små bokstäver
+                const foundKey = Object.keys(carMapping).find(k => k.trim().toLowerCase() === cleanCarName.toLowerCase());
+                if (foundKey) {
+                    mapping = carMapping[foundKey];
+                }
             }
             
             const info = mapping || {};
-            // Här ändrade vi från info.name till info.car för att matcha din json-fil
-            const displayName = info.car || carName;
+            const displayName = info.car || cleanCarName;
             const logo = info.logo || null;
             return { displayName, logo };
         }
