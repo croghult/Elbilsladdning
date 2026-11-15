@@ -140,29 +140,32 @@
         let monthlyChartInstance = null;
 
         async function loadData() {
-            try {
-                const response = await fetch('data.json');
-                if (!response.ok) throw new Error('Kunde inte ladda data.json');
-                const json = await response.json();
-                allData = json.sessions || [];
-                
-                document.getElementById('last-updated').innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
-                
-                carsMap = {};
-                allData.forEach(s => {
-                    const carName = s.car || "Övriga bilar";
-                    if (!carsMap[carName]) {
-                        carsMap[carName] = s.car_logo || "";
-                    }
-                });
-                
-                populateMonths();
-                populateCarCheckboxes();
-                render();
-            } catch (err) {
-                document.getElementById('table-body').innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Kunde inte hitta data.json. Kör GitHub Action först!</td></tr>`;
+    try {
+        const response = await fetch('data.json');
+        if (!response.ok) throw new Error('Kunde inte ladda data.json');
+        const json = await response.json();
+        
+        allData = json.sessions || [];
+        window.allSessionsData = json.sessions || []; // <-- Spara globalt för tabellen
+        
+        document.getElementById('last-updated').innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
+        
+        carsMap = {};
+        allData.forEach(s => {
+            const carName = s.car || "Övriga bilar";
+            if (!carsMap[carName]) {
+                carsMap[carName] = s.car_logo || "";
             }
-        }
+        });
+        
+        populateMonths();
+        populateCarCheckboxes();
+        render();
+        renderMonthlyTable(); // <-- Rita ut månadstabellen här
+    } catch (err) {
+        document.getElementById('table-body').innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Kunde inte hitta data.json. Kör GitHub Action först!</td></tr>`;
+    }
+}
 
         function populateMonths() {
             const months = [...new Set(allData.map(s => s.date.substring(0, 7)))].sort().reverse();
