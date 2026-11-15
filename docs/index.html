@@ -187,9 +187,16 @@
         }
 
         function getCarDisplayInfo(carName) {
-            const mapping = carMapping[carName] || {};
-            const displayName = mapping.name || carName;
-            const logo = mapping.logo || null;
+            // Försök hitta exakt matchning, eller leta oberoende av stora/små bokstäver
+            let mapping = carMapping[carName];
+            if (!mapping) {
+                const foundKey = Object.keys(carMapping).find(k => k.toLowerCase() === carName.toLowerCase());
+                if (foundKey) mapping = carMapping[foundKey];
+            }
+            
+            const info = mapping || {};
+            const displayName = info.name || carName;
+            const logo = info.logo || null;
             return { displayName, logo };
         }
 
