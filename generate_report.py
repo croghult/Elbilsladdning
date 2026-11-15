@@ -20,98 +20,44 @@ def fetch_zaptec_sessions(token):
     url = "https://api.zaptec.com/api/chargehistory"
     headers = {"Authorization": f"Bearer {token}", "Accept": "application/json"}
     response = requests.get(url, headers=headers)
+    
+    # Skriv ut status och råsvar i GitHub-loggen för att se vad som kommer tillbaka
+    print("ZAPTEC API STATUS:", response.status_code)
+    print("ZAPTEC API RAW RESPONSE:", response.text[:1000])
+    
     response.raise_for_status()
     data = response.json()
     
-    sessions_list = []
-    
-    # Extrahera listan oavsett hur Zaptec strukturerar svarsdiktet
-    if isinstance(data, list):
-        sessions_list = data
-    elif isinstance(data, dict):
-        # 1. Kolla kända nycklar först
-        for key in ["Data", "Pages", "Items", "Entries", "Sessions", "Result", "List"]:
-            if key in data:
-                val = data[key]
-                if isinstance(val, list):
-                    sessions_list = val
-                    break
-                elif isinstance(val, dict):
-                    for subkey in ["Data", "Items", "Entries", "Sessions"]:
-                        if subkey in val and isinstance(val[subkey], list):
-                            sessions_list = val[subkey]
-                            break
-                    if sessions_list:
-                        break
-        
-        # 2. Om inget hittats, leta efter valfri lista i diktet
-        if not sessions_list:
-            for val in data.values():
-                if isinstance(val, list):
-                    sessions_list = val
-                    break
-                elif isinstance(val, dict):
-                    for subval in val.values():
-                        if isinstance(subval, list):
-                            sessions_list = subval
-                            break
-                    if sessions_list:
-                        break
-
+    sessions_list = data
+    if isinstance(data, dict):
+        if "Data" in data:
+            sessions_list = data["Data"]
+        elif "Pages" in data:
+            sessions_list = data["Pages"]
+            
     formatted_sessions = []
     for s in sessions_list:
         if not isinstance(s, dict):
             continue
             
-        start_dt = (
-            s.get("startDateTime") or 
-            s.get("StartDateTime") or 
-            s.get("StartTime") or 
-            s.get("startTime") or
-            s.get("date") or
-            s.get("Date")
-        )
-        
-        energy = (
-            s.get("energy") or 
-            s.get("Energy") or 
-            s.get("KWh") or 
-            s.get("kWh") or 
-            s.get("TotalEnergy") or 
-            0.0
-        )
-        
-        user_name = (
-            s.get("userFullName") or 
-            s.get("UserFullName") or 
-            s.get("UserName") or 
-            s.get("userName") or 
-            s.get("User") or 
-            "Övriga bilar"
-        )
+        start_dt = s.get("startDateTime") or s.get("StartDateTime")
+        energy = s.get("energy") or s.get("Energy", 0.0)
+        user_name = s.get("userFullName") or s.get("UserFullName") or "Övriga bilar"
         
         date_str = ""
         if start_dt:
             try:
-                dt = datetime.fromisoformat(str(start_dt).replace("Z", "+00:00"))
+                dt = datetime.fromisoformat(start_dt.replace("Z", "+00:00"))
                 date_str = dt.strftime("%Y-%m-%d %H:%M")
             except Exception:
                 date_str = str(start_dt)[:16].replace("T", " ")
 
-        try:
-            energy_val = float(energy)
-            if energy_val > 1000:  # Om värdet är i Wh istället för kWh
-                energy_val = energy_val / 1000.0
-        except (ValueError, TypeError):
-            energy_val = 0.0
-
         formatted_sessions.append({
             "date": date_str,
-            "car": str(user_name),
-            "kwh": energy_val,
+            "car": user_name,
+            "kwh": float(energy),
             "cost": 0.0
         })
-        
     return formatted_sessions
 
 def process_driving_data(excel_path="audi_trips.xlsx"):
