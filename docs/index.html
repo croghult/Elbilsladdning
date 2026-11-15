@@ -149,4 +149,187 @@
                 const label = document.createElement('label');
                 label.className = "flex items-center space-x-2 text-xs text-gray-700 cursor-pointer py-0.5";
                 label.innerHTML = `
-                    <input type="checkbox"
+                    <input type="checkbox" value="${u}" checked onchange="render()" class="user-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500 h-4 w-4">
+                    <span class="truncate" title="${u}">${u}</span>
+                `;
+                container.appendChild(label);
+            });
+        }
+
+        function toggleAllUsers(state) {
+            document.querySelectorAll('.user-checkbox').forEach(cb => cb.checked = state);
+            render();
+        }
+
+        function setChartMetric(metric) {
+            selectedMetric = metric;
+            const btnKwh = document.getElementById('btn-kwh');
+            const btnKr = document.getElementById('btn-kr');
+            const monthVal = document.getElementById('filter-month').value;
+            const unit = selectedMetric === 'kwh' ? 'kWh' : 'kr';
+            
+            if (metric === 'kwh') {
+                btnKwh.className = "px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-blue-600 shadow-sm transition";
+                btnKr.className = "px-3 py-1.5 text-xs font-semibold rounded-md text-gray-600 hover:text-gray-900 transition";
+            } else {
+                btnKr.className = "px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-blue-600 shadow-sm transition";
+                btnKwh.className = "px-3 py-1.5 text-xs font-semibold rounded-md text-gray-600 hover:text-gray-900 transition";
+            }
+            
+            updateChartTitle(monthVal);
+            renderChartOnly();
+        }
+
+        function updateChartTitle(monthVal) {
+            const title = document.getElementById('chart-title');
+            const unit = selectedMetric === 'kwh' ? 'kWh' : 'kr';
+            if (monthVal === 'all') {
+                title.innerText = `Månadsvis förbrukning (${unit})`;
+            } else {
+                title.innerText = `Daglig förbrukning ${monthVal} (${unit})`;
+            }
+        }
+
+        function getFilteredData() {
+            const monthVal = document.getElementById('filter-month').value;
+            const checkedUsers = Array.from(document.querySelectorAll('.user-checkbox:checked')).map(cb => cb.value);
+
+            return allData.filter(s => {
+                const matchMonth = (monthVal === 'all' || s.date.startsWith(monthVal));
+                const matchUser = checkedUsers.includes(s.user);
+                return matchMonth && matchUser;
+            });
+        }
+
+        function render() {
+            const monthVal = document.getElementById('filter-month').value;
+            updateChartTitle(monthVal);
+
+            const filtered = getFilteredData();
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+
+            let totalKwh = 0;
+            let totalCost = 0;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-gray-400">Inga laddsessioner matchar valda filter.</td></tr>`;
+            } else {
+                filtered.forEach(s => {
+                    const cost = s.cost || (s.energy * 1.50);
+                    totalKwh += s.energy;
+                    totalCost += cost;
+
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-gray-50 transition";
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 text-gray-600">${s.date}</td>
+                        <td class="px-6 py-4 font-medium text-gray-900">${s.user}</td>
+                        <td class="px-6 py-4 text-right text-gray-700">${s.energy.toFixed(2)} kWh</td>
+                        <td class="px-6 py-4 text-right font-semibold text-gray-900">${cost.toFixed(2)} kr</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            document.getElementById('kpi-kwh').innerText = `${totalKwh.toFixed(1)} kWh`;
+            document.getElementById('kpi-cost').innerText = `${totalCost.toFixed(0)} kr`;
+            document.getElementById('kpi-sessions').innerText = `${filtered.length} st`;
+
+            renderChartOnly();
+        }
+
+        function renderChartOnly() {
+            const monthVal = document.getElementById('filter-month').value;
+            const checkedUsers = Array.from(document.querySelectorAll('.user-checkbox:checked')).map(cb => cb.value);
+            
+            // För grafen filtrerar vi på användare (och på månad om vald)
+            const chartData = allData.filter(s => checkedUsers.includes(s.user));
+            const aggregated = {};
+
+            if (monthVal === 'all') {
+                // Gruppera per månad
+                chartData.forEach(s => {
+                    const month = s.date.substring(0, 7);
+                    const cost = s.cost || (s.energy * 1.50);
+                    aggregated[month] = (aggregated[month] || 0) + (selectedMetric === 'kwh' ? s.energy : cost);
+                });
+            } else {
+                // Gruppera dag för dag för den valda månaden
+                const monthFiltered = chartData.filter(s => s.date.startsWith(monthVal));
+                
+                // Skapa upp alla dagar i månaden så staplarna blir snygga och fyller ut
+                const [year, monthNum] = monthVal.split('-').map(Number);
+                const daysInMonth = new Date(year, monthNum, 0).getDate();
+                
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const dayStr = `${monthVal}-${String(i).padStart(2, '0')}`;
+                    aggregated[dayStr] = 0;
+                }
+
+                monthFiltered.forEach(s => {
+                    const day = s.date.substring(0, 10);
+                    const cost = s.cost || (s.energy * 1.50);
+                    if (aggregated[day] !== undefined) {
+                        aggregated[day] += (selectedMetric === 'kwh' ? s.energy : cost);
+                    }
+                });
+            }
+
+            const labels = Object.keys(aggregated).sort();
+            const values = labels.map(l => aggregated[l]);
+
+            // Om vi visar dagar, visa bara dag-numret (t.ex. "01", "02") på x-axeln för att spara plats
+            const displayLabels = labels.map(l => {
+                if (monthVal !== 'all') {
+                    return l.substring(8, 10);
+                }
+                return l;
+            });
+
+            const ctx = document.getElementById('monthlyChart').getContext('2d');
+            if (monthlyChartInstance) monthlyChartInstance.destroy();
+            
+            monthlyChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: displayLabels,
+                    datasets: [{
+                        label: selectedMetric === 'kwh' ? 'kWh' : 'kr',
+                        data: values,
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    // Visa fullständigt datum i tooltippet när man hovrar över en dag
+                                    if (monthVal !== 'all') {
+                                        return labels[context[0].dataIndex];
+                                    }
+                                    return context[0].label;
+                                }
+                            }
+                        }
+                    },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        }
+
+        document.getElementById('filter-month').addEventListener('change', render);
+        document.getElementById('reset-filters').addEventListener('click', () => {
+            document.getElementById('filter-month').value = 'all';
+            toggleAllUsers(true);
+        });
+
+        loadData();
+    </script>
+</body>
+</html>
