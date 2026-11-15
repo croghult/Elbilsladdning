@@ -187,7 +187,6 @@
         }
 
         function getCarDisplayInfo(carName) {
-            // Försök hitta exakt matchning, eller leta oberoende av stora/små bokstäver
             let mapping = carMapping[carName];
             if (!mapping) {
                 const foundKey = Object.keys(carMapping).find(k => k.toLowerCase() === carName.toLowerCase());
@@ -195,7 +194,8 @@
             }
             
             const info = mapping || {};
-            const displayName = info.name || carName;
+            // Här ändrade vi från info.name till info.car för att matcha din json-fil
+            const displayName = info.car || carName;
             const logo = info.logo || null;
             return { displayName, logo };
         }
