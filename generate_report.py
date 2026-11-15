@@ -82,30 +82,42 @@ def load_car_mapping() -> dict:
 
 def process_driving_data() -> dict:
     driving_summary = {}
-    excel_path = "audi_trips.xlsx" # Ersätt med namnet på din exportfil om det skiljer sig
+    excel_path = "audi_trips.xlsx"
     
     if os.path.exists(excel_path):
         try:
-            df = pd.read_excel(excel_path)
+            df_raw = pd.read_excel(excel_path, sheet_name='Korttidsminne', header=None)
+            header_row_idx = None
+            for idx, row in df_raw.iterrows():
+                row_str = str(row.values).lower()
+                if 'körningens slut' in row_str or 'körd sträcka' in row_str:
+                    header_row_idx = idx
+                    break
             
-            # Konvertera datumkolumnen (anpassa kolumnnamnet 'Datum' om det heter något annat i din export)
-            df['Date'] = pd.to_datetime(df['Datum'])
-            
-            # VIKTIGT: Filtrera bort allt före 19 november 2025
-            cutoff_date = pd.to_datetime('2025-11-19')
-            df = df[df['Date'] >= cutoff_date]
-            
-            df['Month'] = df['Date'].dt.strftime('%Y-%m')
-            
-            # Gruppera och summera km per månad (anpassa 'Sträcka (km)' efter din fils kolumnnamn)
-            grouped = df.groupby('Month')['Sträcka (km)'].sum().to_dict()
-            
-            for month, km in grouped.items():
-                driving_summary[month] = {"distance_km": round(float(km), 1)}
+            if header_row_idx is not None:
+                df = pd.read_excel(excel_path, sheet_name='Korttidsminne', header=header_row_idx)
+            else:
+                df = pd.read_excel(excel_path, sheet_name='Korttidsminne', header=1)
                 
-            print(f"Inläst körstatistik för {len(driving_summary)} månader (från 2025-11-19 och framåt).")
+            date_col = next((col for col in df.columns if 'slut' in str(col).lower() or 'datum' in str(col).lower() or 'date' in str(col).lower()), None)
+            dist_col = next((col for col in df.columns if 'sträck' in str(col).lower() or 'distance' in str(col).lower() or 'km' in str(col).lower()), None)
+            
+            if date_col and dist_col:
+                # LAGT TILL dayfirst=True HÄR:
+                df['ParsedDate'] = pd.to_datetime(df[date_col], errors='coerce', dayfirst=True)
+                df['Month'] = df['ParsedDate'].dt.strftime('%Y-%m')
+                df['DistKm'] = pd.to_numeric(df[dist_col], errors='coerce').fillna(0)
+                
+                grouped = df.groupby('Month')['DistKm'].sum().to_dict()
+                
+                for month, km in grouped.items():
+                    if pd.notna(month):
+                        driving_summary[month] = {"distance_km": round(float(km), 1)}
+                print(f"Läste in körstatistik för {len(driving_summary)} månader från Excel.")
+            else:
+                print("Kunde inte matcha kolumner för datum/sträcka i Excel-filen.")
         except Exception as e:
-            print(f"Kunde inte läsa audi_trips.xlsx: {e}")
+            print(f"Fel vid inläsning av audi_trips.xlsx: {e}")
             
     return driving_summary
 
