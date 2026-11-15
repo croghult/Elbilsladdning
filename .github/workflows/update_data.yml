@@ -1,0 +1,35 @@
+name: Uppdatera Zaptec Data
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Körs automatiskt varje natt kl 02:00 UTC
+  workflow_dispatch: # Gör det möjligt att köra manuellt
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installera Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Installera beroenden
+        run: pip install requests
+
+      - name: Kör skript för att hämta all historik
+        env:
+          ZAPTEC_USERNAME: ${{ secrets.ZAPTEC_USERNAME }}
+          ZAPTEC_PASSWORD: ${{ secrets.ZAPTEC_PASSWORD }}
+        run: python generate_report.py
+
+      - name: Pusha uppdaterad data till repo
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Automatiskt uppdaterad laddstatistik"
+          file_pattern: docs/data.json
