@@ -23,19 +23,26 @@ def fetch_zaptec_sessions(token):
     response.raise_for_status()
     data = response.json()
     
-    print(data)
-    
-    # Hitta listan oavsett om den ligger direkt eller under en nyckel
+    # Robust hantering av Zaptecs svarsstruktur (stödjer direkt lista, Data och Pages)
     sessions_list = []
     if isinstance(data, list):
         sessions_list = data
     elif isinstance(data, dict):
-        for key in ["Data", "Pages", "Items", "Entries", "Result", "Detail"]:
-            if key in data and isinstance(data[key], list):
-                sessions_list = data[key]
-                break
-        if not sessions_list:
-            # Om inga kända nycklar matchar, leta efter första listan i diktet
+        if isinstance(data.get("Data"), list):
+            sessions_list = data["Data"]
+        elif isinstance(data.get("Pages"), list):
+            # Om Pages är en lista av sidor/objekt
+            for p in data["Pages"]:
+                if isinstance(p, list):
+                    sessions_list.extend(p)
+                elif isinstance(p, dict):
+                    sub = p.get("Data") or p.get("Items") or p.get("Entries")
+                    if isinstance(sub, list):
+                        sessions_list.extend(sub)
+                    else:
+                        sessions_list.append(p)
+        else:
+            # Fallback: leta efter den första listan som finns i diktet
             for v in data.values():
                 if isinstance(v, list):
                     sessions_list = v
@@ -46,33 +53,9 @@ def fetch_zaptec_sessions(token):
         if not isinstance(s, dict):
             continue
             
-        # Sök igenom möjliga fältnamn för datum, energi och användare
-        start_dt = (
-            s.get("startDateTime") or 
-            s.get("StartDateTime") or 
-            s.get("StartTime") or 
-            s.get("startTime") or
-            s.get("Date") or
-            s.get("date")
-        )
-        
-        energy = (
-            s.get("energy") or 
-            s.get("Energy") or 
-            s.get("KWh") or 
-            s.get("kWh") or 
-            s.get("TotalEnergy") or 
-            0.0
-        )
-        
-        user_name = (
-            s.get("userFullName") or 
-            s.get("UserFullName") or 
-            s.get("UserName") or 
-            s.get("userName") or 
-            s.get("User") or 
-            "Övriga bilar"
-        )
+        start_dt = s.get("startDateTime") or s.get("StartDateTime") or s.get("date") or s.get("Date")
+        energy = s.get("energy") or s.get("Energy") or s.get("kWh") or s.get("KWh") or 0.0
+        user_name = s.get("userFullName") or s.get("UserFullName") or s.get("UserName") or "Övriga bilar"
         
         date_str = ""
         if start_dt:
@@ -82,10 +65,9 @@ def fetch_zaptec_sessions(token):
             except Exception:
                 date_str = str(start_dt)[:16].replace("T", " ")
 
-        # Om energivärdet är i Wh (> 1000 och inget decimaltal), konvertera till kWh
         try:
             energy_val = float(energy)
-            if energy_val > 1000:
+            if energy_val > 1000:  # Om värdet är i Wh istället för kWh
                 energy_val = energy_val / 1000.0
         except (ValueError, TypeError):
             energy_val = 0.0
@@ -104,6 +86,7 @@ def process_driving_data(excel_path="audi_trips.xlsx"):
         print(f"Varning: {excel_path} hittades inte. Genererar tom kördata.")
         return {}
     
+    # Läs in Excel-filen utan dayfirst i read_excel (hanteras i to_datetime)
     df = pd.read_excel(excel_path)
     
     date_col = next((c for c in df.columns if 'dat' in c.lower() or 'date' in c.lower()), df.columns[0])
@@ -143,7 +126,7 @@ def main():
             print("Ansluter till Zaptec API...")
             token = get_zaptec_token(username, password)
             sessions = fetch_zaptec_sessions(token)
-            print(f"Hämtade och bearbetade {len(sessions)} laddsessioner från Zaptec.")
+            print(f"Hämtade {len(sessions)} laddsessioner från Zaptec.")
         except Exception as e:
             print(f"Kunde inte hämta Zaptec-data: {e}")
     else:
