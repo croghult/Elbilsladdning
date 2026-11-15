@@ -47,7 +47,7 @@
 
         <!-- Layout med grafer och filter -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <!-- Stapeldiagram med toggle (tar 2 kolumner) -->
+            <!-- Diagram med toggle (tar 2 kolumner) -->
             <div class="bg-white p-6 rounded-xl border shadow-sm lg:col-span-2 flex flex-col justify-between">
                 <div>
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
@@ -83,7 +83,7 @@
                                 <button onclick="toggleAllCars(false)" class="text-[10px] text-blue-600 hover:underline">Inga</button>
                             </div>
                         </div>
-                        <!-- Checklista för bilar fylls på dynamiskt -->
+                        <!-- Checklista för bilar med logomärkning -->
                         <div id="car-checkboxes" class="space-y-2 max-h-40 overflow-y-auto pr-1 border bg-gray-50 p-2 rounded-lg text-sm">
                             <!-- JS fyller i här -->
                         </div>
@@ -94,11 +94,10 @@
             </div>
         </div>
 
-        <!-- Månadsöversikt per år (Med toggle för kWh, kr, km, kr/mil) -->
+        <!-- Månadsöversikt per år -->
         <div class="bg-white p-6 rounded-xl border shadow-sm mb-8">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
                 <h3 class="text-lg font-bold text-gray-900">Månadsöversikt per år</h3>
-                <!-- Toggle-knappar -->
                 <div class="inline-flex rounded-lg border border-gray-200 p-1 bg-gray-50 flex-wrap gap-1">
                     <button id="btn-view-kwh" onclick="setMonthlyView('kwh')" class="px-3 py-1 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm transition-all">kWh</button>
                     <button id="btn-view-kr" onclick="setMonthlyView('kr')" class="px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all">kr</button>
@@ -108,15 +107,9 @@
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
-                    <thead id="monthly-table-head" class="bg-gray-50 text-gray-700">
-                        <!-- Genereras av JS -->
-                    </thead>
-                    <tbody id="monthly-table-body" class="divide-y divide-gray-200 bg-white text-gray-900">
-                        <!-- Genereras av JS -->
-                    </tbody>
-                    <tfoot id="monthly-table-foot" class="bg-gray-50 font-semibold text-gray-900 border-t-2 border-gray-200">
-                        <!-- Genereras av JS -->
-                    </tfoot>
+                    <thead id="monthly-table-head" class="bg-gray-50 text-gray-700"></thead>
+                    <tbody id="monthly-table-body" class="divide-y divide-gray-200 bg-white text-gray-900"></tbody>
+                    <tfoot id="monthly-table-foot" class="bg-gray-50 font-semibold text-gray-900 border-t-2 border-gray-200"></tfoot>
                 </table>
             </div>
         </div>
@@ -129,14 +122,12 @@
                     <thead>
                         <tr class="bg-gray-50 border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                             <th class="px-6 py-3">Datum / Tid</th>
-                            <th class="px-6 py-3">Bil</th>
+                            <th class="px-6 py-3">Bil / Användare</th>
                             <th class="px-6 py-3 text-right">Förbrukning (kWh)</th>
                             <th class="px-6 py-3 text-right">Kostnad (kr)</th>
                         </tr>
                     </thead>
-                    <tbody id="table-body" class="divide-y divide-gray-200 text-sm">
-                        <!-- Fylls på via JS -->
-                    </tbody>
+                    <tbody id="table-body" class="divide-y divide-gray-200 text-sm"></tbody>
                 </table>
             </div>
         </div>
@@ -169,33 +160,19 @@
                 carsMap = {};
                 allData.forEach(s => {
                     const carName = s.car || "Övriga bilar";
-                    if (!carsMap[carName]) {
-                        carsMap[carName] = s.car_logo || "";
-                    }
+                    carsMap[carName] = true;
                 });
                 
                 populateMonths();
                 populateCarCheckboxes();
                 render();
                 renderMonthlyTable();
-                
-                hideLoader();
-                
             } catch (err) {
                 console.error("Fel vid inläsning av data:", err);
-                hideLoader();
                 const tableBody = document.getElementById('table-body');
                 if (tableBody) {
-                    tableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Fel: ${err.message}</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Fel vid inläsning: ${err.message}</td></tr>`;
                 }
-            }
-        }
-        
-        function hideLoader() {
-            const loadingEl = document.getElementById('loading');
-            if (loadingEl) {
-                loadingEl.style.display = 'none';
-                loadingEl.classList.add('hidden');
             }
         }
 
@@ -243,10 +220,15 @@
             if (!container) return;
             
             container.innerHTML = '';
-            Object.keys(carsMap).forEach(car => {
+            Object.keys(carsMap).sort().forEach(car => {
                 const div = document.createElement('label');
-                div.className = "flex items-center space-x-2 cursor-pointer";
-                div.innerHTML = `<input type="checkbox" value="${car}" checked onchange="render()" class="car-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500"><span>${car}</span>`;
+                div.className = "flex items-center space-x-2 cursor-pointer py-1 px-1 hover:bg-white rounded transition";
+                div.innerHTML = `
+                    <input type="checkbox" value="${car}" checked onchange="render()" class="car-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                    <span class="inline-flex items-center text-xs font-medium text-gray-800">
+                        🚗 ${car}
+                    </span>
+                `;
                 container.appendChild(div);
             });
         }
@@ -319,30 +301,35 @@
                 tbody.appendChild(tr);
             });
 
-            renderChart(filteredSessions);
+            renderChart(filteredSessions, selectedMonth);
         }
 
         function setChartMetric(metric) {
             selectedMetric = metric;
             document.getElementById('btn-kwh').className = metric === 'kwh' ? "px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-blue-600 shadow-sm transition" : "px-3 py-1.5 text-xs font-semibold rounded-md text-gray-600 hover:text-gray-900 transition";
             document.getElementById('btn-kr').className = metric === 'kr' ? "px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-blue-600 shadow-sm transition" : "px-3 py-1.5 text-xs font-semibold rounded-md text-gray-600 hover:text-gray-900 transition";
-            document.getElementById('chart-title').textContent = `Månadsvis förbrukning (${metric})`;
             render();
         }
 
-        function renderChart(sessions) {
-            const monthlyData = {};
+        function renderChart(sessions, selectedMonth) {
+            const chartData = {};
             sessions.forEach(s => {
                 if (s.date) {
-                    const ym = s.date.substring(0, 7);
-                    if (!monthlyData[ym]) monthlyData[ym] = { kwh: 0, kr: 0 };
-                    monthlyData[ym].kwh += (s.kwh || 0);
-                    monthlyData[ym].kr += (s.cost || 0);
+                    // Om en månad är vald: bryt ner per dag (YYYY-MM-DD). Annars per månad (YYYY-MM).
+                    const key = selectedMonth === 'all' ? s.date.substring(0, 7) : s.date.substring(0, 10);
+                    if (!chartData[key]) chartData[key] = { kwh: 0, kr: 0 };
+                    chartData[key].kwh += (s.kwh || 0);
+                    chartData[key].kr += (s.cost || 0);
                 }
             });
 
-            const labels = Object.keys(monthlyData).sort();
-            const dataValues = labels.map(ym => monthlyData[ym][selectedMetric]);
+            const labels = Object.keys(chartData).sort();
+            const dataValues = labels.map(key => chartData[key][selectedMetric]);
+
+            const titleText = selectedMonth === 'all' 
+                ? `Månadsvis förbrukning (${selectedMetric.toUpperCase()})` 
+                : `Daglig förbrukning för ${selectedMonth} (${selectedMetric.toUpperCase()})`;
+            document.getElementById('chart-title').textContent = titleText;
 
             const ctx = document.getElementById('monthlyChart').getContext('2d');
             if (monthlyChartInstance) monthlyChartInstance.destroy();
