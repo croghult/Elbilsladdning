@@ -2,7 +2,7 @@ import os
 import json
 import requests
 import pandas as pd
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 def get_zaptec_token(username, password):
     url = "https://api.zaptec.com/oauth/token"
@@ -16,6 +16,54 @@ def get_zaptec_token(username, password):
     response.raise_for_status()
     return response.json().get("access_token")
 
+# Cache för elpriser så vi slipper göra dubbla anrop för samma dag
+spot_price_cache = {}
+
+def get_spot_prices(date_str):
+    if date_str in spot_price_cache:
+        return spot_price_cache[date_str]
+    try:
+        parts = date_str.split("-")
+        year, month, day = parts[0], parts[1], parts[2]
+        url = f"https://www.elprisetjustnu.se/api/v1/prices/{year}/{month}-{day}_SE3.json"
+        resp = requests.get(url, timeout=5)
+        if resp.status_code == 200:
+            data = resp.json()
+            spot_price_cache[date_str] = data
+            return data
+    except Exception:
+        pass
+    return []
+
+def calculate_cost(start_str, end_str, energy_kwh):
+    try:
+        if not start_str or energy_kwh <= 0:
+            return 0.0
+        
+        start_dt = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+        end_dt = datetime.fromisoformat(end_str.replace("Z", "+00:00")) if end_str else start_dt + timedelta(hours=2)
+        
+        date_str = start_dt.strftime("%Y-%m-%d")
+        prices = get_spot_prices(date_str)
+        if not prices:
+            return 0.0
+            
+        session_prices = []
+        current = start_dt
+        while current < end_dt:
+            hour = current.hour
+            matching_price = next((p for p in prices if datetime.fromisoformat(p["time_start"].replace("Z", "+00:00")).hour == hour), None)
+            if matching_price:
+                session_prices.append(matching_price.get("SEK_per_kWh", 0.0))
+            current += timedelta(hours=1)
+            
+        if session_prices:
+            avg_price = sum(session_prices) / len(session_prices)
+            return round(energy_kwh * avg_price, 2)
+    except Exception:
+        pass
+    return 0.0
+
 def fetch_zaptec_sessions(token):
     url = "https://api.zaptec.com/api/chargehistory"
     headers = {"Authorization": f"Bearer {token}", "Accept": "application/json"}
@@ -24,7 +72,6 @@ def fetch_zaptec_sessions(token):
     page = 1
     total_pages = 1
     
-    # Loopa igenom alla sidor för att få med samtliga sessioner
     while page <= total_pages:
         params = {"PageIndex": page} if page > 1 else {}
         response = requests.get(url, headers=headers, params=params)
@@ -50,6 +97,7 @@ def fetch_zaptec_sessions(token):
             continue
             
         start_dt = s.get("startDateTime") or s.get("StartDateTime")
+        end_dt = s.get("endDateTime") or s.get("EndDateTime")
         energy = s.get("energy") or s.get("Energy", 0.0)
         user_name = s.get("userFullName") or s.get("UserFullName") or "Övriga bilar"
         
@@ -61,11 +109,14 @@ def fetch_zaptec_sessions(token):
             except Exception:
                 date_str = str(start_dt)[:16].replace("T", " ")
 
+        energy_kwh = float(energy)
+        cost = calculate_cost(start_dt, end_dt, energy_kwh)
+
         formatted_sessions.append({
             "date": date_str,
             "car": user_name,
-            "kwh": float(energy),
-            "cost": 0.0
+            "kwh": energy_kwh,
+            "cost": cost
         })
         
     return formatted_sessions
@@ -114,7 +165,7 @@ def main():
             print("Ansluter till Zaptec API...")
             token = get_zaptec_token(username, password)
             sessions = fetch_zaptec_sessions(token)
-            print(f"Hämtade totalt {len(sessions)} laddsessioner från alla sidor hos Zaptec.")
+            print(f"Hämtade totalt {len(sessions)} laddsessioner med spotpriser från Zaptec.")
         except Exception as e:
             print(f"Kunde inte hämta Zaptec-data: {e}")
     else:
@@ -133,7 +184,7 @@ def main():
     with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
     
-    print("docs/data.json har skapats framgångsrikt!")
+    print("docs/data.json har skapats framgångsrikt med alla sessioner, kostnader och kördata!")
 
 if __name__ == "__main__":
     main()
