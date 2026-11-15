@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15 09:29",
+  "updated_at": "2026-11-15 09:40",
   "sessions": [
     {
       "id": "22f26a19-6c04-4a36-8ee3-d3ebe4b631ce",
@@ -1678,7 +1678,7 @@
     {
       "id": "81326bbf-8fcb-45ce-aeab-866c87c8ac4d",
       "date": "2025-10-28 18:06:58",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 46.747,
@@ -1750,7 +1750,7 @@
     {
       "id": "d04c4b4c-d064-4fdb-8af2-1f86877e5d55",
       "date": "2025-10-11 18:06:39",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 0.0,
@@ -1759,7 +1759,7 @@
     {
       "id": "622da1b6-f3c5-48dd-a6d2-0a2cc582f290",
       "date": "2025-10-06 16:39:23",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 23.311,
@@ -1777,7 +1777,7 @@
     {
       "id": "932d3976-1ecd-407d-bc73-75aa1acca8b7",
       "date": "2025-10-01 18:07:31",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 32.175,
@@ -1813,7 +1813,7 @@
     {
       "id": "1eb5951c-5019-438e-8ac5-d0a05ecb74f0",
       "date": "2025-09-16 16:00:00",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 21.823,
@@ -1840,7 +1840,7 @@
     {
       "id": "51939105-52ab-482e-8ea1-48513dd26bc5",
       "date": "2025-09-01 17:22:04",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 36.606,
@@ -1858,7 +1858,7 @@
     {
       "id": "dbcf6259-5b75-498b-9378-61ec86ee7d05",
       "date": "2025-08-25 06:15:36",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 11.649,
@@ -1867,7 +1867,7 @@
     {
       "id": "593b1d36-bdb0-4b97-b159-109fa0c0857d",
       "date": "2025-08-22 08:17:31",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 15.774,
@@ -1876,7 +1876,7 @@
     {
       "id": "b8dc6132-95c6-4efe-a3c8-32de7abc9288",
       "date": "2025-08-20 12:08:43",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 8.221,
@@ -1894,7 +1894,7 @@
     {
       "id": "625ad9bd-d9b2-478b-b2b9-ca20ae104908",
       "date": "2025-08-16 19:41:57",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 35.508,
@@ -1912,7 +1912,7 @@
     {
       "id": "c18881a5-b336-4847-acfc-c11c854b75ae",
       "date": "2025-08-16 10:33:07",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 4.673,
@@ -1921,7 +1921,7 @@
     {
       "id": "8533f78a-c52a-4545-874d-70e32cf5df98",
       "date": "2025-08-14 17:26:17",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 51.362,
@@ -1930,7 +1930,7 @@
     {
       "id": "f1201270-61f5-4caa-9d7b-38ee29d0e9db",
       "date": "2025-08-11 14:06:50",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 22.116,
@@ -1939,7 +1939,7 @@
     {
       "id": "32015921-d0d7-4171-b3dd-38d217b0e9ae",
       "date": "2025-08-09 18:06:00",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 27.864,
@@ -1948,7 +1948,7 @@
     {
       "id": "ec08b0f5-1cf7-45fb-8115-b0c40e675d13",
       "date": "2025-08-09 13:31:06",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 0.0,
@@ -1957,7 +1957,7 @@
     {
       "id": "d18babea-edae-4aa6-9a55-cddde62ffe90",
       "date": "2025-08-07 18:18:03",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 38.97,
@@ -1984,7 +1984,7 @@
     {
       "id": "b6f4fdae-1514-4101-a176-3d6cf86ef396",
       "date": "2025-08-02 11:05:12",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 9.0,
@@ -2011,7 +2011,7 @@
     {
       "id": "593f0a00-ed76-4dd0-8547-b59c202e9db1",
       "date": "2025-07-26 12:12:50",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 14.892,
@@ -2074,7 +2074,7 @@
     {
       "id": "823a9b6e-040a-4eb2-aaf6-3714c7d5c952",
       "date": "2025-07-16 13:05:12",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 11.97,
@@ -2083,7 +2083,7 @@
     {
       "id": "c845bfd5-60b0-4179-bd39-752d16cf7914",
       "date": "2025-07-14 10:32:55",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 7.842,
@@ -2092,7 +2092,7 @@
     {
       "id": "4ae80f0a-d90f-4590-b12c-372198bd3cb6",
       "date": "2025-07-13 09:42:08",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 15.83,
@@ -2119,7 +2119,7 @@
     {
       "id": "53e39d45-61e6-4938-a0e3-07830b4f007b",
       "date": "2025-06-24 18:27:58",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 42.445,
@@ -2128,7 +2128,7 @@
     {
       "id": "6d1179dc-6204-4f5c-8a79-149ffc49ea1a",
       "date": "2025-06-24 17:33:12",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 5.416,
@@ -2182,7 +2182,7 @@
     {
       "id": "87eb2366-adb3-4a21-87d6-0a0d168a616e",
       "date": "2025-06-09 08:43:05",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 11.875,
@@ -2191,7 +2191,7 @@
     {
       "id": "fdb43f09-37c3-4230-aa18-4aefddc0ce9b",
       "date": "2025-06-09 08:41:10",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 0.012,
@@ -2209,7 +2209,7 @@
     {
       "id": "8f088f0a-55f1-4c60-8936-84a06fc76053",
       "date": "2025-06-04 15:20:04",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 31.295,
@@ -2245,7 +2245,7 @@
     {
       "id": "76451d99-f0e1-4006-a117-c7006bd31681",
       "date": "2025-05-26 07:16:29",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 5.247,
@@ -2344,7 +2344,7 @@
     {
       "id": "cc745bf0-f9c2-4e9f-a42a-ab91da66eca5",
       "date": "2025-05-03 11:45:37",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 0.062,
@@ -2353,7 +2353,7 @@
     {
       "id": "3e74a7f2-9732-459e-a1d8-d5d678a650db",
       "date": "2025-05-03 11:42:43",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 0.048,
@@ -2362,7 +2362,7 @@
     {
       "id": "b4ed5ec9-b825-46b4-9e4f-cf54c0e410dd",
       "date": "2025-05-01 14:29:53",
-      "user": "Karolina  Andersson",
+      "user": "Karolina Andersson",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 32.099,
@@ -2380,7 +2380,7 @@
     {
       "id": "3c4649ef-3377-41cf-9e06-a3ca57f7cebd",
       "date": "2025-04-27 11:25:41",
-      "user": "Tommy  Roghult ",
+      "user": "Tommy Roghult",
       "car": "Övriga bilar",
       "car_logo": "",
       "energy": 0.169,
