@@ -182,6 +182,12 @@
                 if (typeof populateCarCheckboxes === 'function') populateCarCheckboxes();
                 if (typeof render === 'function') render();
                 if (typeof renderMonthlyTable === 'function') renderMonthlyTable();
+
+                // Dölj laddningsmeddelandet när allt är klart
+                const loadingEl = document.getElementById('loading');
+                if (loadingEl) {
+                    loadingEl.style.display = 'none';
+                }
                 
             } catch (err) {
                 console.error("Fel vid inläsning av data:", err);
