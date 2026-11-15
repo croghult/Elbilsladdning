@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15 10:26",
+  "updated_at": "2026-11-15 10:30",
   "sessions": [
     {
       "id": "22f26a19-6c04-4a36-8ee3-d3ebe4b631ce",
@@ -8,7 +8,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 10.217,
-      "cost": 24.27
+      "cost": 22.69
     },
     {
       "id": "216bd605-b329-4e5e-9071-4b322cbfdedd",
@@ -17,7 +17,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 40.424,
-      "cost": 96.01
+      "cost": 95.95
     },
     {
       "id": "00a22959-d65b-4a62-a46d-28aa114e2da0",
@@ -80,7 +80,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 63.361,
-      "cost": 150.48
+      "cost": 216.94
     },
     {
       "id": "be17b564-bc45-4732-b1a1-a6c684491189",
@@ -98,7 +98,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 20.352,
-      "cost": 48.34
+      "cost": 10.18
     },
     {
       "id": "796bf98d-4e02-4bc4-97d1-c5466dcde660",
@@ -125,7 +125,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 48.41,
-      "cost": 114.97
+      "cost": 86.85
     },
     {
       "id": "e55fadd8-981e-4a02-b7d5-e93a4f677217",
@@ -134,7 +134,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 8.482,
-      "cost": 20.14
+      "cost": 15.53
     },
     {
       "id": "c5ca561e-605b-4f85-818f-3bbde7964503",
@@ -143,7 +143,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 13.423,
-      "cost": 31.88
+      "cost": 28.37
     },
     {
       "id": "20b06ee2-cade-4ea2-82e4-e5619cc98eed",
@@ -161,7 +161,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 24.613,
-      "cost": 58.46
+      "cost": 54.63
     },
     {
       "id": "fb9ea742-0422-4461-ac96-8a35d1a61e5d",
@@ -170,7 +170,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 26.986,
-      "cost": 64.09
+      "cost": 25.07
     },
     {
       "id": "75e116c0-9a6f-45cd-868b-65389f512287",
@@ -179,7 +179,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 25.867,
-      "cost": 61.43
+      "cost": 44.49
     },
     {
       "id": "215b8e66-5458-4845-a9e8-690991b38606",
@@ -188,7 +188,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 33.784,
-      "cost": 80.24
+      "cost": 68.89
     },
     {
       "id": "42942d42-8abd-465c-9bbf-49c7b80ae3d1",
@@ -206,7 +206,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 16.197,
-      "cost": 38.47
+      "cost": 7.56
     },
     {
       "id": "d02aca12-c427-49d6-862c-35645db5a90d",
@@ -251,7 +251,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 41.178,
-      "cost": 97.8
+      "cost": 70.52
     },
     {
       "id": "97c0c3ba-3231-44f5-b5ac-bde942de5c58",
@@ -260,7 +260,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 14.376,
-      "cost": 34.14
+      "cost": 24.85
     },
     {
       "id": "765f0aa6-5070-4f32-b9ed-1f8ff6bc0e14",
@@ -269,7 +269,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 24.551,
-      "cost": 58.31
+      "cost": 50.41
     },
     {
       "id": "38da1f3e-74fb-4482-9029-6c17059a8153",
@@ -278,7 +278,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 33.702,
-      "cost": 80.04
+      "cost": 72.15
     },
     {
       "id": "7a5d94e2-de58-4ede-9105-a72d0e2a6f69",
@@ -296,7 +296,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 25.761,
-      "cost": 61.18
+      "cost": 94.29
     },
     {
       "id": "2ae44fb7-f5bb-48b9-aca2-5058744e0b0b",
@@ -305,7 +305,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 18.045,
-      "cost": 42.86
+      "cost": 9.02
     },
     {
       "id": "59421ace-7dc0-4c94-a17c-de1ba9c51f99",
@@ -314,7 +314,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 6.038,
-      "cost": 14.34
+      "cost": 4.21
     },
     {
       "id": "83f1f145-2ddd-40dd-98ce-13d9058b7d90",
@@ -323,7 +323,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 17.364,
-      "cost": 41.24
+      "cost": 36.75
     },
     {
       "id": "30e21515-d495-47b2-bf80-cc23f4cf30b7",
@@ -332,7 +332,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 19.843,
-      "cost": 47.13
+      "cost": 41.36
     },
     {
       "id": "93db7334-9a41-4323-bafd-d6d86eed34bc",
@@ -341,7 +341,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 8.127,
-      "cost": 19.3
+      "cost": 20.06
     },
     {
       "id": "a24c6201-f0ab-40f8-8bdb-3991c1c2aa29",
@@ -350,7 +350,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 21.067,
-      "cost": 50.03
+      "cost": 65.27
     },
     {
       "id": "a3cea82c-c32e-40bc-9993-f3354f9dd8e5",
@@ -359,7 +359,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 18.049,
-      "cost": 42.87
+      "cost": 42.48
     },
     {
       "id": "b717ec7a-6a20-414c-9935-82e1507d5a6d",
@@ -368,7 +368,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 8.936,
-      "cost": 21.22
+      "cost": 5.05
     },
     {
       "id": "5edaf58b-49d3-4da6-ba91-5a5ee62fe766",
@@ -386,7 +386,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 6.629,
-      "cost": 15.74
+      "cost": 15.34
     },
     {
       "id": "93ae64e4-6fe2-4fef-8f7b-4653d18f976f",
@@ -395,7 +395,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 38.233,
-      "cost": 90.8
+      "cost": 77.87
     },
     {
       "id": "f4bb7035-21fb-47f3-9adb-40ab5df6f1a6",
@@ -404,7 +404,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 7.442,
-      "cost": 17.67
+      "cost": 6.2
     },
     {
       "id": "4dfcfeb0-de2b-4326-a738-2fe32626c3d3",
@@ -413,7 +413,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 48.934,
-      "cost": 116.22
+      "cost": 42.09
     },
     {
       "id": "8b0e0dd0-0bc1-4164-9f7c-01ed281da850",
@@ -422,7 +422,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 25.313,
-      "cost": 60.12
+      "cost": 20.4
     },
     {
       "id": "004e6857-225a-4c89-955d-53727d6739a5",
@@ -440,7 +440,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 27.6,
-      "cost": 65.55
+      "cost": 19.09
     },
     {
       "id": "31ea533b-2f3b-4ef3-bf57-fad3cb0ce0f2",
@@ -449,7 +449,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 11.897,
-      "cost": 28.26
+      "cost": 11.55
     },
     {
       "id": "cc00a5af-3de0-44f0-bce9-3bd8c150aa88",
@@ -458,7 +458,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 22.832,
-      "cost": 54.23
+      "cost": 12.01
     },
     {
       "id": "6981b7e6-55a1-4456-bf7b-82f678011d54",
@@ -467,7 +467,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 10.144,
-      "cost": 24.09
+      "cost": 5.07
     },
     {
       "id": "6d552354-5841-4aed-8a64-f7e73e489f2d",
@@ -485,7 +485,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 9.492,
-      "cost": 22.54
+      "cost": 5.03
     },
     {
       "id": "cf06f3b4-de12-4692-a1e2-80db35ff6bc6",
@@ -494,7 +494,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 58.028,
-      "cost": 137.82
+      "cost": 31.85
     },
     {
       "id": "e9ff5a98-4331-488c-bf96-78a29fce3376",
@@ -521,7 +521,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 89.912,
-      "cost": 213.54
+      "cost": 69.82
     },
     {
       "id": "9d8edc46-c462-43e5-afcd-1a247e47bfee",
@@ -530,7 +530,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 2.452,
-      "cost": 5.82
+      "cost": 1.23
     },
     {
       "id": "24c1f195-3514-497c-8b24-fa91e11111ce",
@@ -557,7 +557,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 30.511,
-      "cost": 72.46
+      "cost": 19.27
     },
     {
       "id": "d0cb030e-b036-47f6-a531-ed7e3f460ff9",
@@ -566,7 +566,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 13.4,
-      "cost": 31.82
+      "cost": 6.94
     },
     {
       "id": "db801b37-6cf0-47a8-b8e1-b5ba06ee4d5b",
@@ -584,7 +584,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 7.526,
-      "cost": 17.87
+      "cost": 5.48
     },
     {
       "id": "4e800133-af8b-4fff-9cd0-b04703b0d22c",
@@ -602,7 +602,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 92.278,
-      "cost": 219.16
+      "cost": 142.46
     },
     {
       "id": "b6c0a86e-bcc8-4118-b95b-2f38777172c3",
@@ -620,7 +620,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 54.624,
-      "cost": 129.73
+      "cost": 100.34
     },
     {
       "id": "35d4614d-abb4-441e-8eea-c5b4074a6afd",
@@ -638,7 +638,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 7.681,
-      "cost": 18.24
+      "cost": 3.81
     },
     {
       "id": "b599d32d-9c23-443a-9a9b-0d9bb312ba08",
@@ -647,7 +647,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 48.573,
-      "cost": 115.36
+      "cost": 71.05
     },
     {
       "id": "c92314ee-d166-4bec-bef9-0f8ea988afe2",
@@ -656,7 +656,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 37.721,
-      "cost": 89.59
+      "cost": 18.39
     },
     {
       "id": "0dfceddc-d734-4e2f-b2b5-fa3588cb8bc2",
@@ -692,7 +692,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 26.569,
-      "cost": 63.1
+      "cost": 20.44
     },
     {
       "id": "1769b091-7da4-47b2-a511-6a5c747ee391",
@@ -701,7 +701,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 8.387,
-      "cost": 19.92
+      "cost": 12.88
     },
     {
       "id": "5e9a8173-05c9-474d-8572-1847fea7d76f",
@@ -728,7 +728,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 15.849,
-      "cost": 37.64
+      "cost": 4.97
     },
     {
       "id": "4830342d-4e82-4b33-bde6-b7556486d8d4",
@@ -737,7 +737,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 26.348,
-      "cost": 62.58
+      "cost": 13.67
     },
     {
       "id": "d62136a3-36e1-422a-a5f7-296566b1bcac",
@@ -746,7 +746,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 40.173,
-      "cost": 95.41
+      "cost": 79.44
     },
     {
       "id": "0edfda26-2ee7-4270-b4b8-8d190392f9e1",
@@ -764,7 +764,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 36.51,
-      "cost": 86.71
+      "cost": 21.01
     },
     {
       "id": "3a4a0715-ae89-4774-b2bb-0b8456178721",
@@ -773,7 +773,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 13.557,
-      "cost": 32.2
+      "cost": 12.33
     },
     {
       "id": "3f690e31-19a9-4aa8-a99b-068c8e93af7a",
@@ -782,7 +782,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 41.13,
-      "cost": 97.68
+      "cost": 40.72
     },
     {
       "id": "60f320c6-9525-41ee-b330-76785978c589",
@@ -791,7 +791,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 27.165,
-      "cost": 64.52
+      "cost": 39.08
     },
     {
       "id": "e5da239a-f315-4c8c-8d26-b189ae29258e",
@@ -800,7 +800,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 32.06,
-      "cost": 76.14
+      "cost": 87.53
     },
     {
       "id": "39606918-4152-4976-afb2-a35ce30481a4",
@@ -827,7 +827,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 28.83,
-      "cost": 68.47
+      "cost": 51.82
     },
     {
       "id": "720e942d-107e-4912-ad46-e359ca0852ff",
@@ -836,7 +836,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 46.804,
-      "cost": 111.16
+      "cost": 28.44
     },
     {
       "id": "30657f4e-2483-4724-9319-f3332414efc3",
@@ -845,7 +845,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 45.517,
-      "cost": 108.1
+      "cost": 81.72
     },
     {
       "id": "e1108d2e-5649-4ac4-b1a5-c57333562270",
@@ -863,7 +863,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 15.223,
-      "cost": 36.15
+      "cost": 10.54
     },
     {
       "id": "85e96576-7112-41cf-b2b3-b7b1f867c5c5",
@@ -899,7 +899,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 12.89,
-      "cost": 30.61
+      "cost": 23.19
     },
     {
       "id": "575a0d16-55a8-4ed7-a386-931a4718d563",
@@ -908,7 +908,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 27.691,
-      "cost": 65.77
+      "cost": 27.72
     },
     {
       "id": "5d673e68-66af-450c-8153-74ecb4558186",
@@ -944,7 +944,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 9.594,
-      "cost": 22.79
+      "cost": 11.06
     },
     {
       "id": "7659912c-10cb-414b-9bb0-bfa667f37c54",
@@ -953,7 +953,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 23.217,
-      "cost": 55.14
+      "cost": 32.77
     },
     {
       "id": "3411762b-2861-4a66-ad95-83c60a21d459",
@@ -980,7 +980,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 31.746,
-      "cost": 75.4
+      "cost": 29.08
     },
     {
       "id": "42ad97bd-89e8-4bc8-be39-3734a1abfcf6",
@@ -989,7 +989,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 44.789,
-      "cost": 106.37
+      "cost": 73.18
     },
     {
       "id": "48ab89f7-bba0-486b-a03c-b15c7174fb7a",
@@ -998,7 +998,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 46.726,
-      "cost": 110.97
+      "cost": 65.06
     },
     {
       "id": "5d064ee4-137d-468c-94ca-455b0009a106",
@@ -1016,7 +1016,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 8.016,
-      "cost": 19.04
+      "cost": 10.74
     },
     {
       "id": "1ae0ac2a-9c5e-41db-ac8d-dc0332cb5165",
@@ -1025,7 +1025,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 41.3,
-      "cost": 98.09
+      "cost": 47.5
     },
     {
       "id": "668445b8-7934-49ab-acca-fa50a06362ad",
@@ -1043,7 +1043,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 22.287,
-      "cost": 52.93
+      "cost": 38.9
     },
     {
       "id": "d5d4cd05-a8d2-4872-bcf9-8c1e7bc5156a",
@@ -1052,7 +1052,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 70.041,
-      "cost": 166.35
+      "cost": 108.13
     },
     {
       "id": "08db76a2-bd62-46d8-8f4c-8c998b07b039",
@@ -1106,7 +1106,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 17.113,
-      "cost": 40.64
+      "cost": 41.91
     },
     {
       "id": "de30f519-9ccf-4d6b-b9e7-5cd454045cb1",
@@ -1115,7 +1115,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 18.309,
-      "cost": 43.48
+      "cost": 39.3
     },
     {
       "id": "0f9749ac-91b6-4e01-ab6c-26779626a071",
@@ -1124,7 +1124,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 3.33,
-      "cost": 7.91
+      "cost": 6.55
     },
     {
       "id": "c0d34df3-114b-48da-98c7-95613b5a6fdb",
@@ -1169,7 +1169,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 32.168,
-      "cost": 76.4
+      "cost": 59.87
     },
     {
       "id": "bec8876a-fd8f-45d9-a595-d13e9d20d3a9",
@@ -1178,7 +1178,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 9.737,
-      "cost": 23.13
+      "cost": 15.69
     },
     {
       "id": "2730e4a7-50bf-4543-aa4a-ccedb04839c8",
@@ -1187,7 +1187,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 22.147,
-      "cost": 52.6
+      "cost": 35.51
     },
     {
       "id": "c2695cef-5af1-4fd1-95ea-f84c9e6824a0",
@@ -1196,7 +1196,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 37.946,
-      "cost": 90.12
+      "cost": 91.66
     },
     {
       "id": "b58381c4-0dbe-4bef-bbef-3ed5a10f0fad",
@@ -1205,7 +1205,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 27.332,
-      "cost": 64.91
+      "cost": 86.49
     },
     {
       "id": "a0e140c6-dac1-439c-a842-259b2c63443c",
@@ -1214,7 +1214,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 20.328,
-      "cost": 48.28
+      "cost": 45.45
     },
     {
       "id": "4d72f59a-3372-4967-8234-91f0e527e5cf",
@@ -1223,7 +1223,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 4.766,
-      "cost": 11.32
+      "cost": 9.28
     },
     {
       "id": "972f1f58-6d6c-4d3e-85d0-a5e2a1a63ec2",
@@ -1232,7 +1232,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 11.626,
-      "cost": 27.61
+      "cost": 25.79
     },
     {
       "id": "98dd0ac8-02d3-4db1-b7f1-e66d92e8ae26",
@@ -1250,7 +1250,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 43.593,
-      "cost": 103.53
+      "cost": 78.99
     },
     {
       "id": "8c382957-05fd-4d41-a751-3f75a5ca0f84",
@@ -1259,7 +1259,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 11.588,
-      "cost": 27.52
+      "cost": 25.41
     },
     {
       "id": "1eee1e2a-50e8-4a52-bf28-6ac913eff869",
@@ -1268,7 +1268,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 5.888,
-      "cost": 13.98
+      "cost": 11.31
     },
     {
       "id": "b74e8636-6946-4a1e-9315-3a7f87b290c9",
@@ -1295,7 +1295,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 31.664,
-      "cost": 75.2
+      "cost": 51.99
     },
     {
       "id": "047395dc-28d3-4de9-9adf-9a0c7d00cae9",
@@ -1322,7 +1322,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 46.266,
-      "cost": 109.88
+      "cost": 71.9
     },
     {
       "id": "dcd98bf5-8a54-4f17-928d-8b72e709b17f",
@@ -1340,7 +1340,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 32.959,
-      "cost": 78.28
+      "cost": 18.72
     },
     {
       "id": "13d54e35-1d88-494c-a246-82a375998d36",
@@ -1349,7 +1349,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 25.313,
-      "cost": 60.12
+      "cost": 25.57
     },
     {
       "id": "e19e3b11-ae14-4538-ab2e-f70593d9a0b4",
@@ -1358,7 +1358,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 26.88,
-      "cost": 63.84
+      "cost": 31.17
     },
     {
       "id": "9d62f88a-7ebb-4883-a421-bd7d7880036d",
@@ -1367,7 +1367,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 24.825,
-      "cost": 58.96
+      "cost": 23.85
     },
     {
       "id": "61861f36-5158-4aba-a210-c429a955e2bd",
@@ -1376,7 +1376,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 17.03,
-      "cost": 40.45
+      "cost": 16.26
     },
     {
       "id": "267c7d2b-0466-4575-a423-3be7c07f39f8",
@@ -1385,7 +1385,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 37.438,
-      "cost": 88.92
+      "cost": 71.22
     },
     {
       "id": "f1071ec3-86ac-47e3-b603-a288cc143f03",
@@ -1394,7 +1394,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 23.722,
-      "cost": 56.34
+      "cost": 28.84
     },
     {
       "id": "d194860b-5205-4246-b116-d471dbee492d",
@@ -1403,7 +1403,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 42.042,
-      "cost": 99.85
+      "cost": 45.14
     },
     {
       "id": "101e7160-4a08-455a-a252-7cdb35c0930c",
@@ -1448,7 +1448,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 25.811,
-      "cost": 61.3
+      "cost": 67.17
     },
     {
       "id": "56927999-6423-43a3-9d99-9fce63104df0",
@@ -1502,7 +1502,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 0.884,
-      "cost": 2.1
+      "cost": 1.27
     },
     {
       "id": "9998665c-e39c-955c-a7ac-6aefad0e1318",
@@ -1547,7 +1547,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 6.019,
-      "cost": 14.3
+      "cost": 6.72
     },
     {
       "id": "7a89aede-3899-4763-a632-97b62c33dd35",
@@ -1556,7 +1556,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 4.592,
-      "cost": 10.91
+      "cost": 5.04
     },
     {
       "id": "d26ee10a-4550-417b-ba4b-96e2edd97d66",
@@ -1574,7 +1574,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 51.733,
-      "cost": 122.87
+      "cost": 104.1
     },
     {
       "id": "688266aa-a903-4dec-ac7f-ad8318340801",
@@ -1637,7 +1637,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 40.767,
-      "cost": 96.82
+      "cost": 75.71
     },
     {
       "id": "c5a4f9d2-c7d6-4ddd-8f67-ade2d51a9223",
@@ -1664,7 +1664,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 50.007,
-      "cost": 118.77
+      "cost": 102.24
     },
     {
       "id": "d20ccbe4-93e2-450b-a3e0-1ce642ba1654",
@@ -1673,7 +1673,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 36.348,
-      "cost": 86.33
+      "cost": 33.0
     },
     {
       "id": "81326bbf-8fcb-45ce-aeab-866c87c8ac4d",
@@ -1691,7 +1691,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 12.419,
-      "cost": 29.5
+      "cost": 11.76
     },
     {
       "id": "0c734fae-7915-4ce4-86d6-003d870276a2",
@@ -1718,7 +1718,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 3.602,
-      "cost": 8.55
+      "cost": 3.47
     },
     {
       "id": "0042758f-24fa-402c-85e6-635d629cb988",
@@ -1727,7 +1727,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 25.899,
-      "cost": 61.51
+      "cost": 25.58
     },
     {
       "id": "b4486385-8fa7-4693-b8b0-fc9ccb79f230",
@@ -1736,7 +1736,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 17.845,
-      "cost": 42.38
+      "cost": 9.24
     },
     {
       "id": "0374bbe0-3617-4225-84db-a8555269c312",
@@ -1745,7 +1745,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 2.948,
-      "cost": 7.0
+      "cost": 1.57
     },
     {
       "id": "d04c4b4c-d064-4fdb-8af2-1f86877e5d55",
@@ -1763,7 +1763,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 23.311,
-      "cost": 55.36
+      "cost": 55.71
     },
     {
       "id": "4eec7492-e6b3-498b-b702-9fa02e6d4a06",
@@ -1772,7 +1772,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 4.497,
-      "cost": 10.68
+      "cost": 15.8
     },
     {
       "id": "932d3976-1ecd-407d-bc73-75aa1acca8b7",
@@ -1808,7 +1808,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 9.442,
-      "cost": 22.42
+      "cost": 4.56
     },
     {
       "id": "1eb5951c-5019-438e-8ac5-d0a05ecb74f0",
@@ -1826,7 +1826,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 29.945,
-      "cost": 71.12
+      "cost": 28.9
     },
     {
       "id": "9eb66de0-918e-4dcb-88da-cfa56901a36a",
@@ -1835,7 +1835,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 38.009,
-      "cost": 90.27
+      "cost": 29.11
     },
     {
       "id": "51939105-52ab-482e-8ea1-48513dd26bc5",
@@ -1844,7 +1844,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 36.606,
-      "cost": 86.94
+      "cost": 76.35
     },
     {
       "id": "e4d46077-d057-4f50-b75b-baba265bc833",
@@ -1880,7 +1880,7 @@
       "car": "Polestar 2",
       "car_logo": "polestar.png",
       "energy": 8.221,
-      "cost": 19.52
+      "cost": 7.84
     },
     {
       "id": "b7319849-cc1a-4f05-adef-5d0601aa2df8",
@@ -1889,7 +1889,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 22.008,
-      "cost": 52.27
+      "cost": 35.66
     },
     {
       "id": "625ad9bd-d9b2-478b-b2b9-ca20ae104908",
@@ -1907,7 +1907,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 13.175,
-      "cost": 31.29
+      "cost": 6.59
     },
     {
       "id": "c18881a5-b336-4847-acfc-c11c854b75ae",
@@ -1916,7 +1916,7 @@
       "car": "Polestar 2",
       "car_logo": "polestar.png",
       "energy": 4.673,
-      "cost": 11.1
+      "cost": 2.37
     },
     {
       "id": "8533f78a-c52a-4545-874d-70e32cf5df98",
@@ -1925,7 +1925,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 51.362,
-      "cost": 121.98
+      "cost": 85.8
     },
     {
       "id": "f1201270-61f5-4caa-9d7b-38ee29d0e9db",
@@ -1934,7 +1934,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 22.116,
-      "cost": 52.53
+      "cost": 18.33
     },
     {
       "id": "32015921-d0d7-4171-b3dd-38d217b0e9ae",
@@ -1943,7 +1943,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 27.864,
-      "cost": 66.18
+      "cost": 30.48
     },
     {
       "id": "ec08b0f5-1cf7-45fb-8115-b0c40e675d13",
@@ -1979,7 +1979,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 13.995,
-      "cost": 33.24
+      "cost": 7.42
     },
     {
       "id": "b6f4fdae-1514-4101-a176-3d6cf86ef396",
@@ -1988,7 +1988,7 @@
       "car": "Polestar 2",
       "car_logo": "polestar.png",
       "energy": 9.0,
-      "cost": 21.38
+      "cost": 4.88
     },
     {
       "id": "96b34f17-64f9-474f-add0-d9aacf8d65ef",
@@ -2015,7 +2015,7 @@
       "car": "Polestar 2",
       "car_logo": "polestar.png",
       "energy": 14.892,
-      "cost": 35.37
+      "cost": 9.61
     },
     {
       "id": "4d8382a7-71e9-4661-9fcb-f3d1207e25a8",
@@ -2024,7 +2024,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 3.715,
-      "cost": 8.82
+      "cost": 3.89
     },
     {
       "id": "1657ded4-eb60-42a7-8798-4c974d0d858c",
@@ -2051,7 +2051,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 31.717,
-      "cost": 75.33
+      "cost": 27.96
     },
     {
       "id": "ce5c2205-f617-4049-be54-1eec0c12fe73",
@@ -2060,7 +2060,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 51.518,
-      "cost": 122.36
+      "cost": 53.76
     },
     {
       "id": "e1678aad-ce70-411b-85f6-a803e5149455",
@@ -2069,7 +2069,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 2.735,
-      "cost": 6.5
+      "cost": 2.56
     },
     {
       "id": "823a9b6e-040a-4eb2-aaf6-3714c7d5c952",
@@ -2078,7 +2078,7 @@
       "car": "Polestar 2",
       "car_logo": "polestar.png",
       "energy": 11.97,
-      "cost": 28.43
+      "cost": 11.61
     },
     {
       "id": "c845bfd5-60b0-4179-bd39-752d16cf7914",
@@ -2096,7 +2096,7 @@
       "car": "Polestar 2",
       "car_logo": "polestar.png",
       "energy": 15.83,
-      "cost": 37.6
+      "cost": 8.87
     },
     {
       "id": "929bd79e-aedc-4a09-8529-5558e6b3d332",
@@ -2123,7 +2123,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 42.445,
-      "cost": 100.81
+      "cost": 30.33
     },
     {
       "id": "6d1179dc-6204-4f5c-8a79-149ffc49ea1a",
@@ -2132,7 +2132,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 5.416,
-      "cost": 12.86
+      "cost": 3.64
     },
     {
       "id": "aaa70821-302d-4b0e-b4be-4c198e6d23fa",
@@ -2168,7 +2168,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 13.451,
-      "cost": 31.95
+      "cost": 6.09
     },
     {
       "id": "4c33793b-3323-4dee-95b0-adb4d8938966",
@@ -2177,7 +2177,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 29.974,
-      "cost": 71.19
+      "cost": 32.72
     },
     {
       "id": "87eb2366-adb3-4a21-87d6-0a0d168a616e",
@@ -2186,7 +2186,7 @@
       "car": "Polestar 2",
       "car_logo": "polestar.png",
       "energy": 11.875,
-      "cost": 28.2
+      "cost": 6.35
     },
     {
       "id": "fdb43f09-37c3-4230-aa18-4aefddc0ce9b",
@@ -2195,7 +2195,7 @@
       "car": "Polestar 2",
       "car_logo": "polestar.png",
       "energy": 0.012,
-      "cost": 0.03
+      "cost": 0.01
     },
     {
       "id": "7803fee8-c1be-427f-9265-48d87458ec1e",
@@ -2204,7 +2204,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 20.156,
-      "cost": 47.87
+      "cost": 20.74
     },
     {
       "id": "8f088f0a-55f1-4c60-8936-84a06fc76053",
@@ -2222,7 +2222,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 23.958,
-      "cost": 56.9
+      "cost": 11.12
     },
     {
       "id": "4180485d-7b8c-4d36-b86e-d87202831366",
@@ -2240,7 +2240,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 29.597,
-      "cost": 70.29
+      "cost": 31.19
     },
     {
       "id": "76451d99-f0e1-4006-a117-c7006bd31681",
@@ -2249,7 +2249,7 @@
       "car": "Polestar 2",
       "car_logo": "polestar.png",
       "energy": 5.247,
-      "cost": 12.46
+      "cost": 4.76
     },
     {
       "id": "8a138d03-120f-445f-be37-9296074cd492",
@@ -2321,7 +2321,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 3.019,
-      "cost": 7.17
+      "cost": 1.76
     },
     {
       "id": "a8c1a813-149b-4011-91ba-6d1c7b6f6fb5",
@@ -2330,7 +2330,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 0.052,
-      "cost": 0.12
+      "cost": 0.03
     },
     {
       "id": "11ca8c2f-ab94-4c2a-b0e7-d144f3135664",
@@ -2339,7 +2339,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 34.639,
-      "cost": 82.27
+      "cost": 80.59
     },
     {
       "id": "cc745bf0-f9c2-4e9f-a42a-ab91da66eca5",
@@ -2366,7 +2366,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 32.099,
-      "cost": 76.24
+      "cost": 17.05
     },
     {
       "id": "17dcaeaa-ae63-4b4e-8b04-10a454d881b1",
@@ -2393,7 +2393,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 0.134,
-      "cost": 0.32
+      "cost": 0.04
     },
     {
       "id": "51087ebf-c7c3-448c-af27-7575f224de02",
@@ -2402,7 +2402,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 26.57,
-      "cost": 63.1
+      "cost": 32.07
     },
     {
       "id": "2fb70df5-1cf2-4c44-93b5-04ba6ca4e0ae",
@@ -2411,7 +2411,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 49.187,
-      "cost": 116.82
+      "cost": 55.19
     },
     {
       "id": "cfe7955f-b2cf-4a32-9d42-7204716a7223",
@@ -2420,7 +2420,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 39.892,
-      "cost": 94.74
+      "cost": 36.14
     },
     {
       "id": "764ff379-5b4e-4544-b1b7-cc621a3f3265",
@@ -2429,7 +2429,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 4.198,
-      "cost": 9.97
+      "cost": 3.88
     },
     {
       "id": "21703efe-b62f-415b-81f9-297f06a76720",
@@ -2456,7 +2456,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 26.646,
-      "cost": 63.28
+      "cost": 9.74
     },
     {
       "id": "bf627ea6-822a-4716-b028-5d941f8b2440",
@@ -2474,7 +2474,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 25.912,
-      "cost": 61.54
+      "cost": 28.88
     },
     {
       "id": "375372a2-8846-4cab-828e-e012abd5e31c",
@@ -2483,7 +2483,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 34.225,
-      "cost": 81.28
+      "cost": 73.68
     },
     {
       "id": "9da40570-f867-4156-be73-392c754c3194",
@@ -2492,7 +2492,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 34.403,
-      "cost": 81.71
+      "cost": 68.75
     },
     {
       "id": "898112d7-3989-4cf4-aaa5-55450f6c1a5b",
@@ -2501,7 +2501,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 33.585,
-      "cost": 79.76
+      "cost": 41.64
     },
     {
       "id": "0595c04a-1481-4df2-8824-6dfe23d66ccb",
@@ -2510,7 +2510,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 31.739,
-      "cost": 75.38
+      "cost": 87.05
     },
     {
       "id": "b6fdf3bc-6d46-4b71-9b2d-fcdd1af77b34",
@@ -2519,7 +2519,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 5.161,
-      "cost": 12.26
+      "cost": 15.73
     },
     {
       "id": "7e847856-6f2b-4020-9106-c6d046caecb9",
@@ -2528,7 +2528,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 8.839,
-      "cost": 20.99
+      "cost": 22.35
     },
     {
       "id": "e37de944-6b31-4f0f-b7f3-d5fd30a2198c",
@@ -2537,7 +2537,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 2.528,
-      "cost": 6.0
+      "cost": 5.86
     },
     {
       "id": "3ae8c835-321b-423e-97a3-7be8faad280c",
@@ -2555,7 +2555,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 48.765,
-      "cost": 115.82
+      "cost": 40.73
     },
     {
       "id": "99adc398-cab2-4873-91d3-d6c0bb8c3cdb",
@@ -2564,7 +2564,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 22.376,
-      "cost": 53.14
+      "cost": 23.38
     },
     {
       "id": "ddb50a16-ba52-4916-b444-9ef49bfb9a09",
@@ -2582,7 +2582,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 41.319,
-      "cost": 98.13
+      "cost": 65.67
     },
     {
       "id": "76606f86-c1e4-44ea-8303-261bfa1e34a9",
@@ -2600,7 +2600,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 16.944,
-      "cost": 40.24
+      "cost": 37.4
     },
     {
       "id": "e6642624-381b-46bb-a652-be1bf318b61d",
@@ -2636,7 +2636,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 20.238,
-      "cost": 48.07
+      "cost": 27.99
     },
     {
       "id": "6b8171d8-a81f-4dcb-b703-eb65d983bbd8",
@@ -2681,7 +2681,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 0.034,
-      "cost": 0.08
+      "cost": 0.06
     },
     {
       "id": "16f7062e-6a75-4d9f-8941-b7fedbddcd3a",
@@ -2690,7 +2690,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 0.028,
-      "cost": 0.07
+      "cost": 0.05
     },
     {
       "id": "15396ad0-6a7a-4f5d-b2a3-5433ece81b15",
@@ -2708,7 +2708,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 6.562,
-      "cost": 15.58
+      "cost": 10.81
     },
     {
       "id": "92d51214-c6eb-4db7-8d94-d3f2828b2131",
@@ -2726,7 +2726,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 0.163,
-      "cost": 0.39
+      "cost": 0.22
     },
     {
       "id": "ab96d0b0-34ae-4ec3-b645-ce0da4a3004e",
@@ -2753,7 +2753,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 34.175,
-      "cost": 81.17
+      "cost": 43.62
     },
     {
       "id": "369bafa0-6c75-43ea-ba41-4e9a0e1a6f3f",
@@ -2789,7 +2789,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 19.405,
-      "cost": 46.09
+      "cost": 32.31
     },
     {
       "id": "11fcc3e3-d00f-4e20-8924-8499ccc4f9c7",
@@ -2798,7 +2798,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 18.336,
-      "cost": 43.55
+      "cost": 32.05
     },
     {
       "id": "c1cee5d6-46a7-4436-a781-6de81afc0398",
@@ -2807,7 +2807,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 5.563,
-      "cost": 13.21
+      "cost": 28.88
     },
     {
       "id": "7b51e6a5-3803-4169-b1bf-9aa028daac59",
@@ -2816,7 +2816,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 8.976,
-      "cost": 21.32
+      "cost": 13.58
     },
     {
       "id": "413d789a-8026-4f00-9ff1-55352fe9abf2",
@@ -2825,7 +2825,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 4.065,
-      "cost": 9.65
+      "cost": 6.57
     },
     {
       "id": "2c4a6df7-8235-4b33-8d6c-9f7ccf523b8c",
@@ -2834,7 +2834,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 17.1,
-      "cost": 40.61
+      "cost": 14.74
     },
     {
       "id": "c8a9cc4f-1ead-4f7c-a637-fcb8d0455732",
@@ -2843,7 +2843,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 17.765,
-      "cost": 42.19
+      "cost": 15.18
     },
     {
       "id": "687004fe-68b7-4169-9b1b-08a528f9b67e",
@@ -2888,7 +2888,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 0.065,
-      "cost": 0.15
+      "cost": 0.07
     },
     {
       "id": "78afdd8d-7912-4cca-91c3-dcee25ec036a",
@@ -2897,7 +2897,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 17.669,
-      "cost": 41.96
+      "cost": 44.57
     },
     {
       "id": "513aca6b-38e9-453f-9d68-86a62e751002",
@@ -2915,7 +2915,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 40.48,
-      "cost": 96.14
+      "cost": 35.02
     },
     {
       "id": "299b4513-9467-4230-9770-993d5a698080",
@@ -2933,7 +2933,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 23.221,
-      "cost": 55.15
+      "cost": 46.1
     },
     {
       "id": "568195aa-75d5-48c2-9160-70880c2cb6c6",
@@ -2942,7 +2942,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 16.408,
-      "cost": 38.97
+      "cost": 8.97
     },
     {
       "id": "9952a298-1392-4b22-8d0e-d7971b7c280a",
@@ -2951,7 +2951,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 36.442,
-      "cost": 86.55
+      "cost": 19.3
     },
     {
       "id": "874d3ab2-a192-4a90-bbb5-3931b52089f7",
@@ -3023,7 +3023,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 9.427,
-      "cost": 22.39
+      "cost": 9.6
     },
     {
       "id": "d88aa2fb-3513-4a7d-a98a-308acf1f9112",
@@ -3032,7 +3032,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 7.595,
-      "cost": 18.04
+      "cost": 6.64
     },
     {
       "id": "8a0e01d9-8e73-46a8-893d-8efed5218608",
@@ -3041,7 +3041,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 13.277,
-      "cost": 31.53
+      "cost": 15.01
     },
     {
       "id": "200e5e54-1b68-482e-ba39-9c3ae731ec80",
@@ -3050,7 +3050,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 8.368,
-      "cost": 19.87
+      "cost": 18.11
     },
     {
       "id": "5330d0b9-5bec-43ff-a676-ccab424d5b94",
@@ -3059,7 +3059,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 10.278,
-      "cost": 24.41
+      "cost": 104.63
     },
     {
       "id": "c57c1856-5888-4b4c-92b2-2bbb8f9444c4",
@@ -3068,7 +3068,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 20.4,
-      "cost": 48.45
+      "cost": 48.86
     },
     {
       "id": "3e8da7de-28f7-45d2-8e0e-2695c823b04e",
@@ -3077,7 +3077,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 9.442,
-      "cost": 22.42
+      "cost": 32.16
     },
     {
       "id": "aadd6f13-d13f-4645-a135-bbf94bfe91ed",
@@ -3086,7 +3086,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 0.517,
-      "cost": 1.23
+      "cost": 0.92
     },
     {
       "id": "a928fc5d-ff3e-4e88-a208-3612a8b8f735",
@@ -3095,7 +3095,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 15.276,
-      "cost": 36.28
+      "cost": 33.29
     },
     {
       "id": "cee87207-1260-47f0-aaeb-063d84dc9683",
@@ -3104,7 +3104,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 9.785,
-      "cost": 23.24
+      "cost": 11.99
     },
     {
       "id": "eca3c7b8-62f4-4979-90df-1c7c5dd53550",
@@ -3158,7 +3158,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 4.157,
-      "cost": 9.87
+      "cost": 3.17
     },
     {
       "id": "6a8ca5f8-af3f-466e-bd06-ad413280cebd",
@@ -3167,7 +3167,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 10.538,
-      "cost": 25.03
+      "cost": 8.2
     },
     {
       "id": "c637de2f-5a7d-4559-b1b2-e030f2ab99c5",
@@ -3176,7 +3176,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 13.186,
-      "cost": 31.32
+      "cost": 10.38
     },
     {
       "id": "011ef752-20c8-4e1f-8e8f-f239424ce4a2",
@@ -3194,7 +3194,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 0.57,
-      "cost": 1.35
+      "cost": 0.5
     },
     {
       "id": "10439a58-5e0b-4451-8fce-32ccbb1d7d1e",
@@ -3212,7 +3212,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 6.786,
-      "cost": 16.12
+      "cost": 14.25
     },
     {
       "id": "5897d6a0-3e12-458e-ac97-f6559ac28830",
@@ -3221,7 +3221,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 6.374,
-      "cost": 15.14
+      "cost": 17.97
     },
     {
       "id": "32e7376f-4ed1-4260-a450-e02742c93a82",
@@ -3239,7 +3239,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 4.981,
-      "cost": 11.83
+      "cost": 7.03
     },
     {
       "id": "d13c433b-b1ee-49ca-a850-2ef19769825d",
@@ -3293,7 +3293,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 7.508,
-      "cost": 17.83
+      "cost": 4.16
     },
     {
       "id": "5792b342-9926-446c-9b51-19c250bffa11",
@@ -3302,7 +3302,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 6.232,
-      "cost": 14.8
+      "cost": 3.43
     },
     {
       "id": "95ba5dd9-c6f8-4c1c-9a3e-e2d4cc6029be",
@@ -3329,7 +3329,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 15.585,
-      "cost": 37.01
+      "cost": 38.39
     },
     {
       "id": "558be511-5824-4d23-a901-859eadc0ad20",
@@ -3356,7 +3356,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 23.185,
-      "cost": 55.06
+      "cost": 53.46
     },
     {
       "id": "3a278085-59ba-4a94-8a63-79e034afdfc6",
@@ -3374,7 +3374,7 @@
       "car": "Audi Q8 e-tron",
       "car_logo": "audi.png",
       "energy": 0.084,
-      "cost": 0.2
+      "cost": 0.22
     }
   ]
 }
