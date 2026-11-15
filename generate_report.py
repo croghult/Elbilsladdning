@@ -129,7 +129,6 @@ def main():
         "driving": driving
     }
     
-    # Ändra från "data.json" till "docs/data.json"
     os.makedirs("docs", exist_ok=True)
     with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
