@@ -83,7 +83,7 @@
                                 <button onclick="toggleAllCars(false)" class="text-[10px] text-blue-600 hover:underline">Inga</button>
                             </div>
                         </div>
-                        <!-- Checklista för bilar med logomärkning -->
+                        <!-- Checklista för bilar med logomärkning från car_mapping.json -->
                         <div id="car-checkboxes" class="space-y-2 max-h-40 overflow-y-auto pr-1 border bg-gray-50 p-2 rounded-lg text-sm">
                             <!-- JS fyller i här -->
                         </div>
@@ -136,6 +136,7 @@
     <script>
         let allData = [];
         let drivingData = {};
+        let carMapping = {};
         let carsMap = {};
         let selectedMetric = 'kwh'; 
         let monthlyChartInstance = null;
@@ -143,14 +144,23 @@
 
         async function loadData() {
             try {
-                const response = await fetch('data.json');
-                if (!response.ok) throw new Error('Kunde inte ladda data.json');
-                const json = await response.json();
+                // Ladda både data.json och car_mapping.json parallellt
+                const [dataRes, mappingRes] = await Promise.all([
+                    fetch('data.json'),
+                    fetch('car_mapping.json').catch(() => null)
+                ]);
+
+                if (!dataRes.ok) throw new Error('Kunde inte ladda data.json');
+                const json = await dataRes.json();
                 
                 allData = json.sessions || [];
                 drivingData = json.driving || {};
                 window.allSessionsData = allData;
                 window.allDrivingData = drivingData;
+
+                if (mappingRes && mappingRes.ok) {
+                    carMapping = await mappingRes.json();
+                }
                 
                 const lastUpdatedEl = document.getElementById('last-updated');
                 if (lastUpdatedEl) {
@@ -174,6 +184,14 @@
                     tableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Fel vid inläsning: ${err.message}</td></tr>`;
                 }
             }
+        }
+
+        // Hjälpfunktion för att få snyggt namn och logo baserat på car_mapping.json
+        function getCarDisplayInfo(carName) {
+            const mapping = carMapping[carName] || {};
+            const displayName = mapping.name || carName;
+            const logo = mapping.logo || null;
+            return { displayName, logo };
         }
 
         function setMonthlyView(view) {
@@ -221,12 +239,17 @@
             
             container.innerHTML = '';
             Object.keys(carsMap).sort().forEach(car => {
+                const info = getCarDisplayInfo(car);
+                const logoHtml = info.logo 
+                    ? `<img src="${info.logo}" alt="${info.displayName}" class="w-5 h-5 object-contain inline-block mr-1.5">` 
+                    : '🚗 ';
+
                 const div = document.createElement('label');
                 div.className = "flex items-center space-x-2 cursor-pointer py-1 px-1 hover:bg-white rounded transition";
                 div.innerHTML = `
                     <input type="checkbox" value="${car}" checked onchange="render()" class="car-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                     <span class="inline-flex items-center text-xs font-medium text-gray-800">
-                        🚗 ${car}
+                        ${logoHtml}${info.displayName}
                     </span>
                 `;
                 container.appendChild(div);
@@ -290,11 +313,17 @@
             const tbody = document.getElementById('table-body');
             tbody.innerHTML = '';
             filteredSessions.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(s => {
+                const carKey = s.car || "Övriga bilar";
+                const info = getCarDisplayInfo(carKey);
+                const logoHtml = info.logo 
+                    ? `<img src="${info.logo}" alt="${info.displayName}" class="w-4 h-4 object-contain inline-block mr-1.5">` 
+                    : '';
+
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-gray-50 border-b border-gray-100";
                 tr.innerHTML = `
                     <td class="px-6 py-3">${s.date || '-'}</td>
-                    <td class="px-6 py-3 font-medium">${s.car || 'Övriga bilar'}</td>
+                    <td class="px-6 py-3 font-medium inline-flex items-center">${logoHtml}${info.displayName}</td>
                     <td class="px-6 py-3 text-right">${(s.kwh || 0).toFixed(1)}</td>
                     <td class="px-6 py-3 text-right">${(s.cost || 0).toFixed(2)}</td>
                 `;
@@ -315,7 +344,6 @@
             const chartData = {};
             sessions.forEach(s => {
                 if (s.date) {
-                    // Om en månad är vald: bryt ner per dag (YYYY-MM-DD). Annars per månad (YYYY-MM).
                     const key = selectedMonth === 'all' ? s.date.substring(0, 7) : s.date.substring(0, 10);
                     if (!chartData[key]) chartData[key] = { kwh: 0, kr: 0 };
                     chartData[key].kwh += (s.kwh || 0);
