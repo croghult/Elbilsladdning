@@ -377,7 +377,9 @@
 
             const yearsSet = new Set();
             allSessions.forEach(s => { if (s.date) yearsSet.add(s.date.substring(0, 4)); });
-            Object.keys(drivingObj).forEach(ym => yearsSet.add(ym.substring(0, 4)););
+            Object.keys(drivingObj).forEach(ym => {
+                if (ym) yearsSet.add(ym.substring(0, 4));
+            });
 
             const years = Array.from(yearsSet).sort().reverse();
             if (years.length === 0) years.push(new Date().getFullYear().toString());
