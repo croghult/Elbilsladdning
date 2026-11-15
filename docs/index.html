@@ -147,7 +147,7 @@
                 // Hämta både data.json och car_mapping.json direkt från docs-mappen
                 const [dataRes, mappingRes] = await Promise.all([
                     fetch('data.json'),
-                    fetch('/car_mapping.json').catch(() => null)
+                    fetch('../car_mapping.json').catch(() => null)
                 ]);
 
                 if (!dataRes.ok) throw new Error('Kunde inte ladda data.json');
