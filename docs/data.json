@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-11-15 13:20",
+  "updated_at": "2026-11-15 14:31",
   "sessions": [
     {
       "date": "2026-11-13 17:38",
       "car": "Övriga bilar",
       "kwh": 10.217,
-      "cost": 0.0
+      "cost": 11.64
     },
     {
       "date": "2026-11-12 17:07",
       "car": "Övriga bilar",
       "kwh": 40.424,
-      "cost": 0.0
+      "cost": 58.09
     },
     {
       "date": "2026-11-12 15:25",
@@ -35,7 +35,7 @@
       "date": "2026-11-06 20:34",
       "car": "Övriga bilar",
       "kwh": 62.705,
-      "cost": 0.0
+      "cost": 94.06
     },
     {
       "date": "2026-11-06 20:32",
@@ -47,13 +47,13 @@
       "date": "2026-11-04 19:31",
       "car": "Övriga bilar",
       "kwh": 63.652,
-      "cost": 0.0
+      "cost": 95.48
     },
     {
       "date": "2026-11-01 15:51",
       "car": "Övriga bilar",
       "kwh": 63.361,
-      "cost": 0.0
+      "cost": 102.1
     },
     {
       "date": "2026-11-01 14:56",
@@ -65,13 +65,13 @@
       "date": "2026-10-27 19:21",
       "car": "Övriga bilar",
       "kwh": 20.352,
-      "cost": 0.0
+      "cost": 1.34
     },
     {
       "date": "2026-10-25 17:27",
       "car": "Övriga bilar",
       "kwh": 21.881,
-      "cost": 0.0
+      "cost": 32.82
     },
     {
       "date": "2026-10-24 16:10",
@@ -83,19 +83,19 @@
       "date": "2026-10-23 17:18",
       "car": "Övriga bilar",
       "kwh": 48.41,
-      "cost": 0.0
+      "cost": 45.3
     },
     {
       "date": "2026-10-21 18:47",
       "car": "Övriga bilar",
       "kwh": 8.482,
-      "cost": 0.0
+      "cost": 7.32
     },
     {
       "date": "2026-10-20 17:48",
       "car": "Övriga bilar",
       "kwh": 13.423,
-      "cost": 0.0
+      "cost": 20.13
     },
     {
       "date": "2026-10-20 16:39",
@@ -107,37 +107,37 @@
       "date": "2026-10-19 18:13",
       "car": "Övriga bilar",
       "kwh": 24.613,
-      "cost": 0.0
+      "cost": 31.85
     },
     {
       "date": "2026-10-17 11:27",
       "car": "Övriga bilar",
       "kwh": 26.986,
-      "cost": 0.0
+      "cost": 40.48
     },
     {
       "date": "2026-10-15 17:28",
       "car": "Övriga bilar",
       "kwh": 25.867,
-      "cost": 0.0
+      "cost": 20.12
     },
     {
       "date": "2026-10-13 17:32",
       "car": "Övriga bilar",
       "kwh": 33.784,
-      "cost": 0.0
+      "cost": 50.68
     },
     {
       "date": "2026-10-11 17:42",
       "car": "Övriga bilar",
       "kwh": 43.327,
-      "cost": 0.0
+      "cost": 64.99
     },
     {
       "date": "2026-10-05 19:09",
       "car": "Övriga bilar",
       "kwh": 16.197,
-      "cost": 0.0
+      "cost": 0.06
     },
     {
       "date": "2026-10-05 14:34",
@@ -149,7 +149,7 @@
       "date": "2026-10-04 18:59",
       "car": "Övriga bilar",
       "kwh": 12.846,
-      "cost": 0.0
+      "cost": 19.27
     },
     {
       "date": "2026-10-04 17:03",
@@ -167,25 +167,25 @@
       "date": "2026-10-01 18:06",
       "car": "Övriga bilar",
       "kwh": 41.178,
-      "cost": 0.0
+      "cost": 32.38
     },
     {
       "date": "2026-09-28 19:13",
       "car": "Övriga bilar",
       "kwh": 14.376,
-      "cost": 0.0
+      "cost": 8.17
     },
     {
       "date": "2026-09-27 17:21",
       "car": "Övriga bilar",
       "kwh": 24.551,
-      "cost": 0.0
+      "cost": 23.22
     },
     {
       "date": "2026-09-25 19:45",
       "car": "Övriga bilar",
       "kwh": 33.702,
-      "cost": 0.0
+      "cost": 50.55
     },
     {
       "date": "2026-09-25 18:05",
@@ -197,175 +197,175 @@
       "date": "2026-09-22 19:13",
       "car": "Övriga bilar",
       "kwh": 25.761,
-      "cost": 0.0
+      "cost": 38.64
     },
     {
       "date": "2026-09-19 14:20",
       "car": "Övriga bilar",
       "kwh": 18.045,
-      "cost": 0.0
+      "cost": 27.07
     },
     {
       "date": "2026-09-18 20:36",
       "car": "Övriga bilar",
       "kwh": 6.038,
-      "cost": 0.0
+      "cost": 9.06
     },
     {
       "date": "2026-09-17 19:15",
       "car": "Övriga bilar",
       "kwh": 17.364,
-      "cost": 0.0
+      "cost": 26.05
     },
     {
       "date": "2026-09-15 16:52",
       "car": "Övriga bilar",
       "kwh": 19.843,
-      "cost": 0.0
+      "cost": 21.53
     },
     {
       "date": "2026-09-13 17:12",
       "car": "Övriga bilar",
       "kwh": 8.127,
-      "cost": 0.0
+      "cost": 5.76
     },
     {
       "date": "2026-09-11 15:53",
       "car": "Övriga bilar",
       "kwh": 21.067,
-      "cost": 0.0
+      "cost": 31.6
     },
     {
       "date": "2026-09-08 18:13",
       "car": "Övriga bilar",
       "kwh": 18.049,
-      "cost": 0.0
+      "cost": 11.44
     },
     {
       "date": "2026-09-05 14:17",
       "car": "Övriga bilar",
       "kwh": 8.936,
-      "cost": 0.0
+      "cost": 2.3
     },
     {
       "date": "2026-09-04 16:06",
       "car": "Övriga bilar",
       "kwh": 6.181,
-      "cost": 0.0
+      "cost": 9.27
     },
     {
       "date": "2026-09-03 17:03",
       "car": "Övriga bilar",
       "kwh": 6.629,
-      "cost": 0.0
+      "cost": 5.1
     },
     {
       "date": "2026-09-02 17:28",
       "car": "Övriga bilar",
       "kwh": 38.233,
-      "cost": 0.0
+      "cost": 57.35
     },
     {
       "date": "2026-08-29 15:43",
       "car": "Övriga bilar",
       "kwh": 7.442,
-      "cost": 0.0
+      "cost": 11.16
     },
     {
       "date": "2026-08-28 16:58",
       "car": "Övriga bilar",
       "kwh": 48.934,
-      "cost": 0.0
+      "cost": 73.4
     },
     {
       "date": "2026-08-23 15:35",
       "car": "Övriga bilar",
       "kwh": 25.313,
-      "cost": 0.0
+      "cost": 8.98
     },
     {
       "date": "2026-08-20 16:06",
       "car": "Övriga bilar",
       "kwh": 54.526,
-      "cost": 0.0
+      "cost": 81.79
     },
     {
       "date": "2026-08-15 10:39",
       "car": "Övriga bilar",
       "kwh": 27.6,
-      "cost": 0.0
+      "cost": 8.26
     },
     {
       "date": "2026-08-15 06:39",
       "car": "Övriga bilar",
       "kwh": 11.897,
-      "cost": 0.0
+      "cost": 2.01
     },
     {
       "date": "2026-03-29 18:59",
       "car": "Övriga bilar",
       "kwh": 27.691,
-      "cost": 0.0
+      "cost": 41.54
     },
     {
       "date": "2026-03-26 20:22",
       "car": "Övriga bilar",
       "kwh": 40.572,
-      "cost": 0.0
+      "cost": 60.86
     },
     {
       "date": "2026-03-22 13:39",
       "car": "Övriga bilar",
       "kwh": 19.838,
-      "cost": 0.0
+      "cost": 29.76
     },
     {
       "date": "2026-03-19 19:01",
       "car": "Övriga bilar",
       "kwh": 43.2,
-      "cost": 0.0
+      "cost": 64.8
     },
     {
       "date": "2026-03-15 20:59",
       "car": "Övriga bilar",
       "kwh": 9.594,
-      "cost": 0.0
+      "cost": 6.36
     },
     {
       "date": "2026-03-14 18:39",
       "car": "Övriga bilar",
       "kwh": 23.217,
-      "cost": 0.0
+      "cost": 13.61
     },
     {
       "date": "2026-03-13 20:47",
       "car": "Övriga bilar",
       "kwh": 16.553,
-      "cost": 0.0
+      "cost": 24.83
     },
     {
       "date": "2026-03-11 19:55",
       "car": "Övriga bilar",
       "kwh": 34.095,
-      "cost": 0.0
+      "cost": 51.14
     },
     {
       "date": "2026-03-08 13:36",
       "car": "Övriga bilar",
       "kwh": 31.746,
-      "cost": 0.0
+      "cost": 23.06
     },
     {
       "date": "2026-03-05 15:30",
       "car": "Övriga bilar",
       "kwh": 44.789,
-      "cost": 0.0
+      "cost": 37.68
     },
     {
       "date": "2026-02-28 18:04",
       "car": "Övriga bilar",
       "kwh": 46.726,
-      "cost": 0.0
+      "cost": 70.09
     },
     {
       "date": "2026-02-28 18:01",
@@ -377,31 +377,31 @@
       "date": "2026-02-21 09:01",
       "car": "Övriga bilar",
       "kwh": 8.016,
-      "cost": 0.0
+      "cost": 5.11
     },
     {
       "date": "2026-02-20 19:38",
       "car": "Övriga bilar",
       "kwh": 41.3,
-      "cost": 0.0
+      "cost": 31.63
     },
     {
       "date": "2026-02-19 20:05",
       "car": "Övriga bilar",
       "kwh": 38.86,
-      "cost": 0.0
+      "cost": 58.29
     },
     {
       "date": "2026-02-17 20:05",
       "car": "Övriga bilar",
       "kwh": 22.287,
-      "cost": 0.0
+      "cost": 15.21
     },
     {
       "date": "2026-02-15 18:19",
       "car": "Övriga bilar",
       "kwh": 70.041,
-      "cost": 0.0
+      "cost": 105.06
     },
     {
       "date": "2026-02-13 08:21",
@@ -413,13 +413,13 @@
       "date": "2026-02-12 20:12",
       "car": "Övriga bilar",
       "kwh": 30.134,
-      "cost": 0.0
+      "cost": 45.2
     },
     {
       "date": "2026-02-12 18:45",
       "car": "Övriga bilar",
       "kwh": 8.782,
-      "cost": 0.0
+      "cost": 13.17
     },
     {
       "date": "2026-02-12 18:35",
@@ -431,97 +431,97 @@
       "date": "2026-02-11 19:52",
       "car": "Övriga bilar",
       "kwh": 19.883,
-      "cost": 0.0
+      "cost": 29.82
     },
     {
       "date": "2026-02-09 20:17",
       "car": "Övriga bilar",
       "kwh": 17.113,
-      "cost": 0.0
+      "cost": 25.67
     },
     {
       "date": "2026-02-08 19:03",
       "car": "Övriga bilar",
       "kwh": 18.309,
-      "cost": 0.0
+      "cost": 20.54
     },
     {
       "date": "2026-02-07 08:23",
       "car": "Övriga bilar",
       "kwh": 3.33,
-      "cost": 0.0
+      "cost": 3.9
     },
     {
       "date": "2026-02-06 15:21",
       "car": "Övriga bilar",
       "kwh": 28.687,
-      "cost": 0.0
+      "cost": 43.03
     },
     {
       "date": "2026-02-06 14:45",
       "car": "Övriga bilar",
       "kwh": 3.61,
-      "cost": 0.0
+      "cost": 5.42
     },
     {
       "date": "2026-02-05 18:35",
       "car": "Övriga bilar",
       "kwh": 15.79,
-      "cost": 0.0
+      "cost": 23.68
     },
     {
       "date": "2026-02-03 18:07",
       "car": "Övriga bilar",
       "kwh": 9.379,
-      "cost": 0.0
+      "cost": 14.07
     },
     {
       "date": "2026-02-02 21:11",
       "car": "Övriga bilar",
       "kwh": 32.168,
-      "cost": 0.0
+      "cost": 30.26
     },
     {
       "date": "2026-01-31 20:50",
       "car": "Övriga bilar",
       "kwh": 9.737,
-      "cost": 0.0
+      "cost": 8.25
     },
     {
       "date": "2026-01-30 22:43",
       "car": "Övriga bilar",
       "kwh": 22.147,
-      "cost": 0.0
+      "cost": 23.62
     },
     {
       "date": "2026-01-29 18:26",
       "car": "Övriga bilar",
       "kwh": 37.946,
-      "cost": 0.0
+      "cost": 46.89
     },
     {
       "date": "2026-01-27 16:39",
       "car": "Övriga bilar",
       "kwh": 27.332,
-      "cost": 0.0
+      "cost": 37.54
     },
     {
       "date": "2026-01-25 16:55",
       "car": "Övriga bilar",
       "kwh": 20.328,
-      "cost": 0.0
+      "cost": 23.68
     },
     {
       "date": "2026-01-24 19:44",
       "car": "Övriga bilar",
       "kwh": 4.766,
-      "cost": 0.0
+      "cost": 5.31
     },
     {
       "date": "2026-01-24 17:54",
       "car": "Övriga bilar",
       "kwh": 11.626,
-      "cost": 0.0
+      "cost": 16.92
     },
     {
       "date": "2026-01-23 16:11",
@@ -533,19 +533,19 @@
       "date": "2026-01-22 20:37",
       "car": "Övriga bilar",
       "kwh": 43.593,
-      "cost": 0.0
+      "cost": 42.06
     },
     {
       "date": "2026-01-22 15:36",
       "car": "Övriga bilar",
       "kwh": 11.588,
-      "cost": 0.0
+      "cost": 12.65
     },
     {
       "date": "2026-01-18 18:56",
       "car": "Övriga bilar",
       "kwh": 5.888,
-      "cost": 0.0
+      "cost": 6.07
     },
     {
       "date": "2026-01-18 13:48",
@@ -557,133 +557,133 @@
       "date": "2026-01-18 08:41",
       "car": "Övriga bilar",
       "kwh": 44.098,
-      "cost": 0.0
+      "cost": 66.15
     },
     {
       "date": "2026-01-14 19:23",
       "car": "Övriga bilar",
       "kwh": 31.664,
-      "cost": 0.0
+      "cost": 20.89
     },
     {
       "date": "2026-01-11 15:22",
       "car": "Övriga bilar",
       "kwh": 32.941,
-      "cost": 0.0
+      "cost": 49.41
     },
     {
       "date": "2026-01-11 10:40",
       "car": "Övriga bilar",
       "kwh": 9.253,
-      "cost": 0.0
+      "cost": 13.88
     },
     {
       "date": "2026-01-07 20:21",
       "car": "Övriga bilar",
       "kwh": 46.266,
-      "cost": 0.0
+      "cost": 35.67
     },
     {
       "date": "2026-01-03 20:06",
       "car": "Övriga bilar",
       "kwh": 54.318,
-      "cost": 0.0
+      "cost": 81.48
     },
     {
       "date": "2025-12-19 13:49",
       "car": "Övriga bilar",
       "kwh": 32.959,
-      "cost": 0.0
+      "cost": 2.27
     },
     {
       "date": "2025-12-18 19:26",
       "car": "Övriga bilar",
       "kwh": 25.313,
-      "cost": 0.0
+      "cost": 8.44
     },
     {
       "date": "2025-12-16 20:48",
       "car": "Övriga bilar",
       "kwh": 26.88,
-      "cost": 0.0
+      "cost": 13.74
     },
     {
       "date": "2025-12-14 18:09",
       "car": "Övriga bilar",
       "kwh": 24.825,
-      "cost": 0.0
+      "cost": 8.63
     },
     {
       "date": "2025-12-14 13:47",
       "car": "Övriga bilar",
       "kwh": 17.03,
-      "cost": 0.0
+      "cost": 5.78
     },
     {
       "date": "2025-12-12 18:32",
       "car": "Övriga bilar",
       "kwh": 37.438,
-      "cost": 0.0
+      "cost": 27.34
     },
     {
       "date": "2025-12-11 13:18",
       "car": "Övriga bilar",
       "kwh": 23.722,
-      "cost": 0.0
+      "cost": 13.01
     },
     {
       "date": "2025-12-06 17:58",
       "car": "Övriga bilar",
       "kwh": 42.042,
-      "cost": 0.0
+      "cost": 19.93
     },
     {
       "date": "2025-12-03 19:13",
       "car": "Övriga bilar",
       "kwh": 32.321,
-      "cost": 0.0
+      "cost": 48.48
     },
     {
       "date": "2025-11-30 18:16",
       "car": "Övriga bilar",
       "kwh": 34.22,
-      "cost": 0.0
+      "cost": 51.33
     },
     {
       "date": "2025-11-27 19:55",
       "car": "Övriga bilar",
       "kwh": 33.896,
-      "cost": 0.0
+      "cost": 50.84
     },
     {
       "date": "2025-11-27 18:31",
       "car": "Övriga bilar",
       "kwh": 7.763,
-      "cost": 0.0
+      "cost": 11.64
     },
     {
       "date": "2025-11-24 18:52",
       "car": "Övriga bilar",
       "kwh": 25.811,
-      "cost": 0.0
+      "cost": 32.29
     },
     {
       "date": "2025-11-24 17:41",
       "car": "Övriga bilar",
       "kwh": 7.967,
-      "cost": 0.0
+      "cost": 11.95
     },
     {
       "date": "2025-11-23 11:56",
       "car": "Övriga bilar",
       "kwh": 2.461,
-      "cost": 0.0
+      "cost": 3.69
     },
     {
       "date": "2025-11-23 11:53",
       "car": "Övriga bilar",
       "kwh": 0.038,
-      "cost": 0.0
+      "cost": 0.06
     },
     {
       "date": "2025-11-23 11:51",
@@ -695,13 +695,13 @@
       "date": "2025-11-23 11:50",
       "car": "Övriga bilar",
       "kwh": 0.091,
-      "cost": 0.0
+      "cost": 0.14
     },
     {
       "date": "2025-11-23 11:37",
       "car": "Övriga bilar",
       "kwh": 0.884,
-      "cost": 0.0
+      "cost": 0.63
     },
     {
       "date": "2025-11-23 11:35",
@@ -713,7 +713,7 @@
       "date": "2025-11-23 11:24",
       "car": "Övriga bilar",
       "kwh": 0.127,
-      "cost": 0.0
+      "cost": 0.19
     },
     {
       "date": "2025-11-23 11:22",
@@ -731,13 +731,13 @@
       "date": "2025-11-22 20:06",
       "car": "Övriga bilar",
       "kwh": 6.019,
-      "cost": 0.0
+      "cost": 3.19
     },
     {
       "date": "2025-11-22 09:49",
       "car": "Övriga bilar",
       "kwh": 4.592,
-      "cost": 0.0
+      "cost": 2.22
     },
     {
       "date": "2025-11-22 09:48",
@@ -749,13 +749,13 @@
       "date": "2025-11-21 21:19",
       "car": "Övriga bilar",
       "kwh": 51.733,
-      "cost": 0.0
+      "cost": 77.6
     },
     {
       "date": "2025-11-19 17:46",
       "car": "Övriga bilar",
       "kwh": 39.71,
-      "cost": 0.0
+      "cost": 59.56
     },
     {
       "date": "2025-11-19 17:15",
@@ -791,7 +791,7 @@
       "date": "2025-11-16 18:07",
       "car": "Övriga bilar",
       "kwh": 40.767,
-      "cost": 0.0
+      "cost": 23.77
     },
     {
       "date": "2025-11-15 08:13",
@@ -803,67 +803,67 @@
       "date": "2025-11-10 17:39",
       "car": "Övriga bilar",
       "kwh": 19.074,
-      "cost": 0.0
+      "cost": 28.61
     },
     {
       "date": "2025-11-08 15:25",
       "car": "Övriga bilar",
       "kwh": 50.007,
-      "cost": 0.0
+      "cost": 29.91
     },
     {
       "date": "2025-11-01 16:54",
       "car": "Christoffer Roghult",
       "kwh": 36.348,
-      "cost": 0.0
+      "cost": 9.86
     },
     {
       "date": "2025-10-28 18:06",
       "car": "Karolina  Andersson",
       "kwh": 46.747,
-      "cost": 0.0
+      "cost": 70.12
     },
     {
       "date": "2025-10-25 17:36",
       "car": "Christoffer Roghult",
       "kwh": 12.419,
-      "cost": 0.0
+      "cost": 1.51
     },
     {
       "date": "2025-10-25 06:49",
       "car": "Christoffer Roghult",
       "kwh": 27.857,
-      "cost": 0.0
+      "cost": 41.79
     },
     {
       "date": "2025-10-18 12:37",
       "car": "Christoffer Roghult",
       "kwh": 39.729,
-      "cost": 0.0
+      "cost": 59.59
     },
     {
       "date": "2025-10-18 10:52",
       "car": "Christoffer Roghult",
       "kwh": 3.602,
-      "cost": 0.0
+      "cost": 5.4
     },
     {
       "date": "2025-10-12 16:25",
       "car": "Christoffer Roghult",
       "kwh": 25.899,
-      "cost": 0.0
+      "cost": 4.79
     },
     {
       "date": "2025-10-12 08:52",
       "car": "Christoffer Roghult",
       "kwh": 17.845,
-      "cost": 0.0
+      "cost": 0.37
     },
     {
       "date": "2025-10-12 06:59",
       "car": "Christoffer Roghult",
       "kwh": 2.948,
-      "cost": 0.0
+      "cost": -0.01
     },
     {
       "date": "2025-10-11 18:06",
@@ -875,127 +875,127 @@
       "date": "2025-10-06 16:39",
       "car": "Karolina  Andersson",
       "kwh": 23.311,
-      "cost": 0.0
+      "cost": 19.78
     },
     {
       "date": "2025-10-02 15:52",
       "car": "Christoffer Roghult",
       "kwh": 4.497,
-      "cost": 0.0
+      "cost": 5.54
     },
     {
       "date": "2025-10-01 18:07",
       "car": "Karolina  Andersson",
       "kwh": 32.175,
-      "cost": 0.0
+      "cost": 48.26
     },
     {
       "date": "2025-09-26 19:01",
       "car": "Christoffer Roghult",
       "kwh": 36.283,
-      "cost": 0.0
+      "cost": 54.42
     },
     {
       "date": "2025-09-21 13:32",
       "car": "Christoffer Roghult",
       "kwh": 9.032,
-      "cost": 0.0
+      "cost": 13.55
     },
     {
       "date": "2025-09-21 10:19",
       "car": "Christoffer Roghult",
       "kwh": 9.442,
-      "cost": 0.0
+      "cost": 0.01
     },
     {
       "date": "2025-09-16 16:00",
       "car": "Karolina  Andersson",
       "kwh": 21.823,
-      "cost": 0.0
+      "cost": 32.73
     },
     {
       "date": "2025-09-12 20:50",
       "car": "Christoffer Roghult",
       "kwh": 29.945,
-      "cost": 0.0
+      "cost": 8.04
     },
     {
       "date": "2025-09-07 14:21",
       "car": "Christoffer Roghult",
       "kwh": 38.009,
-      "cost": 0.0
+      "cost": 16.72
     },
     {
       "date": "2025-09-01 17:22",
       "car": "Karolina  Andersson",
       "kwh": 36.606,
-      "cost": 0.0
+      "cost": 24.93
     },
     {
       "date": "2025-08-25 17:33",
       "car": "Christoffer Roghult",
       "kwh": 38.866,
-      "cost": 0.0
+      "cost": 58.3
     },
     {
       "date": "2025-08-25 06:15",
       "car": "Tommy  Roghult ",
       "kwh": 11.649,
-      "cost": 0.0
+      "cost": 17.47
     },
     {
       "date": "2025-08-22 08:17",
       "car": "Tommy  Roghult ",
       "kwh": 15.774,
-      "cost": 0.0
+      "cost": 23.66
     },
     {
       "date": "2025-08-20 12:08",
       "car": "Tommy  Roghult ",
       "kwh": 8.221,
-      "cost": 0.0
+      "cost": 12.33
     },
     {
       "date": "2025-08-19 18:13",
       "car": "Christoffer Roghult",
       "kwh": 22.008,
-      "cost": 0.0
+      "cost": 33.01
     },
     {
       "date": "2025-08-16 19:41",
       "car": "Karolina  Andersson",
       "kwh": 35.508,
-      "cost": 0.0
+      "cost": 53.26
     },
     {
       "date": "2025-08-16 12:05",
       "car": "Christoffer Roghult",
       "kwh": 13.175,
-      "cost": 0.0
+      "cost": 0.03
     },
     {
       "date": "2025-08-16 10:33",
       "car": "Tommy  Roghult ",
       "kwh": 4.673,
-      "cost": 0.0
+      "cost": 0.78
     },
     {
       "date": "2025-08-14 17:26",
       "car": "Karolina  Andersson",
       "kwh": 51.362,
-      "cost": 0.0
+      "cost": 25.21
     },
     {
       "date": "2025-08-11 14:06",
       "car": "Karolina  Andersson",
       "kwh": 22.116,
-      "cost": 0.0
+      "cost": 2.68
     },
     {
       "date": "2025-08-09 18:06",
       "car": "Karolina  Andersson",
       "kwh": 27.864,
-      "cost": 0.0
+      "cost": 6.03
     },
     {
       "date": "2025-08-09 13:31",
@@ -1007,49 +1007,49 @@
       "date": "2025-08-07 18:18",
       "car": "Karolina  Andersson",
       "kwh": 38.97,
-      "cost": 0.0
+      "cost": 58.45
     },
     {
       "date": "2025-08-04 13:40",
       "car": "Christoffer Roghult",
       "kwh": 26.77,
-      "cost": 0.0
+      "cost": 40.16
     },
     {
       "date": "2025-08-03 13:33",
       "car": "Christoffer Roghult",
       "kwh": 13.995,
-      "cost": 0.0
+      "cost": 0.3
     },
     {
       "date": "2025-08-02 11:05",
       "car": "Tommy  Roghult ",
       "kwh": 9.0,
-      "cost": 0.0
+      "cost": 0.49
     },
     {
       "date": "2025-08-02 08:24",
       "car": "Christoffer Roghult",
       "kwh": 1.743,
-      "cost": 0.0
+      "cost": 2.61
     },
     {
       "date": "2025-07-31 07:53",
       "car": "Christoffer Roghult",
       "kwh": 4.311,
-      "cost": 0.0
+      "cost": 6.47
     },
     {
       "date": "2025-07-26 12:12",
       "car": "Tommy  Roghult ",
       "kwh": 14.892,
-      "cost": 0.0
+      "cost": 2.21
     },
     {
       "date": "2025-07-26 04:44",
       "car": "Christoffer Roghult",
       "kwh": 3.715,
-      "cost": 0.0
+      "cost": 0.59
     },
     {
       "date": "2025-07-25 15:27",
@@ -1061,67 +1061,67 @@
       "date": "2025-07-24 13:01",
       "car": "Christoffer Roghult",
       "kwh": 25.197,
-      "cost": 0.0
+      "cost": 37.8
     },
     {
       "date": "2025-07-22 14:19",
       "car": "Christoffer Roghult",
       "kwh": 31.717,
-      "cost": 0.0
+      "cost": 8.34
     },
     {
       "date": "2025-07-17 17:32",
       "car": "Christoffer Roghult",
       "kwh": 51.518,
-      "cost": 0.0
+      "cost": 77.28
     },
     {
       "date": "2025-07-17 16:48",
       "car": "Christoffer Roghult",
       "kwh": 2.735,
-      "cost": 0.0
+      "cost": 0.78
     },
     {
       "date": "2025-07-16 13:05",
       "car": "Tommy  Roghult ",
       "kwh": 11.97,
-      "cost": 0.0
+      "cost": 17.96
     },
     {
       "date": "2025-07-14 10:32",
       "car": "Tommy  Roghult ",
       "kwh": 7.842,
-      "cost": 0.0
+      "cost": 11.76
     },
     {
       "date": "2025-07-13 09:42",
       "car": "Tommy  Roghult ",
       "kwh": 15.83,
-      "cost": 0.0
+      "cost": 2.14
     },
     {
       "date": "2025-06-28 11:00",
       "car": "Christoffer Roghult",
       "kwh": 10.342,
-      "cost": 0.0
+      "cost": 15.51
     },
     {
       "date": "2025-06-28 05:31",
       "car": "Christoffer Roghult",
       "kwh": 15.004,
-      "cost": 0.0
+      "cost": 22.51
     },
     {
       "date": "2025-06-24 18:27",
       "car": "Karolina  Andersson",
       "kwh": 42.445,
-      "cost": 0.0
+      "cost": 63.67
     },
     {
       "date": "2025-06-24 17:33",
       "car": "Karolina  Andersson",
       "kwh": 5.416,
-      "cost": 0.0
+      "cost": 8.12
     },
     {
       "date": "2025-06-21 18:05",
@@ -1133,31 +1133,31 @@
       "date": "2025-06-21 12:16",
       "car": "Christoffer Roghult",
       "kwh": 16.146,
-      "cost": 0.0
+      "cost": 24.22
     },
     {
       "date": "2025-06-21 06:12",
       "car": "Christoffer Roghult",
       "kwh": 8.795,
-      "cost": 0.0
+      "cost": 13.19
     },
     {
       "date": "2025-06-15 12:37",
       "car": "Christoffer Roghult",
       "kwh": 13.451,
-      "cost": 0.0
+      "cost": -0.41
     },
     {
       "date": "2025-06-13 05:52",
       "car": "Christoffer Roghult",
       "kwh": 29.974,
-      "cost": 0.0
+      "cost": 44.96
     },
     {
       "date": "2025-06-09 08:43",
       "car": "Tommy  Roghult ",
       "kwh": 11.875,
-      "cost": 0.0
+      "cost": 17.81
     },
     {
       "date": "2025-06-09 08:41",
@@ -1169,85 +1169,85 @@
       "date": "2025-06-07 17:00",
       "car": "Christoffer Roghult",
       "kwh": 20.156,
-      "cost": 0.0
+      "cost": 4.69
     },
     {
       "date": "2025-06-04 15:20",
       "car": "Karolina  Andersson",
       "kwh": 31.295,
-      "cost": 0.0
+      "cost": 46.94
     },
     {
       "date": "2025-05-31 13:16",
       "car": "Christoffer Roghult",
       "kwh": 23.958,
-      "cost": 0.0
+      "cost": 6.05
     },
     {
       "date": "2025-05-31 10:27",
       "car": "Christoffer Roghult",
       "kwh": 4.9,
-      "cost": 0.0
+      "cost": 7.35
     },
     {
       "date": "2025-05-28 19:51",
       "car": "Christoffer Roghult",
       "kwh": 29.597,
-      "cost": 0.0
+      "cost": 44.4
     },
     {
       "date": "2025-05-26 07:16",
       "car": "Tommy  Roghult ",
       "kwh": 5.247,
-      "cost": 0.0
+      "cost": 2.11
     },
     {
       "date": "2025-05-25 13:29",
       "car": "Christoffer Roghult",
       "kwh": 11.788,
-      "cost": 0.0
+      "cost": 17.68
     },
     {
       "date": "2025-05-22 19:38",
       "car": "Christoffer Roghult",
       "kwh": 31.996,
-      "cost": 0.0
+      "cost": 47.99
     },
     {
       "date": "2025-05-15 19:28",
       "car": "Christoffer Roghult",
       "kwh": 21.198,
-      "cost": 0.0
+      "cost": 31.8
     },
     {
       "date": "2025-05-11 14:54",
       "car": "Christoffer Roghult",
       "kwh": 1.862,
-      "cost": 0.0
+      "cost": 2.79
     },
     {
       "date": "2025-05-11 11:06",
       "car": "Christoffer Roghult",
       "kwh": 16.023,
-      "cost": 0.0
+      "cost": 24.03
     },
     {
       "date": "2025-05-11 10:33",
       "car": "Christoffer Roghult",
       "kwh": 1.343,
-      "cost": 0.0
+      "cost": 2.01
     },
     {
       "date": "2025-05-11 06:12",
       "car": "Christoffer Roghult",
       "kwh": 4.46,
-      "cost": 0.0
+      "cost": 6.69
     },
     {
       "date": "2025-05-10 11:19",
       "car": "Christoffer Roghult",
       "kwh": 3.019,
-      "cost": 0.0
+      "cost": 0.28
     },
     {
       "date": "2025-05-10 11:17",
@@ -1259,217 +1259,217 @@
       "date": "2025-05-07 17:32",
       "car": "Christoffer Roghult",
       "kwh": 34.639,
-      "cost": 0.0
+      "cost": 33.53
     },
     {
       "date": "2025-05-03 11:45",
       "car": "Tommy  Roghult ",
       "kwh": 0.062,
-      "cost": 0.0
+      "cost": 0.09
     },
     {
       "date": "2025-05-03 11:42",
       "car": "Tommy  Roghult ",
       "kwh": 0.048,
-      "cost": 0.0
+      "cost": 0.07
     },
     {
       "date": "2025-05-01 14:29",
       "car": "Karolina  Andersson",
       "kwh": 32.099,
-      "cost": 0.0
+      "cost": 48.15
     },
     {
       "date": "2025-04-27 11:37",
       "car": "Christoffer Roghult",
       "kwh": 2.553,
-      "cost": 0.0
+      "cost": 3.83
     },
     {
       "date": "2025-04-27 11:25",
       "car": "Tommy  Roghult ",
       "kwh": 0.169,
-      "cost": 0.0
+      "cost": 0.25
     },
     {
       "date": "2025-04-27 11:00",
       "car": "Christoffer Roghult",
       "kwh": 0.134,
-      "cost": 0.0
+      "cost": -0.01
     },
     {
       "date": "2025-04-26 16:28",
       "car": "Övriga bilar",
       "kwh": 26.57,
-      "cost": 0.0
+      "cost": 10.57
     },
     {
       "date": "2025-04-20 16:29",
       "car": "Övriga bilar",
       "kwh": 49.187,
-      "cost": 0.0
+      "cost": 14.21
     },
     {
       "date": "2025-04-15 17:36",
       "car": "Övriga bilar",
       "kwh": 39.892,
-      "cost": 0.0
+      "cost": 11.76
     },
     {
       "date": "2025-04-12 19:09",
       "car": "Övriga bilar",
       "kwh": 4.198,
-      "cost": 0.0
+      "cost": 6.3
     },
     {
       "date": "2025-04-11 17:59",
       "car": "Övriga bilar",
       "kwh": 1.301,
-      "cost": 0.0
+      "cost": 1.95
     },
     {
       "date": "2025-04-11 12:48",
       "car": "Övriga bilar",
       "kwh": 32.758,
-      "cost": 0.0
+      "cost": 49.14
     },
     {
       "date": "2025-04-06 12:58",
       "car": "Övriga bilar",
       "kwh": 26.646,
-      "cost": 0.0
+      "cost": 10.15
     },
     {
       "date": "2025-04-03 20:18",
       "car": "Övriga bilar",
       "kwh": 22.303,
-      "cost": 0.0
+      "cost": 33.45
     },
     {
       "date": "2025-03-30 17:00",
       "car": "Övriga bilar",
       "kwh": 25.912,
-      "cost": 0.0
+      "cost": 7.27
     },
     {
       "date": "2025-03-25 18:02",
       "car": "Övriga bilar",
       "kwh": 34.225,
-      "cost": 0.0
+      "cost": 19.94
     },
     {
       "date": "2025-03-21 17:42",
       "car": "Övriga bilar",
       "kwh": 34.403,
-      "cost": 0.0
+      "cost": 33.25
     },
     {
       "date": "2025-03-16 17:59",
       "car": "Övriga bilar",
       "kwh": 33.585,
-      "cost": 0.0
+      "cost": 9.04
     },
     {
       "date": "2025-03-13 18:38",
       "car": "Övriga bilar",
       "kwh": 31.739,
-      "cost": 0.0
+      "cost": 38.58
     },
     {
       "date": "2025-03-13 17:50",
       "car": "Övriga bilar",
       "kwh": 5.161,
-      "cost": 0.0
+      "cost": 9.72
     },
     {
       "date": "2025-03-13 15:02",
       "car": "Övriga bilar",
       "kwh": 8.839,
-      "cost": 0.0
+      "cost": 13.26
     },
     {
       "date": "2025-03-13 05:47",
       "car": "Övriga bilar",
       "kwh": 2.528,
-      "cost": 0.0
+      "cost": 3.79
     },
     {
       "date": "2025-03-07 16:59",
       "car": "Övriga bilar",
       "kwh": 32.679,
-      "cost": 0.0
+      "cost": 49.02
     },
     {
       "date": "2025-03-01 19:58",
       "car": "Övriga bilar",
       "kwh": 48.765,
-      "cost": 0.0
+      "cost": 19.14
     },
     {
       "date": "2025-02-21 15:43",
       "car": "Övriga bilar",
       "kwh": 22.376,
-      "cost": 0.0
+      "cost": 7.55
     },
     {
       "date": "2025-02-20 18:03",
       "car": "Övriga bilar",
       "kwh": 30.034,
-      "cost": 0.0
+      "cost": 45.05
     },
     {
       "date": "2025-02-18 20:54",
       "car": "Övriga bilar",
       "kwh": 41.319,
-      "cost": 0.0
+      "cost": 30.15
     },
     {
       "date": "2025-02-17 15:47",
       "car": "Övriga bilar",
       "kwh": 1.381,
-      "cost": 0.0
+      "cost": 2.07
     },
     {
       "date": "2025-02-15 16:28",
       "car": "Övriga bilar",
       "kwh": 16.944,
-      "cost": 0.0
+      "cost": 17.68
     },
     {
       "date": "2025-02-15 14:33",
       "car": "Övriga bilar",
       "kwh": 0.007,
-      "cost": 0.0
+      "cost": 0.01
     },
     {
       "date": "2025-02-14 16:46",
       "car": "Övriga bilar",
       "kwh": 49.707,
-      "cost": 0.0
+      "cost": 74.56
     },
     {
       "date": "2025-02-10 20:25",
       "car": "Övriga bilar",
       "kwh": 15.24,
-      "cost": 0.0
+      "cost": 22.86
     },
     {
       "date": "2025-02-09 16:29",
       "car": "Övriga bilar",
       "kwh": 20.238,
-      "cost": 0.0
+      "cost": 9.82
     },
     {
       "date": "2025-02-08 06:21",
       "car": "Övriga bilar",
       "kwh": 20.679,
-      "cost": 0.0
+      "cost": 31.02
     },
     {
       "date": "2025-02-05 17:57",
       "car": "Övriga bilar",
       "kwh": 25.411,
-      "cost": 0.0
+      "cost": 38.12
     },
     {
       "date": "2025-02-04 05:19",
@@ -1481,43 +1481,43 @@
       "date": "2025-02-04 05:18",
       "car": "Övriga bilar",
       "kwh": 0.012,
-      "cost": 0.0
+      "cost": 0.02
     },
     {
       "date": "2025-02-04 05:17",
       "car": "Övriga bilar",
       "kwh": 0.034,
-      "cost": 0.0
+      "cost": 0.05
     },
     {
       "date": "2025-02-04 05:17",
       "car": "Övriga bilar",
       "kwh": 0.028,
-      "cost": 0.0
+      "cost": 0.04
     },
     {
       "date": "2025-02-03 18:26",
       "car": "Övriga bilar",
       "kwh": 8.562,
-      "cost": 0.0
+      "cost": 12.84
     },
     {
       "date": "2025-02-02 15:40",
       "car": "Övriga bilar",
       "kwh": 6.562,
-      "cost": 0.0
+      "cost": 9.84
     },
     {
       "date": "2025-02-01 13:09",
       "car": "Övriga bilar",
       "kwh": 47.616,
-      "cost": 0.0
+      "cost": 71.42
     },
     {
       "date": "2025-02-01 12:09",
       "car": "Övriga bilar",
       "kwh": 0.163,
-      "cost": 0.0
+      "cost": 0.11
     },
     {
       "date": "2025-01-31 13:04",
@@ -1529,19 +1529,19 @@
       "date": "2025-01-30 16:27",
       "car": "Övriga bilar",
       "kwh": 25.7,
-      "cost": 0.0
+      "cost": 38.55
     },
     {
       "date": "2025-01-29 19:18",
       "car": "Övriga bilar",
       "kwh": 34.175,
-      "cost": 0.0
+      "cost": 51.26
     },
     {
       "date": "2025-01-26 17:32",
       "car": "Övriga bilar",
       "kwh": 21.625,
-      "cost": 0.0
+      "cost": 32.44
     },
     {
       "date": "2025-01-26 07:33",
@@ -1553,355 +1553,355 @@
       "date": "2025-01-24 20:32",
       "car": "Övriga bilar",
       "kwh": 9.592,
-      "cost": 0.0
+      "cost": 14.39
     },
     {
       "date": "2025-01-23 17:27",
       "car": "Övriga bilar",
       "kwh": 19.405,
-      "cost": 0.0
+      "cost": 10.71
     },
     {
       "date": "2025-01-21 18:10",
       "car": "Övriga bilar",
       "kwh": 18.336,
-      "cost": 0.0
+      "cost": 11.0
     },
     {
       "date": "2025-01-20 16:09",
       "car": "Övriga bilar",
       "kwh": 5.563,
-      "cost": 0.0
+      "cost": 8.34
     },
     {
       "date": "2025-01-19 18:12",
       "car": "Övriga bilar",
       "kwh": 8.976,
-      "cost": 0.0
+      "cost": 3.16
     },
     {
       "date": "2025-01-19 17:30",
       "car": "Övriga bilar",
       "kwh": 4.065,
-      "cost": 0.0
+      "cost": 3.17
     },
     {
       "date": "2025-01-19 13:56",
       "car": "Övriga bilar",
       "kwh": 17.1,
-      "cost": 0.0
+      "cost": 4.92
     },
     {
       "date": "2025-01-16 17:27",
       "car": "Övriga bilar",
       "kwh": 17.765,
-      "cost": 0.0
+      "cost": 26.65
     },
     {
       "date": "2025-01-14 18:26",
       "car": "Övriga bilar",
       "kwh": 24.571,
-      "cost": 0.0
+      "cost": 36.86
     },
     {
       "date": "2025-01-14 16:15",
       "car": "Övriga bilar",
       "kwh": 3.959,
-      "cost": 0.0
+      "cost": 5.94
     },
     {
       "date": "2025-01-12 17:37",
       "car": "Övriga bilar",
       "kwh": 0.291,
-      "cost": 0.0
+      "cost": 0.44
     },
     {
       "date": "2025-01-11 18:30",
       "car": "Övriga bilar",
       "kwh": 29.384,
-      "cost": 0.0
+      "cost": 44.08
     },
     {
       "date": "2025-01-11 09:57",
       "car": "Övriga bilar",
       "kwh": 0.065,
-      "cost": 0.0
+      "cost": 0.1
     },
     {
       "date": "2025-01-08 17:16",
       "car": "Övriga bilar",
       "kwh": 17.669,
-      "cost": 0.0
+      "cost": 26.5
     },
     {
       "date": "2025-01-07 18:03",
       "car": "Övriga bilar",
       "kwh": 11.454,
-      "cost": 0.0
+      "cost": 17.18
     },
     {
       "date": "2025-01-06 14:09",
       "car": "Övriga bilar",
       "kwh": 40.48,
-      "cost": 0.0
+      "cost": 9.94
     },
     {
       "date": "2025-01-06 09:45",
       "car": "Övriga bilar",
       "kwh": 9.217,
-      "cost": 0.0
+      "cost": 13.83
     },
     {
       "date": "2025-01-02 19:21",
       "car": "Övriga bilar",
       "kwh": 23.221,
-      "cost": 0.0
+      "cost": 34.83
     },
     {
       "date": "2025-01-01 08:22",
       "car": "Övriga bilar",
       "kwh": 16.408,
-      "cost": 0.0
+      "cost": 24.61
     },
     {
       "date": "2024-12-29 19:20",
       "car": "Övriga bilar",
       "kwh": 36.442,
-      "cost": 0.0
+      "cost": 0.24
     },
     {
       "date": "2024-12-25 16:40",
       "car": "Övriga bilar",
       "kwh": 68.501,
-      "cost": 0.0
+      "cost": 102.75
     },
     {
       "date": "2024-12-25 13:48",
       "car": "Övriga bilar",
       "kwh": 3.123,
-      "cost": 0.0
+      "cost": 4.68
     },
     {
       "date": "2024-12-21 05:28",
       "car": "Övriga bilar",
       "kwh": 1.572,
-      "cost": 0.0
+      "cost": 2.36
     },
     {
       "date": "2024-12-20 18:03",
       "car": "Övriga bilar",
       "kwh": 27.07,
-      "cost": 0.0
+      "cost": 40.61
     },
     {
       "date": "2024-12-19 19:21",
       "car": "Övriga bilar",
       "kwh": 9.893,
-      "cost": 0.0
+      "cost": 14.84
     },
     {
       "date": "2024-12-18 17:59",
       "car": "Övriga bilar",
       "kwh": 6.17,
-      "cost": 0.0
+      "cost": 9.25
     },
     {
       "date": "2024-12-17 18:26",
       "car": "Övriga bilar",
       "kwh": 8.937,
-      "cost": 0.0
+      "cost": 13.41
     },
     {
       "date": "2024-12-16 18:40",
       "car": "Övriga bilar",
       "kwh": 9.427,
-      "cost": 0.0
+      "cost": 14.14
     },
     {
       "date": "2024-12-15 17:40",
       "car": "Övriga bilar",
       "kwh": 7.595,
-      "cost": 0.0
+      "cost": 11.39
     },
     {
       "date": "2024-12-15 09:46",
       "car": "Övriga bilar",
       "kwh": 13.277,
-      "cost": 0.0
+      "cost": 6.17
     },
     {
       "date": "2024-12-13 17:33",
       "car": "Övriga bilar",
       "kwh": 8.368,
-      "cost": 0.0
+      "cost": 6.21
     },
     {
       "date": "2024-12-12 15:43",
       "car": "Övriga bilar",
       "kwh": 10.278,
-      "cost": 0.0
+      "cost": 26.54
     },
     {
       "date": "2024-12-11 18:01",
       "car": "Övriga bilar",
       "kwh": 20.4,
-      "cost": 0.0
+      "cost": 15.44
     },
     {
       "date": "2024-12-10 16:23",
       "car": "Övriga bilar",
       "kwh": 9.442,
-      "cost": 0.0
+      "cost": 8.85
     },
     {
       "date": "2024-12-09 20:35",
       "car": "Övriga bilar",
       "kwh": 0.517,
-      "cost": 0.0
+      "cost": 0.78
     },
     {
       "date": "2024-12-09 17:23",
       "car": "Övriga bilar",
       "kwh": 15.276,
-      "cost": 0.0
+      "cost": 20.35
     },
     {
       "date": "2024-12-07 09:56",
       "car": "Övriga bilar",
       "kwh": 9.785,
-      "cost": 0.0
+      "cost": 14.68
     },
     {
       "date": "2024-12-05 18:50",
       "car": "Övriga bilar",
       "kwh": 11.609,
-      "cost": 0.0
+      "cost": 17.41
     },
     {
       "date": "2024-12-05 16:05",
       "car": "Övriga bilar",
       "kwh": 2.035,
-      "cost": 0.0
+      "cost": 3.05
     },
     {
       "date": "2024-12-04 18:00",
       "car": "Övriga bilar",
       "kwh": 14.003,
-      "cost": 0.0
+      "cost": 21.0
     },
     {
       "date": "2024-12-03 18:52",
       "car": "Övriga bilar",
       "kwh": 24.231,
-      "cost": 0.0
+      "cost": 36.35
     },
     {
       "date": "2024-12-02 15:25",
       "car": "Övriga bilar",
       "kwh": 4.644,
-      "cost": 0.0
+      "cost": 6.97
     },
     {
       "date": "2024-12-01 17:21",
       "car": "Övriga bilar",
       "kwh": 4.157,
-      "cost": 0.0
+      "cost": 0.89
     },
     {
       "date": "2024-12-01 12:48",
       "car": "Övriga bilar",
       "kwh": 10.538,
-      "cost": 0.0
+      "cost": 2.36
     },
     {
       "date": "2024-12-01 10:24",
       "car": "Övriga bilar",
       "kwh": 13.186,
-      "cost": 0.0
+      "cost": 19.78
     },
     {
       "date": "2024-11-30 21:29",
       "car": "Övriga bilar",
       "kwh": 11.64,
-      "cost": 0.0
+      "cost": 17.46
     },
     {
       "date": "2024-11-30 14:30",
       "car": "Övriga bilar",
       "kwh": 0.57,
-      "cost": 0.0
+      "cost": 0.17
     },
     {
       "date": "2024-11-29 16:40",
       "car": "Övriga bilar",
       "kwh": 9.871,
-      "cost": 0.0
+      "cost": 14.81
     },
     {
       "date": "2024-11-28 21:16",
       "car": "Övriga bilar",
       "kwh": 6.786,
-      "cost": 0.0
+      "cost": 10.18
     },
     {
       "date": "2024-11-28 17:29",
       "car": "Övriga bilar",
       "kwh": 6.374,
-      "cost": 0.0
+      "cost": 11.66
     },
     {
       "date": "2024-11-27 15:48",
       "car": "Övriga bilar",
       "kwh": 16.877,
-      "cost": 0.0
+      "cost": 25.32
     },
     {
       "date": "2024-11-27 05:44",
       "car": "Övriga bilar",
       "kwh": 4.981,
-      "cost": 0.0
+      "cost": 2.7
     },
     {
       "date": "2024-11-26 19:16",
       "car": "Övriga bilar",
       "kwh": 0.019,
-      "cost": 0.0
+      "cost": 0.03
     },
     {
       "date": "2024-11-24 17:29",
       "car": "Övriga bilar",
       "kwh": 3.167,
-      "cost": 0.0
+      "cost": 4.75
     },
     {
       "date": "2024-11-24 13:17",
       "car": "Övriga bilar",
       "kwh": 5.955,
-      "cost": 0.0
+      "cost": 8.93
     },
     {
       "date": "2024-11-24 11:45",
       "car": "Övriga bilar",
       "kwh": 9.664,
-      "cost": 0.0
+      "cost": 14.5
     },
     {
       "date": "2024-11-24 11:44",
       "car": "Övriga bilar",
       "kwh": 0.101,
-      "cost": 0.0
+      "cost": 0.15
     },
     {
       "date": "2024-11-24 09:30",
       "car": "Övriga bilar",
       "kwh": 7.508,
-      "cost": 0.0
+      "cost": 0.34
     },
     {
       "date": "2024-11-24 06:12",
       "car": "Övriga bilar",
       "kwh": 6.232,
-      "cost": 0.0
+      "cost": 9.35
     },
     {
       "date": "2024-11-23 14:48",
@@ -1913,13 +1913,13 @@
       "date": "2024-11-22 09:35",
       "car": "Övriga bilar",
       "kwh": 7.075,
-      "cost": 0.0
+      "cost": 10.61
     },
     {
       "date": "2024-11-21 17:56",
       "car": "Övriga bilar",
       "kwh": 15.585,
-      "cost": 0.0
+      "cost": 14.2
     },
     {
       "date": "2024-11-20 14:55",
@@ -1937,7 +1937,7 @@
       "date": "2024-11-19 18:35",
       "car": "Övriga bilar",
       "kwh": 23.185,
-      "cost": 0.0
+      "cost": 34.78
     },
     {
       "date": "2024-11-19 15:08",
@@ -1949,7 +1949,7 @@
       "date": "2024-11-19 12:50",
       "car": "Övriga bilar",
       "kwh": 0.084,
-      "cost": 0.0
+      "cost": 0.15
     }
   ],
   "driving": {
