@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zaptec Laddningsstatistik</title>
+    <title>Zaptec & Körstatistik</title>
     <!-- Tailwind CSS för snygg design -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js för grafer -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased">
-    <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="max-w-7xl mx-auto px-4 py-8">
         <header class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Zaptec Laddningsstatistik</h1>
-                <p class="text-sm text-gray-500 mt-1">Översikt över förbrukning, grafer och kostnader per bil.</p>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Laddnings- & Körstatistik</h1>
+                <p class="text-sm text-gray-500 mt-1">Översikt över förbrukning, körsträcka och kostnader per bil.</p>
             </div>
             <div id="last-updated" class="text-xs text-gray-400 bg-white px-3 py-2 rounded-lg border shadow-sm">
                 Laddar data...
@@ -22,22 +22,26 @@
         </header>
 
        <!-- KPI-kort -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
             <div class="bg-white p-6 rounded-xl border shadow-sm">
                 <p class="text-sm font-medium text-gray-500">Total förbrukning</p>
-                <p id="kpi-kwh" class="text-3xl font-bold text-gray-900 mt-2">0 kWh</p>
+                <p id="kpi-kwh" class="text-2xl font-bold text-gray-900 mt-2">0 kWh</p>
             </div>
             <div class="bg-white p-6 rounded-xl border shadow-sm">
                 <p class="text-sm font-medium text-gray-500">Total kostnad</p>
-                <p id="kpi-cost" class="text-3xl font-bold text-gray-900 mt-2">0 kr</p>
+                <p id="kpi-cost" class="text-2xl font-bold text-gray-900 mt-2">0 kr</p>
             </div>
             <div class="bg-white p-6 rounded-xl border shadow-sm">
                 <p class="text-sm font-medium text-gray-500">Snittkostnad per kWh</p>
-                <p id="kpi-avg-price" class="text-3xl font-bold text-gray-900 mt-2">0.00 kr</p>
+                <p id="kpi-avg-price" class="text-2xl font-bold text-gray-900 mt-2">0.00 kr</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border shadow-sm">
+                <p class="text-sm font-medium text-gray-500">Kostnad per mil</p>
+                <p id="kpi-cost-per-mil" class="text-2xl font-bold text-gray-900 mt-2">0.00 kr/mil</p>
             </div>
             <div class="bg-white p-6 rounded-xl border shadow-sm">
                 <p class="text-sm font-medium text-gray-500">Antal sessioner</p>
-                <p id="kpi-sessions" class="text-3xl font-bold text-gray-900 mt-2">0 st</p>
+                <p id="kpi-sessions" class="text-2xl font-bold text-gray-900 mt-2">0 st</p>
             </div>
         </div>
 
@@ -90,14 +94,16 @@
             </div>
         </div>
 
-        <!-- Månadsöversikt per år -->
+        <!-- Månadsöversikt per år (Med toggle för kWh, kr, km, kr/mil) -->
         <div class="bg-white p-6 rounded-xl border shadow-sm mb-8">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
                 <h3 class="text-lg font-bold text-gray-900">Månadsöversikt per år</h3>
                 <!-- Toggle-knappar -->
-                <div class="inline-flex rounded-lg border border-gray-200 p-1 bg-gray-50">
+                <div class="inline-flex rounded-lg border border-gray-200 p-1 bg-gray-50 flex-wrap gap-1">
                     <button id="btn-view-kwh" onclick="setMonthlyView('kwh')" class="px-3 py-1 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm transition-all">kWh</button>
                     <button id="btn-view-kr" onclick="setMonthlyView('kr')" class="px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all">kr</button>
+                    <button id="btn-view-km" onclick="setMonthlyView('km')" class="px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all">km</button>
+                    <button id="btn-view-krmil" onclick="setMonthlyView('krmil')" class="px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all">kr/mil</button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -115,8 +121,9 @@
             </div>
         </div>
 
-        <!-- Tabell -->
+        <!-- Detaljerad tabell över laddsessioner -->
         <div class="bg-white rounded-xl border shadow-sm overflow-hidden mb-8">
+            <div class="px-6 py-4 border-b border-gray-200 font-bold text-gray-900">Laddningssessioner</div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
@@ -137,6 +144,7 @@
 
     <script>
         let allData = [];
+        let drivingData = {};
         let carsMap = {};
         let selectedMetric = 'kwh'; 
         let monthlyChartInstance = null;
@@ -149,7 +157,9 @@
                 const json = await response.json();
                 
                 allData = json.sessions || [];
-                window.allSessionsData = json.sessions || [];
+                drivingData = json.driving || {};
+                window.allSessionsData = allData;
+                window.allDrivingData = drivingData;
                 
                 document.getElementById('last-updated').innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
                 
@@ -167,314 +177,31 @@
                 renderMonthlyTable();
             } catch (err) {
                 console.error(err);
-                document.getElementById('table-body').innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Kunde inte hitta data.json. Kör GitHub Action först!</td></tr>`;
+                document.getElementById('table-body').innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Kunde inte hitta eller tolka data.json. Kör GitHub Action först!</td></tr>`;
             }
         }
 
         function setMonthlyView(view) {
             currentMonthlyView = view;
-            const btnKwh = document.getElementById('btn-view-kwh');
-            const btnKr = document.getElementById('btn-view-kr');
-
-            if (view === 'kwh') {
-                btnKwh.className = "px-3 py-1 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm transition-all";
-                btnKr.className = "px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all";
-            } else {
-                btnKr.className = "px-3 py-1 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm transition-all";
-                btnKwh.className = "px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all";
-            }
-
+            ['kwh', 'kr', 'km', 'krmil'].forEach(v => {
+                const btn = document.getElementById(`btn-view-${v}`);
+                if (btn) {
+                    if (v === view) {
+                        btn.className = "px-3 py-1 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm transition-all";
+                    } else {
+                        btn.className = "px-3 py-1 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all";
+                    }
+                }
+            });
             renderMonthlyTable();
         }
 
         function renderMonthlyTable() {
-            const allSessions = window.allSessionsData || allData || [];
+            const allSessions = window.allSessionsData || [];
+            const drivingObj = window.allDrivingData || {};
             const months = [
                 "Januari", "Februari", "Mars", "April", "Maj", "Juni", 
                 "Juli", "Augusti", "September", "Oktober", "November", "December"
             ];
 
-            const yearsSet = new Set();
-            const matrix = {};
-
-            months.forEach((_, mIdx) => {
-                matrix[mIdx] = {};
-            });
-
-            allSessions.forEach(s => {
-                const year = s.date.substring(0, 4);
-                const month = parseInt(s.date.substring(5, 7), 10) - 1;
-                
-                yearsSet.add(year);
-
-                if (!matrix[month][year]) {
-                    matrix[month][year] = { energy: 0, cost: 0 };
-                }
-                matrix[month][year].energy += s.energy || 0;
-                matrix[month][year].cost += (s.cost || (s.energy * 1.50));
-            });
-
-            const years = Array.from(yearsSet).sort();
-
-            let headHtml = `<tr><th class="px-4 py-3 font-semibold">Månad</th>`;
-            years.forEach(y => {
-                headHtml += `<th class="px-4 py-3 text-right font-semibold">${y}</th>`;
-            });
-            headHtml += `</tr>`;
-            document.getElementById('monthly-table-head').innerHTML = headHtml;
-
-            if (years.length === 0) {
-                document.getElementById('monthly-table-body').innerHTML = `<tr><td colspan="10" class="px-4 py-4 text-center text-gray-500">Ingen data tillgänglig</td></tr>`;
-                document.getElementById('monthly-table-foot').innerHTML = '';
-                return;
-            }
-
-            let bodyHtml = '';
-            months.forEach((monthName, mIdx) => {
-                bodyHtml += `<tr class="hover:bg-gray-50 border-b border-gray-100">`;
-                bodyHtml += `<td class="px-4 py-3 font-medium text-gray-900">${monthName}</td>`;
-
-                years.forEach(y => {
-                    const cellData = matrix[mIdx][y];
-                    let val = 0;
-                    if (cellData) {
-                        val = currentMonthlyView === 'kwh' ? cellData.energy : cellData.cost;
-                    }
-                    
-                    const formattedVal = currentMonthlyView === 'kwh' 
-                        ? (val > 0 ? `${val.toFixed(1)} kWh` : '-') 
-                        : (val > 0 ? `${Math.round(val)} kr` : '-');
-
-                    bodyHtml += `<td class="px-4 py-3 text-right text-gray-600">${formattedVal}</td>`;
-                });
-                bodyHtml += `</tr>`;
-            });
-            document.getElementById('monthly-table-body').innerHTML = bodyHtml;
-
-            let footHtml = `<tr><td class="px-4 py-3 font-bold text-gray-900">Total</td>`;
-            years.forEach(y => {
-                let yearTotal = 0;
-                months.forEach((_, mIdx) => {
-                    const cellData = matrix[mIdx][y];
-                    if (cellData) {
-                        yearTotal += currentMonthlyView === 'kwh' ? cellData.energy : cellData.cost;
-                    }
-                });
-
-                const formattedTotal = currentMonthlyView === 'kwh'
-                    ? `${yearTotal.toFixed(1)} kWh`
-                    : `${Math.round(yearTotal)} kr`;
-
-                footHtml += `<td class="px-4 py-3 text-right font-bold text-gray-900">${formattedTotal}</td>`;
-            });
-            footHtml += `</tr>`;
-            document.getElementById('monthly-table-foot').innerHTML = footHtml;
-        }
-
-        function populateMonths() {
-            const months = [...new Set(allData.map(s => s.date.substring(0, 7)))].sort().reverse();
-            const monthSelect = document.getElementById('filter-month');
-            months.forEach(m => {
-                const opt = document.createElement('option');
-                opt.value = m;
-                opt.innerText = m;
-                monthSelect.appendChild(opt);
-            });
-        }
-
-        function populateCarCheckboxes() {
-            const container = document.getElementById('car-checkboxes');
-            container.innerHTML = '';
-            
-            Object.keys(carsMap).sort().forEach(carName => {
-                const logo = carsMap[carName];
-                const label = document.createElement('label');
-                label.className = "flex items-center space-x-2 text-xs text-gray-700 cursor-pointer py-1";
-                
-                let logoHtml = logo ? `<img src="${logo}" class="w-5 h-5 object-contain rounded" />` : `<div class="w-5 h-5 bg-gray-200 rounded flex items-center justify-center text-[10px] font-bold">🚗</div>`;
-                
-                label.innerHTML = `
-                    <input type="checkbox" value="${carName}" checked onchange="render()" class="car-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500 h-4 w-4">
-                    ${logoHtml}
-                    <span class="truncate font-medium" title="${carName}">${carName}</span>
-                `;
-                container.appendChild(label);
-            });
-        }
-
-        function toggleAllCars(state) {
-            document.querySelectorAll('.car-checkbox').forEach(cb => cb.checked = state);
-            render();
-        }
-
-        function setChartMetric(metric) {
-            selectedMetric = metric;
-            const btnKwh = document.getElementById('btn-kwh');
-            const btnKr = document.getElementById('btn-kr');
-            const monthVal = document.getElementById('filter-month').value;
-            
-            if (metric === 'kwh') {
-                btnKwh.className = "px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-blue-600 shadow-sm transition";
-                btnKr.className = "px-3 py-1.5 text-xs font-semibold rounded-md text-gray-600 hover:text-gray-900 transition";
-            } else {
-                btnKr.className = "px-3 py-1.5 text-xs font-semibold rounded-md bg-white text-blue-600 shadow-sm transition";
-                btnKwh.className = "px-3 py-1.5 text-xs font-semibold rounded-md text-gray-600 hover:text-gray-900 transition";
-            }
-            
-            updateChartTitle(monthVal);
-            renderChartOnly();
-        }
-
-        function updateChartTitle(monthVal) {
-            const title = document.getElementById('chart-title');
-            const unit = selectedMetric === 'kwh' ? 'kWh' : 'kr';
-            if (monthVal === 'all') {
-                title.innerText = `Månadsvis förbrukning (${unit})`;
-            } else {
-                title.innerText = `Daglig förbrukning ${monthVal} (${unit})`;
-            }
-        }
-
-        function getFilteredData() {
-            const monthVal = document.getElementById('filter-month').value;
-            const checkedCars = Array.from(document.querySelectorAll('.car-checkbox:checked')).map(cb => cb.value);
-
-            return allData.filter(s => {
-                const carName = s.car || "Övriga bilar";
-                const matchMonth = (monthVal === 'all' || s.date.startsWith(monthVal));
-                const matchCar = checkedCars.includes(carName);
-                return matchMonth && matchCar;
-            });
-        }
-
-        function render() {
-            const monthVal = document.getElementById('filter-month').value;
-            updateChartTitle(monthVal);
-
-            const filtered = getFilteredData();
-            const tbody = document.getElementById('table-body');
-            tbody.innerHTML = '';
-
-            let totalKwh = 0;
-            let totalCost = 0;
-
-            if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-gray-400">Inga laddsessioner matchar valda filter.</td></tr>`;
-            } else {
-                filtered.forEach(s => {
-                    const cost = s.cost || (s.energy * 1.50);
-                    totalKwh += s.energy;
-                    totalCost += cost;
-
-                    const carName = s.car || "Övriga bilar";
-                    const logo = s.car_logo;
-                    let logoHtml = logo ? `<img src="${logo}" class="w-6 h-6 object-contain rounded inline-block mr-2" />` : `<span class="mr-2">🚗</span>`;
-
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-gray-50 transition";
-                    tr.innerHTML = `
-                        <td class="px-6 py-4 text-gray-600">${s.date}</td>
-                        <td class="px-6 py-4 font-medium text-gray-900 flex items-center">
-                            ${logoHtml}
-                            <div>
-                                <div>${carName}</div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 text-right text-gray-700">${s.energy.toFixed(2)} kWh</td>
-                        <td class="px-6 py-4 text-right font-semibold text-gray-900">${cost.toFixed(2)} kr</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            }
-
-            const avgPrice = totalKwh > 0 ? (totalCost / totalKwh) : 0;
-
-            document.getElementById('kpi-kwh').innerText = `${totalKwh.toFixed(1)} kWh`;
-            document.getElementById('kpi-cost').innerText = `${totalCost.toFixed(0)} kr`;
-            document.getElementById('kpi-avg-price').innerText = `${avgPrice.toFixed(2)} kr/kWh`;
-            document.getElementById('kpi-sessions').innerText = `${filtered.length} st`;
-
-            renderChartOnly();
-        }
-
-        function renderChartOnly() {
-            const monthVal = document.getElementById('filter-month').value;
-            const checkedCars = Array.from(document.querySelectorAll('.car-checkbox:checked')).map(cb => cb.value);
-            
-            const chartData = allData.filter(s => checkedCars.includes(s.car || "Övriga bilar"));
-            const aggregated = {};
-
-            if (monthVal === 'all') {
-                chartData.forEach(s => {
-                    const month = s.date.substring(0, 7);
-                    const cost = s.cost || (s.energy * 1.50);
-                    aggregated[month] = (aggregated[month] || 0) + (selectedMetric === 'kwh' ? s.energy : cost);
-                });
-            } else {
-                const monthFiltered = chartData.filter(s => s.date.startsWith(monthVal));
-                const [year, monthNum] = monthVal.split('-').map(Number);
-                const daysInMonth = new Date(year, monthNum, 0).getDate();
-                
-                for (let i = 1; i <= daysInMonth; i++) {
-                    const dayStr = `${monthVal}-${String(i).padStart(2, '0')}`;
-                    aggregated[dayStr] = 0;
-                }
-
-                monthFiltered.forEach(s => {
-                    const day = s.date.substring(0, 10);
-                    const cost = s.cost || (s.energy * 1.50);
-                    if (aggregated[day] !== undefined) {
-                        aggregated[day] += (selectedMetric === 'kwh' ? s.energy : cost);
-                    }
-                });
-            }
-
-            const labels = Object.keys(aggregated).sort();
-            const values = labels.map(l => aggregated[l]);
-            const displayLabels = labels.map(l => (monthVal !== 'all' ? l.substring(8, 10) : l));
-
-            const ctx = document.getElementById('monthlyChart').getContext('2d');
-            if (monthlyChartInstance) monthlyChartInstance.destroy();
-            
-            monthlyChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: displayLabels,
-                    datasets: [{
-                        label: selectedMetric === 'kwh' ? 'kWh' : 'kr',
-                        data: values,
-                        backgroundColor: '#3b82f6',
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                title: function(context) {
-                                    if (monthVal !== 'all') {
-                                        return labels[context[0].dataIndex];
-                                    }
-                                    return context[0].label;
-                                }
-                            }
-                        }
-                    },
-                    scales: { y: { beginAtZero: true } }
-                }
-            });
-        }
-
-        document.getElementById('filter-month').addEventListener('change', render);
-        document.getElementById('reset-filters').addEventListener('click', () => {
-            document.getElementById('filter-month').value = 'all';
-            toggleAllCars(true);
-        });
-
-        loadData();
-    </script>
-</body>
-</html>
+            const yearsSet = new
