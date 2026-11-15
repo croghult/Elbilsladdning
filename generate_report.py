@@ -3,6 +3,7 @@ import json
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 import requests
+import pandas as pd
 
 ZAPTEC_USERNAME = os.environ["ZAPTEC_USERNAME"]
 ZAPTEC_PASSWORD = os.environ["ZAPTEC_PASSWORD"]
@@ -79,6 +80,35 @@ def load_car_mapping() -> dict:
             pass
     return {}
 
+def process_driving_data() -> dict:
+    driving_summary = {}
+    excel_path = "audi_trips.xlsx" # Ersätt med namnet på din exportfil om det skiljer sig
+    
+    if os.path.exists(excel_path):
+        try:
+            df = pd.read_excel(excel_path)
+            
+            # Konvertera datumkolumnen (anpassa kolumnnamnet 'Datum' om det heter något annat i din export)
+            df['Date'] = pd.to_datetime(df['Datum'])
+            
+            # VIKTIGT: Filtrera bort allt före 19 november 2025
+            cutoff_date = pd.to_datetime('2025-11-19')
+            df = df[df['Date'] >= cutoff_date]
+            
+            df['Month'] = df['Date'].dt.strftime('%Y-%m')
+            
+            # Gruppera och summera km per månad (anpassa 'Sträcka (km)' efter din fils kolumnnamn)
+            grouped = df.groupby('Month')['Sträcka (km)'].sum().to_dict()
+            
+            for month, km in grouped.items():
+                driving_summary[month] = {"distance_km": round(float(km), 1)}
+                
+            print(f"Inläst körstatistik för {len(driving_summary)} månader (från 2025-11-19 och framåt).")
+        except Exception as e:
+            print(f"Kunde inte läsa audi_trips.xlsx: {e}")
+            
+    return driving_summary
+
 def fetch_all_charge_history(token: str) -> list[dict]:
     headers = {"Authorization": f"Bearer {token}"}
     url = f"{BASE_URL}/api/chargehistory"
@@ -130,17 +160,19 @@ def fetch_all_charge_history(token: str) -> list[dict]:
 def main():
     token = get_access_token()
     sessions = fetch_all_charge_history(token)
+    driving_data = process_driving_data()
     
     output_data = {
         "updated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"),
-        "sessions": sessions
+        "sessions": sessions,
+        "driving": driving_data
     }
 
     os.makedirs("docs", exist_ok=True)
     with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
     
-    print(f"Hämtade {len(sessions)} sessioner med exakta spotpriser och bilmappning.")
+    print(f"Hämtade {len(sessions)} sessioner och sparade kördata till docs/data.json.")
 
 if __name__ == "__main__":
     main()
