@@ -150,53 +150,51 @@
         let monthlyChartInstance = null;
         let currentMonthlyView = 'kwh';
 
-        async function loadData() {
-            try {
-                const response = await fetch('data.json');
-                if (!response.ok) throw new Error('Kunde inte ladda data.json');
-                const json = await response.json();
-                
-                // Spara data globalt
-                allData = json.sessions || [];
-                drivingData = json.driving || {};
-                window.allSessionsData = allData;
-                window.allDrivingData = drivingData;
-                
-                // Uppdatera tidsstämpel
-                const lastUpdatedEl = document.getElementById('last-updated');
-                if (lastUpdatedEl) {
-                    lastUpdatedEl.innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
-                }
-                
-                // Bygg bil-mappning för filter/ikoner
-                carsMap = {};
-                allData.forEach(s => {
-                    const carName = s.car || "Övriga bilar";
-                    if (!carsMap[carName]) {
-                        carsMap[carName] = s.car_logo || "";
-                    }
-                });
-                
-                // Initiera gränssnitt och tabeller
-                if (typeof populateMonths === 'function') populateMonths();
-                if (typeof populateCarCheckboxes === 'function') populateCarCheckboxes();
-                if (typeof render === 'function') render();
-                if (typeof renderMonthlyTable === 'function') renderMonthlyTable();
-
-                // Dölj laddningsmeddelandet när allt är klart
-                const loadingEl = document.getElementById('loading');
-                if (loadingEl) {
-                    loadingEl.style.display = 'none';
-                }
-                
-            } catch (err) {
-                console.error("Fel vid inläsning av data:", err);
-                const tableBody = document.getElementById('table-body');
-                if (tableBody) {
-                    tableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500">Kunde inte hitta eller tolka data.json. Kör GitHub Action först!</td></tr>`;
-                }
-            }
+       async function loadData() {
+    try {
+        console.log("1. Hämtar data.json...");
+        const response = await fetch('data.json');
+        if (!response.ok) throw new Error('Kunde inte ladda data.json');
+        const json = await response.json();
+        
+        console.log("2. Data mottagen:", json);
+        allData = json.sessions || [];
+        drivingData = json.driving || {};
+        window.allSessionsData = allData;
+        window.allDrivingData = drivingData;
+        
+        const lastUpdatedEl = document.getElementById('last-updated');
+        if (lastUpdatedEl) {
+            lastUpdatedEl.innerText = `Uppdaterad: ${json.updated_at || 'Okänt'}`;
         }
+        
+        carsMap = {};
+        allData.forEach(s => {
+            const carName = s.car || "Övriga bilar";
+            if (!carsMap[carName]) {
+                carsMap[carName] = s.car_logo || "";
+            }
+        });
+        
+        console.log("3. Kör render-funktioner...");
+        if (typeof populateMonths === 'function') populateMonths();
+        if (typeof populateCarCheckboxes === 'function') populateCarCheckboxes();
+        if (typeof render === 'function') render();
+        if (typeof renderMonthlyTable === 'function') renderMonthlyTable();
+        
+        console.log("4. Döljer laddare...");
+        const loadingEl = document.getElementById('loading');
+        if (loadingEl) {
+            loadingEl.style.display = 'none';
+            console.log("Laddare dold!");
+        } else {
+            console.warn("Hittade inget element med id='loading'!");
+        }
+        
+    } CHARSET catch (err) {
+        console.error("FEL I loadData:", err);
+    }
+}
 
         function setMonthlyView(view) {
             currentMonthlyView = view;
