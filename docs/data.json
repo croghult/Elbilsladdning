@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-20 09:24",
+  "updated_at": "2026-11-21 08:58",
   "sessions": [
     {
       "date": "2026-11-19 19:01",
@@ -1944,12 +1944,6 @@
       "car": "Övriga bilar",
       "kwh": 15.585,
       "cost": 14.2
-    },
-    {
-      "date": "2024-11-20 14:55",
-      "car": "Övriga bilar",
-      "kwh": 0.0,
-      "cost": 0.0
     }
   ],
   "driving": {
